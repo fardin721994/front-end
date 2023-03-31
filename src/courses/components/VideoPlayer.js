@@ -2,18 +2,9 @@ import React, { useState, useRef } from "react";
 import "./VideoPlayer.css";
 import Modal from "../../shared/components/UIElements/Modal";
 
-// import MyModal from "../../../main/bootstrap/MyModal";
-// import videoPath from "../../../main/components/tour/media/Friends.S01E01.720p_IFR.mp4";
-// import subPath from "../../../main/components/tour/media/friends.s01e01_720p_bluray_x264-sujaidr.vtt";
-
 const VideoPlayer = ({ data, videoSrc, subtitle }) => {
   const [rows, setRows] = useState([]);
   const [imageSrc, setImageSrc] = useState("");
-
-  // const image = React.createRef();
-
-  // const sub = useRef();
-  // console.log(sub);
 
   const video = useRef();
 
@@ -47,7 +38,6 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
         var videoContainer = document.getElementById("vp-videoContainer");
         var video = document.getElementById("vp-video");
         var image = document.getElementById("vp-image");
-
         var track = document.getElementById("vp-track");
         var videoControls = document.getElementById("vp-video-controls");
         // console.log(video.textTracks[0].cues[1]);
@@ -73,7 +63,6 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
               <div className="d-flex justify-content-center">
                 {line.map((word) => {
                   if (data[`${word}`]) {
-                    // console.log("blueeeeeeeeeeeeeeeeeeee");
                     counter++;
                     setImageSrc(
                       process.env.REACT_APP_BACKEND_URL +
@@ -416,10 +405,10 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
         className=" d-flex justify-content-center align-items-center "
         data-fullscreen="false"
       >
-        <div className=" position-relative video-box">
+        <div className=" position-relative video-box d-flex flex-column">
           <video
             id="vp-video"
-            className=" p-0 m-0 w-100 "
+            className="vp-player p-0 m-0 mx-auto  "
             controls
             ref={video}
             preload="metadata"
@@ -440,35 +429,35 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
           <div className=" subtitles w-100 position-absolute">{rows}</div>
           <div
             id="vp-video-controls"
-            className="vp-controls row bg-primary"
+            className="vp-controls row bg-secondary w-100   "
             data-state="hidden"
           >
-            <button id="vp-playpause" type="button" data-state="play">
-              Play/Pause
-            </button>
-            <button id="vp-stop" type="button" data-state="stop">
-              Stop
-            </button>
-            <div className="vp-progress">
-              <progress id="vp-progress" value="0" min="0">
+            <div className="vp-progress mb-2">
+              <progress id="vp-progress" value="0" min="0" max="100">
                 <span id="vp-progress-bar"></span>
               </progress>
             </div>
-            <button id="vp-mute" type="button" data-state="mute">
-              Mute/Unmute
-            </button>
-            <button id="vp-volinc" type="button" data-state="volup">
-              Vol+
-            </button>
-            <button id="vp-voldec" type="button" data-state="voldown">
-              Vol-
-            </button>
-            <button id="vp-fs" type="button" data-state="go-fullscreen">
-              Fullscreen
-            </button>
-            {/* <button id="vp-subtitles" type="button" data-state="subtitles">
-          CC
-        </button> */}
+            <div className="vp-controls-buttons d-flex justify-content-around">
+              <button id="vp-playpause" type="button" data-state="play">
+                Play/Pause
+              </button>
+              <button id="vp-stop" type="button" data-state="stop">
+                Stop
+              </button>
+              <button id="vp-mute" type="button" data-state="mute">
+                Mute/Unmute
+              </button>
+              <div className="middle-holder"></div>
+              <button id="vp-volinc" type="button" data-state="volup">
+                Vol+
+              </button>
+              <button id="vp-voldec" type="button" data-state="voldown">
+                Vol-
+              </button>
+              <button id="vp-fs" type="button" data-state="go-fullscreen">
+                Fullscreen
+              </button>
+            </div>
           </div>
           <Modal
             show={showModal}

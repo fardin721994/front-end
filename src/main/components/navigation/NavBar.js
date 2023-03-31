@@ -5,9 +5,17 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import logo from "./logo.jpg";
+import { height } from "@mui/system";
+import "./NavBar.css";
 function NavBar(props) {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      className="my-nav"
+    >
       {!props.logInstatus ? (
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
