@@ -109,10 +109,13 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
         var playpause = document.getElementById("vp-playpause");
         var stop = document.getElementById("vp-stop");
         var mute = document.getElementById("vp-mute");
-        var volinc = document.getElementById("vp-volinc");
-        var voldec = document.getElementById("vp-voldec");
+        const volume = document.getElementById("vp-volume");
+
+        // var volinc = document.getElementById("vp-volinc");
+        // var voldec = document.getElementById("vp-voldec");
         var progress = document.getElementById("vp-progress");
         var progressBar = document.getElementById("vp-progress-bar");
+        // const progressBar = document.getElementById("video-progress");
         var fullscreen = document.getElementById("vp-fs");
         // var subtitles = document.getElementById("vp-subtitles");
 
@@ -136,26 +139,26 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
         }
 
         // Check the volume
-        var checkVolume = function (dir) {
-          if (dir) {
-            var currentVolume = Math.floor(video.volume * 10) / 10;
-            if (dir === "+") {
-              if (currentVolume < 1) video.volume += 0.1;
-            } else if (dir === "-") {
-              if (currentVolume > 0) video.volume -= 0.1;
-            }
-            // If the volume has been turned off, also set it as muted
-            // Note: can only do this with the custom control set as when the 'volumechange' event is raised, there is no way to know if it was via a volume or a mute change
-            if (currentVolume <= 0) video.muted = true;
-            else video.muted = false;
-          }
-          changeButtonState("mute");
-        };
+        // var checkVolume = function (dir) {
+        //   if (dir) {
+        //     var currentVolume = Math.floor(video.volume * 10) / 10;
+        //     if (dir === "+") {
+        //       if (currentVolume < 1) video.volume += 0.1;
+        //     } else if (dir === "-") {
+        //       if (currentVolume > 0) video.volume -= 0.1;
+        //     }
+        //     // If the volume has been turned off, also set it as muted
+        //     // Note: can only do this with the custom control set as when the 'volumechange' event is raised, there is no way to know if it was via a volume or a mute change
+        //     if (currentVolume <= 0) video.muted = true;
+        //     else video.muted = false;
+        //   }
+        //   changeButtonState("mute");
+        // };
 
         // Change the volume
-        var alterVolume = function (dir) {
-          checkVolume(dir);
-        };
+        // var alterVolume = function (dir) {
+        //   checkVolume(dir);
+        // };
 
         // Set the video container's fullscreen state
         var setFullscreenData = function (state) {
@@ -254,13 +257,13 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
             },
             false
           );
-          video.addEventListener(
-            "volumechange",
-            function () {
-              checkVolume();
-            },
-            false
-          );
+          // video.addEventListener(
+          //   "volumechange",
+          //   function () {
+          //     checkVolume();
+          //   },
+          //   false
+          // );
 
           // Add events for all buttons
           playpause.addEventListener("click", function (e) {
@@ -275,70 +278,11 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
             video.textTracks[i].mode = "hidden";
           }
 
-          // Creates and returns a menu item for the subtitles language menu
-          // var subtitleMenuButtons = [];
-          // var createMenuItem = function (id, lang, label) {
-          //   var listItem = document.createElement("li");
-          //   var button = listItem.appendChild(document.createElement("button"));
-          //   button.setAttribute("id", id);
-          //   button.className = "vp-subtitles-button";
-          //   if (lang.length > 0) button.setAttribute("lang", lang);
-          //   button.value = label;
-          //   button.setAttribute("data-state", "inactive");
-          //   button.appendChild(document.createTextNode(label));
-          //   button.addEventListener("click", function (e) {
-          //     // Set all buttons to inactive
-          //     subtitleMenuButtons.map(function (v, i, a) {
-          //       subtitleMenuButtons[i].setAttribute("data-state", "inactive");
-          //     });
-          //     // Find the language to activate
-          //     var lang = this.getAttribute("lang");
-          //     for (var i = 0; i < video.textTracks.length; i++) {
-          //       // For the 'subtitles-off' button, the first condition will never match so all will subtitles be turned off
-          //       if (video.textTracks[i].language == lang) {
-          //         video.textTracks[i].mode = "showing";
-          //         this.setAttribute("data-state", "active");
-          //       } else {
-          //         video.textTracks[i].mode = "hidden";
-          //       }
-          //     }
-          //     subtitlesMenu.style.display = "none";
-          //   });
-          //   subtitleMenuButtons.push(button);
-          //   return listItem;
-          // };
-          // // Go through each one and build a small clickable list, and when each item is clicked on, set its mode to be "showing" and the others to be "hidden"
-          // var subtitlesMenu;
-          // if (video.textTracks) {
-          //   var df = document.createDocumentFragment();
-          //   var subtitlesMenu = df.appendChild(document.createElement("ul"));
-          //   subtitlesMenu.className = "vp-subtitles-menu";
-          //   subtitlesMenu.appendChild(
-          //     createMenuItem("subtitles-off", "", "Off")
-          //   );
-          //   for (var i = 0; i < video.textTracks.length; i++) {
-          //     subtitlesMenu.appendChild(
-          //       createMenuItem(
-          //         "subtitles-" + video.textTracks[i].language,
-          //         video.textTracks[i].language,
-          //         video.textTracks[i].label
-          //       )
-          //     );
-          //   }
-          //   videoContainer.appendChild(subtitlesMenu);
-          // }
-          // subtitles.addEventListener("click", function (e) {
-          //   if (subtitlesMenu) {
-          //     subtitlesMenu.style.display =
-          //       subtitlesMenu.style.display == "block" ? "none" : "block";
-          //   }
-          // });
-
           // The Media API has no 'stop()' function, so pause the video and reset its time and the progress bar
           stop.addEventListener("click", function (e) {
             video.pause();
             video.currentTime = 0;
-            progress.value = 0;
+            progressBar.value = 0;
             // Update the play/pause button's 'data-state' which allows the correct button image to be set via CSS
             changeButtonState("playpause");
           });
@@ -346,12 +290,19 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
             video.muted = !video.muted;
             changeButtonState("mute");
           });
-          volinc.addEventListener("click", function (e) {
-            alterVolume("+");
+
+          volume.addEventListener("input", function (event) {
+            video.volume = event.target.value / 100;
           });
-          voldec.addEventListener("click", function (e) {
-            alterVolume("-");
-          });
+          // progressBar.addEventListener("input", function (event) {
+          //   video.currentTime = (event.target.value / 100) * video.duration;
+          // });
+          // volinc.addEventListener("click", function (e) {
+          //   alterVolume("+");
+          // });
+          // voldec.addEventListener("click", function (e) {
+          //   alterVolume("-");
+          // });
           fullscreen.addEventListener("click", function (e) {
             handleFullscreen();
           });
@@ -365,6 +316,11 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
             progressBar.style.width =
               Math.floor((video.currentTime / video.duration) * 100) + "%";
           });
+          // video.addEventListener("timeupdate", function () {
+          //   progressBar.value = Math.floor(
+          //     (video.currentTime / video.duration) * 100
+          //   );
+          // });
 
           // React to the user clicking within the progress bar
           progress.addEventListener("click", function (e) {
@@ -405,7 +361,7 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
         className=" d-flex justify-content-center align-items-center "
         data-fullscreen="false"
       >
-        <div className=" position-relative video-box d-flex flex-column">
+        <div className=" position-relative video-box d-flex flex-column bg-dark">
           <video
             id="vp-video"
             className="vp-player p-0 m-0 mx-auto  "
@@ -429,15 +385,17 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
           <div className=" subtitles w-100 position-absolute">{rows}</div>
           <div
             id="vp-video-controls"
-            className="vp-controls row bg-secondary w-100   "
+            className="vp-controls row bg-dark w-100   "
             data-state="hidden"
           >
-            <div className="vp-progress mb-2">
+            <div className="vp-progress pb-2">
               <progress id="vp-progress" value="0" min="0" max="100">
                 <span id="vp-progress-bar"></span>
               </progress>
             </div>
-            <div className="vp-controls-buttons d-flex justify-content-around">
+            {/* <input id="video-progress" type="range" /> */}
+
+            <div className="vp-controls-buttons d-flex justify-content-around align-items-center">
               <button id="vp-playpause" type="button" data-state="play">
                 Play/Pause
               </button>
@@ -447,13 +405,14 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
               <button id="vp-mute" type="button" data-state="mute">
                 Mute/Unmute
               </button>
+              <input id="vp-volume" type="range" />
               <div className="middle-holder"></div>
-              <button id="vp-volinc" type="button" data-state="volup">
+              {/* <button id="vp-volinc" type="button" data-state="volup">
                 Vol+
               </button>
               <button id="vp-voldec" type="button" data-state="voldown">
                 Vol-
-              </button>
+              </button> */}
               <button id="vp-fs" type="button" data-state="go-fullscreen">
                 Fullscreen
               </button>
