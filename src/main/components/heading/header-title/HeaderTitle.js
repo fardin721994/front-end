@@ -19,7 +19,7 @@ function HeaderTitle() {
           </h1>
           <h4>A simpler learning experience for a simpler life.</h4>
           <Link
-            to="/tour"
+            to="/course/friends"
             className="bg-warning text-dark fs-1 fw-semibold text-decoration-none rounded-pill py-2 px-4  mt-5 mb-5 d-inline-block  "
           >
             Take a tour for free
