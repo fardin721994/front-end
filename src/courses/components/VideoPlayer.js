@@ -1,25 +1,29 @@
 import React, { useState, useRef } from "react";
 import "./VideoPlayer.css";
 import Modal from "../../shared/components/UIElements/Modal";
+import Button from "react-bootstrap/Button";
+import Carousel from "react-bootstrap/Carousel";
+
+// import Modal from "react-bootstrap/Modal";
 
 const VideoPlayer = ({ data, videoSrc, subtitle }) => {
   const [rows, setRows] = useState([]);
   const [imageSrc, setImageSrc] = useState("");
+  const [showModal, setShowModal] = useState("false");
 
   const video = useRef();
 
   const wordClickHandler = (event) => {
     video.current.pause();
-    setShowModal(true);
+    setShowModal("true");
   };
 
   const closeModalHandler = () => {
     video.current.play();
-    setShowModal(false);
+    setShowModal("false");
   };
   // For modal
 
-  const [showModal, setShowModal] = useState(false);
   // const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   ///////////
@@ -418,7 +422,7 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
               </button>
             </div>
           </div>
-          <Modal
+          {/* <Modal
             show={showModal}
             onCancel={closeModalHandler}
             contentClass="place-item__modal-content"
@@ -426,7 +430,41 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
             footer={<button onClick={closeModalHandler}>CLOSE</button>}
           >
             <img id="vp-image" className="image" src={imageSrc} />
-          </Modal>
+          </Modal> */}
+          <div
+            className="vp-modal-background"
+            // onClick={closeModalHandler}
+            data-showModal={showModal}
+          >
+            <div className="vp-modal-content">
+              <button
+                className="vp-modal-close"
+                onClick={closeModalHandler}
+              ></button>
+              <Carousel>
+                <Carousel.Item interval={100000}>
+                  <img id="vp-image" className="image" src={imageSrc} />
+
+                  {/* <Carousel.Caption>
+                    <h3>First slide label</h3>
+                    <p>
+                      Nulla vitae elit libero, a pharetra augue mollis interdum.
+                    </p>
+                  </Carousel.Caption> */}
+                </Carousel.Item>
+                {/* <Carousel.Item interval={500}>
+                  <img id="vp-image" className="image" src={imageSrc} />
+
+                  <Carousel.Caption>
+                    <h3>Second slide label</h3>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </p>
+                  </Carousel.Caption>
+                </Carousel.Item> */}
+              </Carousel>
+            </div>
+          </div>
         </div>
       </figure>
     </React.Fragment>

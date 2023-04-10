@@ -218,6 +218,52 @@ figure[data-fullscreen="true"] .vp-controls .vp-progress {
 #vp-volume {
   cursor: pointer;
 }
+
+/* .modal-90w {
+  width: 90%;
+} */
+
+.vp-modal-background[data-showModal="false"] {
+  display: none;
+}
+
+.vp-modal-background[data-showModal="true"] {
+  display: block;
+}
+
+.vp-modal-background {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.vp-modal-content {
+  width: 100%;
+  position: relative;
+}
+figure[data-fullscreen="true"] .vp-modal-content {
+  width: 75%;
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin: auto; */
+}
+
+#vp-image {
+  width: 100%;
+  padding: 15%;
+}
+.vp-modal-close {
+  background-image: url(../../shared/icons/close.svg);
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 27px;
+  height: 27px;
+  z-index: 2;
+}
 @media (orientation: landscape) {
   .video-box {
     width: 60%;
