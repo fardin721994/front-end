@@ -449,7 +449,7 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
                     <h3>First slide label</h3>
                     <p>
                       Nulla vitae elit libero, a pharetra augue mollis interdum.
-                    </p>
+                    </p> 
                   </Carousel.Caption> */}
                 </Carousel.Item>
                 {/* <Carousel.Item interval={500}>

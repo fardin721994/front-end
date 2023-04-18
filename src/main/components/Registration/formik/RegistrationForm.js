@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Formik, Form } from "formik";
@@ -13,9 +13,32 @@ import LoadingSpinner from "../../../../shared/components/UIElements/LoadingSpin
 import { useHttpClient } from "../../../../shared/hooks/http-hook";
 // import ImageUpload from "../../../../shared/components/FormElements/ImageUpload";
 import "./auth.css";
+import jwt_decode from "jwt-decode";
 
 function RegistrationForm(props) {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+
+  // Handling sign in with google
+  function googleCallBackResponseHandler(response) {
+    console.log("jwt token", response.credential);
+    let userObject = jwt_decode(response.credential);
+    console.log(userObject);
+  }
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id:
+        "838879790668-013q6bp66h7kqtbjckmm68et0vgtfcr7.apps.googleusercontent.com",
+      callback: googleCallBackResponseHandler,
+    });
+    google.accounts.id.renderButton(document.getElementById("googleSignin"), {
+      theme: "filled_blue",
+      size: "large",
+      shape: "pill",
+      width: "350",
+    });
+  }, []);
+  // Handling sign in with google
 
   const initialValues = {
     username: "",
@@ -75,35 +98,49 @@ function RegistrationForm(props) {
   };
 
   return (
-    <React.Fragment>
+    <div className="form-wrapper">
       <ErrorModal error={error} onClear={clearError} />
-      {isLoading && <LoadingSpinner asOverlay />}
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={onRegitrationSubmitHandler}
-      >
-        {(formik) => {
-          return (
-            <Form className="authform">
-              <Input type="username" label="UserName" name="username" />
-              <Input type="email" label="Email" name="email" />
-              <Input type="password" label="Password" name="password" />
-              <Input
-                type="password"
-                label="Confirm Password"
-                name="confirmPassword"
-              />
-              {/* <ImageUpload center id="image" /> */}
+      <div className="auth-form ">
+        <h2 className="mb-4 text-center">Create a free acount</h2>
+        {/* /////////////////////////////////////////////////////////// */}
+        {/* I wrapped the google signin div in another div with the height of 44px to reduce flickering. I learnt it in stack overflow.  */}
+        <div id="googleSigninContainer">
+          <div id="googleSignin"></div>
+        </div>
+        {/* /////////////////////////////////////////////////////////// */}
+        <div className="text-center my-4 "> or </div>
+        {isLoading && <LoadingSpinner asOverlay />}
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onRegitrationSubmitHandler}
+        >
+          {(formik) => {
+            return (
+              <Form>
+                <Input type="username" label="UserName" name="username" />
+                <Input type="email" label="Email" name="email" />
+                <Input type="password" label="Password" name="password" />
+                <Input
+                  type="password"
+                  label="Confirm Password"
+                  name="confirmPassword"
+                />
+                {/* <ImageUpload center id="image" /> */}
 
-              <button type="submit" disabled={!formik.isValid}>
-                Submit
-              </button>
-            </Form>
-          );
-        }}
-      </Formik>
-    </React.Fragment>
+                <button
+                  type="submit"
+                  disabled={!formik.isValid}
+                  className="rounded-pill w-100 bg-warning py-2 fw-bold"
+                >
+                  Sign up
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
+      </div>
+    </div>
   );
 }
 

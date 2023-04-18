@@ -6,10 +6,15 @@ function Input(props) {
   const { label, name, ...rest } = props;
   return (
     <div className="mb-3">
-      <label htmlFor={name} className="form-label">
+      <label htmlFor={name} className="form-label ">
         {label}
       </label>
-      <Field id={name} name={name} {...rest} className="form-control" />
+      <Field
+        id={name}
+        name={name}
+        {...rest}
+        className="form-control rounded-pill"
+      />
       <ErrorMessage component={TextError} name={name} />
     </div>
   );
