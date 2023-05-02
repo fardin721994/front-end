@@ -12,7 +12,7 @@ import React, { useState } from "react";
 // import turn_out_1 from "./media/turn_out_1.png";
 // import weird from "./media/weird.png";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
-import VideoPlayer from "../../../courses/components/VideoPlayer";
+import VideoPlayer from "../../../courses/course-view/VideoPlayer";
 
 function Tour() {
   const data = {

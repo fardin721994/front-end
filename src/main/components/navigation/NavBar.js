@@ -36,6 +36,9 @@ function NavBar(props) {
               <Nav.Link as={Link} to="/courses/all" eventKey={2}>
                 Courses
               </Nav.Link>
+              <Nav.Link as={Link} to="/courses/new" eventKey={3}>
+                NewCourse
+              </Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -52,12 +55,12 @@ function NavBar(props) {
               <Nav.Link
                 as={Link}
                 to="/registration"
-                eventKey={3}
+                eventKey={4}
                 className="ms-lg-auto"
               >
                 Sign up
               </Nav.Link>
-              <Nav.Link eventKey={4} as={Link} to="/login" className="me-3">
+              <Nav.Link eventKey={5} as={Link} to="/login" className="me-3">
                 Login
               </Nav.Link>
             </Nav>

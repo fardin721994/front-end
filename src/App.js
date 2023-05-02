@@ -9,27 +9,23 @@ import {
 import NavBar from "./main/components/navigation/NavBar";
 import MainPage from "./main/pages/MainPage";
 import Tour from "./main/components/tour/Tour";
-// import Registration from "./main/components/Registration/LogIn_Registration";
 import RegistrationForm from "./main/components/Registration/formik/RegistrationForm";
 import LoginForm from "./main/components/Registration/formik/LoginForm";
-import NewCourse from "./courses/pages/NewCourse";
-import VideoInput from "./courses/components/ImageInput";
+import NewCourse from "./courses/course-creation/NewCourse";
 import Users from "./user/pages/Users";
 import NewPlace from "./places/pages/NewPlace";
-import UserCourses from "./courses/pages/UserCourses";
-import UpdateCourse from "./courses/pages/UpdateCourse";
-import FileUpload from "./courses/components/FileUpload";
-import OldNavBar from "./main/bootstrap/OldNavBar";
+import UserCourses from "./courses/course-view/UserCourses";
+import UpdateCourse from "./courses/course-creation/UpdateCourse";
 import { useHttpClient } from "./shared/hooks/http-hook";
 
 import AutoCompleteSearch from "./shared/components/UIElements/AutoCompleteSearch";
-import WordItem from "./courses/components/WordItem";
-import CourseSection from "./courses/components/CourseSection";
+import CourseSection from "./courses/course-creation/CourseSection";
 import RBAutoCompleteSearch from "./shared/components/UIElements/RBAutoCompleteSearch";
-import Ttest from "./shared/components/UIElements/Ttest";
-import Image from "./courses/components/Image";
-import CourseList from "./courses/components/CourseList";
-import CourseView from "./courses/components/CourseView";
+// import Ttest from "./shared/components/UIElements/Ttest";
+import CourseList from "./courses/course-view/CourseList";
+import CourseView from "./courses/course-view/CourseView";
+// import CourseTitle from "./courses/course-creation/CourseTitle";
+import Test from "./courses/course-creation/Test";
 function App() {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   let newData = [
@@ -491,23 +487,24 @@ function App() {
   // }, []);
 
   // console.log(data);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
 
-  const logInStatusHandler = (uid) => {
-    setIsLoggedIn(true);
+  const logInStatusHandler = (uid, token) => {
+    setToken(token);
     setUserId(uid);
   };
 
   const logOutStatusHandler = () => {
-    setIsLoggedIn(false);
+    setToken(null);
     setUserId(null);
   };
 
   return (
+    // <Test />
     <Router>
       <NavBar
-        logInstatus={isLoggedIn}
+        logInstatus={!!token}
         logOutStatusHandler={logOutStatusHandler}
         userId={userId}
       />
@@ -534,8 +531,7 @@ function App() {
           <UserCourses />
         </Route>
         <Route path="/courses/new" exact>
-          {/* <NewCourse userId={userId} /> */}
-          <CourseSection />
+          <NewCourse />
         </Route>
         <Route path="/courses/:courseId" exact>
           <UpdateCourse userId={userId} />

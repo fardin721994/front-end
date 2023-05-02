@@ -89,8 +89,11 @@ function RegistrationForm(props) {
           "Content-Type": "application/json",
         }
       );
-      props.logInStatusHandler(logInResponseData.user.id);
-      console.log("successfully logged in");
+      props.logInStatusHandler(
+        logInResponseData.userId,
+        logInResponseData.token
+      );
+      // console.log("successfully logged in");
       history.push("/");
     } catch (err) {}
 
