@@ -10,6 +10,8 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
   const [rows, setRows] = useState([]);
   const [imageSrc, setImageSrc] = useState("");
   const [showModal, setShowModal] = useState("false");
+  const [playingPronunciation, setPlayingPronunciation] = useState(false);
+  const [pronunciationSrc, setPronunciationSrc] = useState("");
 
   const video = useRef();
 
@@ -70,7 +72,11 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
                     counter++;
                     setImageSrc(
                       process.env.REACT_APP_BACKEND_URL +
-                        `/images/${data[`${word}`]}`
+                        `/images/${data[`${word}`]}.png`
+                    );
+                    setPronunciationSrc(
+                      process.env.REACT_APP_BACKEND_URL +
+                        `/audios/${data[`${word}`]}_Am.mp3`
                     );
                     return (
                       <button
@@ -422,6 +428,15 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
               </button>
             </div>
           </div>
+          {playingPronunciation ? (
+            <audio
+              src={pronunciationSrc}
+              autoPlay
+              hidden
+              // play={playingPronunciation}
+              onEnded={() => setPlayingPronunciation(false)}
+            />
+          ) : null}
           {/* <Modal
             show={showModal}
             onCancel={closeModalHandler}
@@ -437,20 +452,42 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
             data-showModal={showModal}
           >
             <div className="vp-modal-content">
-              <button
-                className="vp-modal-close"
-                onClick={closeModalHandler}
-              ></button>
+              <div className="vp-modal-top-bar">
+                <div
+                  className="bg-primary"
+                  onClick={() => {
+                    // setPronunciationSrc(pronunciationSrc + "_Am.mp3")
+                    setPlayingPronunciation(true);
+                  }}
+                >
+                  <span className="vp-modal-top-bar-icon vp-AmP"></span>{" "}
+                  <span>Am</span>
+                </div>
+                <div
+                  className="bg-warning "
+                  onClick={() => {
+                    // setPronunciationSrc(pronunciationSrc + "_Am.mp3")
+                    setPlayingPronunciation(true);
+                  }}
+                >
+                  <span className="vp-modal-top-bar-icon vp-BrP"></span>{" "}
+                  <span>Br</span>
+                </div>
+
+                <div className="bg-danger " onClick={closeModalHandler}>
+                  <span className="vp-modal-top-bar-icon vp-modal-close "></span>
+                  <span>Close</span>
+                </div>
+              </div>
+
               <Carousel>
                 <Carousel.Item interval={100000}>
                   <img id="vp-image" className="image" src={imageSrc} />
 
-                  {/* <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>
-                      Nulla vitae elit libero, a pharetra augue mollis interdum.
-                    </p> 
-                  </Carousel.Caption> */}
+                  <Carousel.Caption>
+                    <h5 className="text-primary">ترجمه فارسی</h5>
+                    <p> خود توضیح انگلیسی رو بخون </p>
+                  </Carousel.Caption>
                 </Carousel.Item>
                 {/* <Carousel.Item interval={500}>
                   <img id="vp-image" className="image" src={imageSrc} />

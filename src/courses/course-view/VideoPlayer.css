@@ -255,15 +255,50 @@ figure[data-fullscreen="true"] .vp-modal-content {
   width: 100%;
   padding: 15%;
 }
-.vp-modal-close {
-  background-image: url(../../shared/icons/close.svg);
+.vp-modal-top-bar {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   position: absolute;
+  top: 50px;
+  width: 100%;
+}
+.vp-modal-top-bar > div {
+  width: 20%;
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  cursor: pointer;
+}
+.vp-modal-top-bar > div > span:last-child {
+  padding-bottom: 5px;
+  font-style: italic;
+}
+.vp-modal-top-bar-icon {
+  /* position: absolute;
   top: 10%;
-  right: 10%;
+  right: 10%; */
   width: 27px;
   height: 27px;
   z-index: 2;
 }
+.vp-AmP {
+  background-image: url(../../shared/icons/volume.svg);
+  z-index: 2;
+}
+.vp-BrP {
+  background-image: url(../../shared/icons/volume.svg);
+}
+.vp-modal-close {
+  background-image: url(../../shared/icons/close.svg);
+}
+/* .vp-modal-top-bar-button {
+  width: 20%;
+  color: #dd3b00;
+} */
 @media (orientation: landscape) {
   .video-box {
     width: 60%;

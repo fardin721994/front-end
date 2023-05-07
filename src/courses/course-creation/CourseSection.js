@@ -115,11 +115,20 @@ function CourseSection(props) {
   return (
     <React.Fragment>
       <div className="container-fluid">
+        <h1 className="w-75 mx-auto bg-info text-center rounded-4 py-2">
+          {props.courseSection}
+        </h1>
         <SubtitleUploadPart
           className=" w-50 mx-auto"
           setUploadedSubtitleSrc={setUploadedSubtitleSrc}
+          courseName={props.courseName}
+          courseSection={props.courseSection}
         />
-        <VideoUploadPart className="w-50 mx-auto" />
+        <VideoUploadPart
+          className="w-50 mx-auto"
+          courseName={props.courseName}
+          courseSection={props.courseSection}
+        />
         <video id="vp-video" controls preload="metadata" className="d-none">
           {/* <source src={videosource} /> */}
           {uploadedSubtitleSrc ? (

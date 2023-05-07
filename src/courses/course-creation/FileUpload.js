@@ -30,14 +30,14 @@ const FileUpload = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("courseName", "friends");
-    formData.append("sectionNumber", "section1");
+    formData.append("courseName", props.courseName);
+    formData.append("courseSection", props.courseSection);
     formData.append("fileType", props.fileType);
     formData.append("file", file);
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/courses/upload",
+        process.env.REACT_APP_BACKEND_URL + "/courses/new/section",
         formData,
         {
           headers: {

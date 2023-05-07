@@ -10,6 +10,7 @@ function CourseView() {
   const courseId = "640762cd015f528a16a78b64";
   let data = {};
   let images = [];
+  ////////////////////////////////////////////////////////////////////////////
   React.useEffect(() => {
     (function () {
       const subtitleRetreive = async () => {
@@ -38,6 +39,7 @@ function CourseView() {
       subtitleRetreive();
     })();
   }, []);
+  ////////////////////////////////////////////////////////////////////////////
   React.useEffect(() => {
     (function () {
       const courseDataRetreive = async () => {
@@ -67,7 +69,7 @@ function CourseView() {
   // console.log("im sub", subtitle);
   if (courseData && subtitle) {
     courseData.course.content.forEach((element) => {
-      data[`${element.subtitleWord}`] = element.databaseWord + ".png";
+      data[`${element.subtitleWord}`] = element.databaseWord;
     });
     return <VideoPlayer data={data} subtitle={subtitle} />;
   }
