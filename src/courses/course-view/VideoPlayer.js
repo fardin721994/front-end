@@ -1,10 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./VideoPlayer.css";
-import Modal from "../../shared/components/UIElements/Modal";
-import Button from "react-bootstrap/Button";
 import Carousel from "react-bootstrap/Carousel";
-
-// import Modal from "react-bootstrap/Modal";
+import Hls from "hls.js";
 
 const VideoPlayer = ({ data, videoSrc, subtitle }) => {
   const [rows, setRows] = useState([]);
@@ -24,13 +21,6 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
     video.current.play();
     setShowModal("false");
   };
-  // For modal
-
-  // const [showConfirmModal, setShowConfirmModal] = useState(false);
-
-  ///////////
-
-  // console.log(data);
 
   React.useEffect(() => {
     (function () {
@@ -363,7 +353,28 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
       }
     })();
   }, []);
+  ////////////// HLS.js player
+  React.useEffect(() => {
+    (function () {
+      const videoElement = video.current;
 
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(
+          process.env.REACT_APP_BACKEND_URL +
+            // `/courses-data/friends/section1/playlist/output_playlist.m3u8`
+            `/playlist/output_playlist.m3u8`
+        );
+        hls.attachMedia(videoElement);
+      } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
+        videoElement.src =
+          process.env.REACT_APP_BACKEND_URL +
+          // `/courses-data/friends/section1/playlist/output_playlist.m3u8`;
+          `/playlist/output_playlist.m3u8`;
+      }
+    })();
+  }, []);
+  /////////////////////
   return (
     <React.Fragment>
       <figure
@@ -375,19 +386,20 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
           <video
             id="vp-video"
             className="vp-player p-0 m-0 mx-auto  "
-            controls
+            // controls
             ref={video}
             preload="metadata"
-            crossOrigin="anonymous"
+            // crossOrigin="anonymous"
           >
-            <source
+            {/* <source
               src={process.env.REACT_APP_BACKEND_URL + `/video/friends/1`}
-            />
+            /> */}
             <track
               label="English"
               kind="subtitles"
               srcLang="en"
               src={subtitle}
+              // src={process.env.REACT_APP_BACKEND_URL + "/playlist/friends1.vtt"}
               default
               id="vp-track"
             />

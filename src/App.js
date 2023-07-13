@@ -26,6 +26,10 @@ import CourseList from "./courses/course-view/CourseList";
 import CourseView from "./courses/course-view/CourseView";
 // import CourseTitle from "./courses/course-creation/CourseTitle";
 import Test from "./courses/course-creation/Test";
+import AudioStoring from "./courses/course-creation/word-creation/AudioStoring";
+import ImageStoring from "./courses/course-creation/word-creation/ImageStoring";
+import VideoPlayer from "./courses/course-view/VideoPlayer";
+
 function App() {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   let newData = [
@@ -501,47 +505,53 @@ function App() {
   };
 
   return (
-    // <Test />
-    <Router>
-      <NavBar
-        logInstatus={!!token}
-        logOutStatusHandler={logOutStatusHandler}
-        userId={userId}
-      />
-      <Switch>
-        <Route path="/" exact>
-          <MainPage />
-        </Route>
-        <Route path="/users" exact>
-          <Users />
-        </Route>
-        <Route path="/login" exact>
-          <LoginForm logInStatusHandler={logInStatusHandler} />
-        </Route>
-        <Route path="/registration" exact>
-          <RegistrationForm logInStatusHandler={logInStatusHandler} />
-        </Route>
-        <Route path="/tour" exact>
-          <Tour />
-        </Route>
-        <Route path="/courses/all" exact>
-          <CourseList />
-        </Route>
-        <Route path="/courses/user/:userId" exact>
-          <UserCourses />
-        </Route>
-        <Route path="/courses/new" exact>
-          <NewCourse />
-        </Route>
-        <Route path="/courses/:courseId" exact>
-          <UpdateCourse userId={userId} />
-        </Route>
-        <Route path="/course/friends" exact>
-          <CourseView />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
-    </Router>
+    <CourseView />
+    // <Router>
+    //   <NavBar
+    //     logInstatus={!!token}
+    //     logOutStatusHandler={logOutStatusHandler}
+    //     userId={userId}
+    //   />
+    //   <Switch>
+    //     <Route path="/" exact>
+    //       <MainPage />
+    //     </Route>
+    //     <Route path="/users" exact>
+    //       <Users />
+    //     </Route>
+    //     <Route path="/login" exact>
+    //       <LoginForm logInStatusHandler={logInStatusHandler} />
+    //     </Route>
+    //     <Route path="/registration" exact>
+    //       <RegistrationForm logInStatusHandler={logInStatusHandler} />
+    //     </Route>
+    //     <Route path="/tour" exact>
+    //       <Tour />
+    //     </Route>
+    //     <Route path="/courses/all" exact>
+    //       <CourseList />
+    //     </Route>
+    //     <Route path="/courses/user/:userId" exact>
+    //       <UserCourses />
+    //     </Route>
+    //     <Route path="/courses/new" exact>
+    //       <NewCourse />
+    //     </Route>
+    //     <Route path="/courses/:courseId" exact>
+    //       <UpdateCourse userId={userId} />
+    //     </Route>
+    //     <Route path="/course/friends" exact>
+    //       <CourseView />
+    //     </Route>
+    //     <Route path="/audios/new" exact>
+    //       <AudioStoring />
+    //     </Route>{" "}
+    //     <Route path="/images/new" exact>
+    //       <ImageStoring />
+    //     </Route>
+    //     <Redirect to="/" />
+    //   </Switch>
+    // </Router>
   );
 }
 export default App;

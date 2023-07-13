@@ -39,28 +39,22 @@ function NavBar(props) {
               <Nav.Link as={Link} to="/courses/new" eventKey={3}>
                 NewCourse
               </Nav.Link>
-              <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">
-                  Another action
-                </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Something
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">
-                  Separated link
-                </NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link as={Link} to="/audios/new" eventKey={4}>
+                Save Audio
+              </Nav.Link>
+              <Nav.Link as={Link} to="/images/new" eventKey={5}>
+                Save Image
+              </Nav.Link>
+
               <Nav.Link
                 as={Link}
                 to="/registration"
-                eventKey={4}
+                eventKey={6}
                 className="ms-lg-auto"
               >
                 Sign up
               </Nav.Link>
-              <Nav.Link eventKey={5} as={Link} to="/login" className="me-3">
+              <Nav.Link eventKey={7} as={Link} to="/login" className="me-3">
                 Login
               </Nav.Link>
             </Nav>
