@@ -1,0 +1,38 @@
+.word-search-input {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 5px;
+  border: solid;
+  border-color: coral;
+  border-radius: 20px;
+}
+.selected-item {
+  /* width: fit-content; */
+  padding: 0px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: cornflowerblue;
+  border-radius: 15px;
+  margin: 2px;
+}
+.word-search-input input {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 15px;
+  /* padding: 0 10px; */
+  text-align: center;
+  border: none;
+  background-color: inherit;
+}
+.word-search-input .word-search-input-remove {
+  background-image: url(./icons/close.svg);
+  width: 15px;
+  height: 15px;
+  border: none;
+  background-color: inherit;
+  background-size: 15px;
+  background-repeat: no-repeat;
+}

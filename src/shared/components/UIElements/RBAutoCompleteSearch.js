@@ -24,31 +24,13 @@ function RBAutoCompleteSearch(props) {
               children[1].children[activeElIndex - 1].focus();
             } else children[0].focus();
           }
-          // if (activeEl.nodeName.toLowerCase() === "input") {
-          //   // console.log("hello me");
-          //   // var val = activeEl.value; //store the value of the element
-          //   // activeEl.value = ""; //clear the value of the element
-          //   // activeEl.value = val; //set that value back.
-          //   // let end = activeEl.value.length;
-          //   // // ✅ Move focus to END of input field
-          //   // activeEl.setSelectionRange(end, end);
-          //   activeEl.select();
-          // }
-
-          // children[activeElIndex].select();
-
-          // console.log("active", document.activeElement);
         }
         if (event.key === "ArrowDown") {
           activeElIndex++;
-          // console.log("n of children[1]", children[1].children.length);
-          // console.log("n of children[1]", children[1].children.length);
 
           if (activeElIndex < children[1].children.length + 1)
             children[1].children[activeElIndex - 1].focus();
           else activeElIndex--;
-
-          // console.log(children[activeElIndex]);
         }
       });
     })();
@@ -58,6 +40,7 @@ function RBAutoCompleteSearch(props) {
       setValue(props.initialValue);
     })();
   }, [props.initialValue]);
+
   React.useEffect(() => {
     (function () {
       if (props.closeSuggestionBox === true) setRows([]);
@@ -77,9 +60,6 @@ function RBAutoCompleteSearch(props) {
         keys: ["title"],
       });
     } else searchSuggestions = [];
-
-    // fuse.search(newValue);
-    // console.log(searchSuggestions);
 
     const newRows = searchSuggestions.map((item) => (
       <OverlayTrigger
@@ -111,20 +91,16 @@ function RBAutoCompleteSearch(props) {
     // console.log("happened on click", event);
   };
   return (
-    <React.Fragment>
-      <div ref={ref} className="auto-wrapper">
-        <input
-          value={value}
-          type="search"
-          onChange={onChange}
-          className="auto-input"
-          placeholder={
-            props.type ? "Search in subtitle" : "Search in data-base"
-          }
-        />
-        <div className="list-group auto-ul-wrapper">{rows}</div>
-      </div>
-    </React.Fragment>
+    <div ref={ref} className="auto-wrapper">
+      <input
+        value={value}
+        type="search"
+        onChange={onChange}
+        className="auto-input"
+        placeholder={props.type ? "Search in subtitle" : "Search in data-base"}
+      />
+      <div className="list-group auto-ul-wrapper">{rows}</div>
+    </div>
   );
 }
 export default RBAutoCompleteSearch;

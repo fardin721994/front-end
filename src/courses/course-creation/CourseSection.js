@@ -1,49 +1,22 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Formik, Form, useFormik } from "formik";
-import * as Yup from "yup";
-import Input from "../../main/components/Registration/formik/Input";
-import { useHttpClient } from "../../shared/hooks/http-hook";
-import ErrorModal from "../../shared/components/UIElements/ErrorModal";
-import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
-import { ErrorMessage } from "formik";
-import TextError from "../../main/components/Registration/formik/TextError";
-import Progress from "./Progress";
-import axios from "axios";
 
-import WordItem from "./WordItem";
 import WordsPart from "./WordsPart";
 import SubtitleUploadPart from "./SubtitleUploadPart";
 import VideoUploadPart from "./VideoUploadPart";
+import "./CourseSection.css";
 
-function CourseSection(props) {
+function CourseSection({
+  courseName,
+  courseSection,
+  ////////////////
+  databaseWords,
+  sectionData,
+  setSectionData,
+}) {
   const [uploadedSubtitleSrc, setUploadedSubtitleSrc] = useState();
-  const [databaseWords, setDatabaseWords] = useState([]);
   const [subtitleWords, setSubtitleWords] = useState([]);
   const [cues, setCues] = useState([]);
 
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
-  React.useEffect(() => {
-    (function () {
-      const dataRetreive = async () => {
-        try {
-          const retrievedDatabaseWords = await sendRequest(
-            process.env.REACT_APP_BACKEND_URL + "/database"
-          );
-          //// to add id key. we have _id key but I need id key.
-          retrievedDatabaseWords.forEach((data) => {
-            data.id = data._id;
-          });
-          ////
-          setDatabaseWords(retrievedDatabaseWords);
-        } catch (err) {
-          console.log("sth wrong happened");
-        }
-      };
-      dataRetreive();
-    })();
-  }, []);
   React.useEffect(() => {
     (function () {
       if (uploadedSubtitleSrc) {
@@ -100,34 +73,34 @@ function CourseSection(props) {
           }
           setSubtitleWords(allWords);
           setCues(allCues);
-          // console.log("rrrrrrrrrrrrrrrr", words);
-
-          // for (const cue in video.textTracks[0].cues) {
-          //   console.log(cue);
-          // }
         });
       }
     })();
   }, [uploadedSubtitleSrc]);
-  // console.log("me subbbbbbbb", uploadedSubtitleSrc);
-  //   console.log("database", database);
 
   return (
     <React.Fragment>
       <div className="container-fluid">
-        <h1 className="w-75 mx-auto bg-info text-center rounded-4 py-2">
-          {props.courseSection}
-        </h1>
         <SubtitleUploadPart
           className=" w-50 mx-auto"
           setUploadedSubtitleSrc={setUploadedSubtitleSrc}
-          courseName={props.courseName}
-          courseSection={props.courseSection}
+          courseName={courseName}
+          courseSection={courseSection}
+          ////////////////
+          subtitleUploaded={sectionData.subtitleUploaded}
+          setSubtitleUploaded={(boolean) =>
+            setSectionData({ ...sectionData, subtitleUploaded: boolean })
+          }
         />
         <VideoUploadPart
           className="w-50 mx-auto"
-          courseName={props.courseName}
-          courseSection={props.courseSection}
+          courseName={courseName}
+          courseSection={courseSection}
+          ////////////
+          videoUploaded={sectionData.videoUploaded}
+          setSubtitleUploaded={(boolean) =>
+            setSectionData({ ...sectionData, videoUploaded: boolean })
+          }
         />
         <video id="vp-video" controls preload="metadata" className="d-none">
           {/* <source src={videosource} /> */}
@@ -147,6 +120,11 @@ function CourseSection(props) {
           subtitleWords={subtitleWords}
           databaseWords={databaseWords}
           cues={cues}
+          /////////////
+          wordList={sectionData.words}
+          setWordList={(newWords) =>
+            setSectionData({ ...sectionData, words: newWords })
+          }
         />
       </div>
     </React.Fragment>

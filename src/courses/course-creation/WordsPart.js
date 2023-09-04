@@ -2,21 +2,37 @@ import React, { useState } from "react";
 import WordItem from "./WordItem";
 import Button from "react-bootstrap/Button";
 import { useHttpClient } from "../../shared/hooks/http-hook";
+import "./WordsPart.css";
 
-function WordsPart(props) {
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
-  const [wordList, setWordList] = useState([
-    { subtitleWord: "", databaseWord: "" },
-  ]);
+function WordsPart({
+  subtitleWords,
+  databaseWords,
+  cues,
+  /////////////
+  wordList,
+  setWordList,
+}) {
   const [closeSuggestionBox, setCloseSuggestionBox] = useState(false);
 
-  const handleWordChange = (value, type, index) => {
-    const list = [...wordList];
-    type === "subtitle"
-      ? (list[index].subtitleWord = value)
-      : (list[index].databaseWord = value);
-    setWordList(list);
+  const setSubtitleWord = (index, newSubtitleWord) => {
+    let wordListCopy = [...wordList];
+    wordListCopy[index].subtitleWord = newSubtitleWord;
+    const newWordList = [...wordListCopy];
+    setWordList(newWordList);
+  };
+  const setDatabaseWord = (index, newDatabaseWord) => {
+    let wordListCopy = [...wordList];
+    wordListCopy[index].databaseWord = newDatabaseWord;
+    const newWordList = [...wordListCopy];
+    setWordList(newWordList);
+  };
+
+  const handleWordAdd = () => {
+    setWordList([...wordList, { subtitleWord: [], databaseWord: [] }]);
+  };
+
+  const closeSuggestionBoxHandler = (event) => {
+    if (event.target.className !== "auto-input") setCloseSuggestionBox(true);
   };
 
   const handleWordRemove = (index) => {
@@ -25,69 +41,52 @@ function WordsPart(props) {
     setWordList([...list]);
   };
 
-  const handleWordAdd = () => {
-    setWordList((preState) => {
-      return [...preState, { subtitleWord: "", databaseWord: "" }];
-    });
-  };
-  // const closeSuggestionBoxHandler = (e) => console.log(e);
-  const closeSuggestionBoxHandler = (event) => {
-    if (event.target.className !== "auto-input") setCloseSuggestionBox(true);
-  };
   const wordsSaveHandler = async () => {
-    try {
-      await sendRequest(
-        process.env.REACT_APP_BACKEND_URL + "/courses/words",
-        "POST",
-        JSON.stringify({
-          name: "friends",
-          content: wordList,
-        }),
-        { "Content-Type": "application/json" }
-      );
-    } catch (err) {}
+    // try {
+    //   await sendRequest(
+    //     process.env.REACT_APP_BACKEND_URL + "/courses/words",
+    //     "POST",
+    //     JSON.stringify({
+    //       name: "friends",
+    //       content: wordList,
+    //     }),
+    //     { "Content-Type": "application/json" }
+    //   );
+    // } catch (err) {}
+    console.log("wordList", wordList);
   };
 
   return (
-    <div
-      className="w-75 mx-auto my-5 bg-warning words-part-wrapper rounded-4"
-      onClick={closeSuggestionBoxHandler}
-    >
-      <div className=" w-75 mx-auto py-4">
-        {wordList.map((word, index) => (
-          <div className="row bg-primary align-items-center  mb-2 rounded-2">
-            <div className="col-10">
-              <WordItem
-                subtitleWord={word.subtitleWord}
-                databaseWord={word.databaseWord}
-                subtitleWords={props.subtitleWords}
-                databaseWords={props.databaseWords}
-                cues={props.cues}
-                handleWordChange={(value, type) =>
-                  handleWordChange(value, type, index)
-                }
-                closeSuggestionBox={closeSuggestionBox}
-                setCloseSuggestionBox={setCloseSuggestionBox}
-              />
-            </div>
-            <div className="col-2">
-              <Button variant="danger" onClick={() => handleWordRemove(index)}>
-                Remove
-              </Button>
-            </div>
-          </div>
-        ))}
-        <div className="row w-50 mx-auto mb-2">
-          <Button variant="success" onClick={handleWordAdd}>
-            Add a word
-          </Button>
-        </div>
-        <div className="row w-50 mx-auto mb-2">
-          <Button variant="dark" onClick={wordsSaveHandler}>
-            Save
-          </Button>
-        </div>
-      </div>
+    <div className="words-part" onClick={closeSuggestionBoxHandler}>
+      {wordList.map((word, index) => (
+        <WordItem
+          subtitleWords={subtitleWords}
+          databaseWords={databaseWords}
+          cues={cues}
+          ///////////////
+          subtitleWord={word.subtitleWord}
+          databaseWord={word.databaseWord}
+          setSubtitleWord={(newSubtitleWord) =>
+            setSubtitleWord(index, newSubtitleWord)
+          }
+          setDatabaseWord={(newDatabaseWord) =>
+            setDatabaseWord(index, newDatabaseWord)
+          }
+          //////////////
+
+          handleWordRemove={() => handleWordRemove(index)}
+          closeSuggestionBox={closeSuggestionBox}
+          setCloseSuggestionBox={setCloseSuggestionBox}
+          ////////////////
+          key={index}
+        />
+      ))}
+      <button className="add" onClick={handleWordAdd}>
+        Add a word
+      </button>
+      <button className="save" onClick={wordsSaveHandler}>
+        Save
+      </button>
     </div>
   );
 }

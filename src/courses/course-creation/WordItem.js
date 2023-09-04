@@ -1,38 +1,34 @@
 import React, { useState } from "react";
-import RBAutoCompleteSearch from "../../shared/components/UIElements/RBAutoCompleteSearch";
+import WordAutoCompleteSearch from "./WordAutoCompleteSearch";
 import "./WordItem.css";
 
 function WordItem(props) {
   return (
-    <div className="container-fluid ">
-      <div className="row  p-1  bg-primary rounded-3">
-        <div className="col-3 p-2 ">
-          <RBAutoCompleteSearch
-            items={props.subtitleWords}
-            cues={props.cues}
-            type={"subtitle"}
-            initialValue={props.subtitleWord}
-            handleWordChange={(value) =>
-              props.handleWordChange(value, "subtitle")
-            }
-            closeSuggestionBox={props.closeSuggestionBox}
-            setCloseSuggestionBox={props.setCloseSuggestionBox}
-          />
-        </div>
-        <div className="col-3"></div>
-        <div className="col-3 p-2 ">
-          <RBAutoCompleteSearch
-            items={props.databaseWords}
-            initialValue={props.databaseWord}
-            handleWordChange={(value) =>
-              props.handleWordChange(value, "database")
-            }
-            closeSuggestionBox={props.closeSuggestionBox}
-            setCloseSuggestionBox={props.setCloseSuggestionBox}
-          />
-        </div>
-        <div className="col-3"></div>
-      </div>
+    <div className="word-item">
+      <WordAutoCompleteSearch
+        itemsToSearchIn={props.subtitleWords}
+        cues={props.cues}
+        type={"subtitle"}
+        /////////////
+        selectedItems={props.subtitleWord}
+        setSelectedItems={props.setSubtitleWord}
+        ////////////////////
+        closeSuggestionBox={props.closeSuggestionBox}
+        setCloseSuggestionBox={props.setCloseSuggestionBox}
+      />
+
+      <WordAutoCompleteSearch
+        itemsToSearchIn={props.databaseWords}
+        ////////////////
+        selectedItems={props.databaseWord}
+        setSelectedItems={props.setDatabaseWord}
+        ////////////////
+        closeSuggestionBox={props.closeSuggestionBox}
+        setCloseSuggestionBox={props.setCloseSuggestionBox}
+      />
+      <button className="remove" onClick={props.handleWordRemove}>
+        Remove
+      </button>
     </div>
   );
 }

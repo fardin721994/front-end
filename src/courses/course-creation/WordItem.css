@@ -1,0 +1,25 @@
+.word-item {
+  width: 90%;
+  margin: 25px auto;
+  padding: 10px;
+  border: solid;
+  border-color: darkblue;
+  border-radius: 10px;
+  display: flex;
+}
+.word-item .remove {
+  background-color: red;
+  display: block;
+  margin: 10px auto;
+  width: 100px;
+  padding: 5px;
+  border-radius: 20px;
+}
+
+@media screen and (min-width: 1000px) {
+  .word-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

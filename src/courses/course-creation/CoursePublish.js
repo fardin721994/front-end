@@ -1,6 +1,6 @@
 import React from "react";
 import "./CoursePublish.css";
 function CoursePublish() {
-  return <div></div>;
+  return <div> publish</div>;
 }
 export default CoursePublish;
