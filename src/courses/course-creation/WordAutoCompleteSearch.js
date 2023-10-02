@@ -50,8 +50,12 @@ function WordAutoCompleteSearch({
       keys: ["title"],
     });
   } else searchSuggestions = [];
+
   const handleSelectSuggetion = (event) => {
-    const newSelectedItems = [...selectedItems, event.target.textContent];
+    const newSelectedItem = itemsToSearchIn.find(
+      (item) => item.title === event.target.textContent
+    );
+    const newSelectedItems = [...selectedItems, newSelectedItem];
     setSelectedItems(newSelectedItems);
     setValue("");
   };

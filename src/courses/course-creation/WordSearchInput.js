@@ -20,12 +20,12 @@ function WordSearchInput({
 
   const selectedItemsElements = selectedItems.map((selectedItem) => (
     <div className="selected-item">
-      <span>{selectedItem}</span>
+      <span>{selectedItem.title}</span>
       <button
         className="word-search-input-remove"
         onClick={handleRemoveSelectedItem}
-        data-selectedItem={selectedItem}
-        key={selectedItem}
+        data-selectedItem={selectedItem.title}
+        key={selectedItem.title}
       ></button>
     </div>
   ));

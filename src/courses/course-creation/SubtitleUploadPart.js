@@ -6,7 +6,9 @@ function SubtitleUploadPart(props) {
     <div className="mb-3 w-75  mx-auto bg-warning rounded-4 py-2">
       <FileUpload
         fileType="subtitle"
-        setUploadedFileSrc={props.setUploadedSubtitleSrc}
+        uploadedFile={props.subtitleFile}
+        setUploadedFile={props.setSubtitleFile}
+        setUploadedFileSrc={props.setSubtitleSrc}
         courseName={props.courseName}
         courseSection={props.courseSection}
       />

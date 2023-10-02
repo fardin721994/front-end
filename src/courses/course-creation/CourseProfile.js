@@ -2,46 +2,48 @@ import React, { useState } from "react";
 import "./CourseProfile.css";
 import axios from "axios";
 
-function CourseProfile(props) {
-  const [name, setName] = useState("");
+function CourseProfile({
+  courseName,
+  setCourseName,
+  courseDescription,
+  setCourseDescription,
+}) {
   const [image, setImage] = useState();
-  const [description, setDescription] = useState("");
-  const [profileSaved, setprofileSaved] = useState(false);
 
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    setCourseName(event.target.value);
   };
   const handleImageChange = (event) => {
     setImage(event.target.files[0]);
   };
   const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
+    setCourseDescription(event.target.value);
   };
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("courseName", name);
-    formData.append("image", image);
-    formData.append("description", description);
-    try {
-      const res = await axios.post(
-        process.env.REACT_APP_BACKEND_URL + "/courses/new/profile",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      props.setCourseData({
-        sections: { ...props.courseData.sections },
-        profile: { name: `${name}`, description: `${description}` },
-      });
-      setprofileSaved(true);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handleFormSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append("courseName", name);
+  //   formData.append("image", image);
+  //   formData.append("description", description);
+  //   try {
+  //     const res = await axios.post(
+  //       process.env.REACT_APP_BACKEND_URL + "/courses/new/profile",
+  //       formData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //       }
+  //     );
+  //     props.setCourseData({
+  //       sections: { ...props.courseData.sections },
+  //       profile: { name: `${name}`, description: `${description}` },
+  //     });
+  //     setprofileSaved(true);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div className="course-profile-wrapper">
       <form className="course-profile">
@@ -51,7 +53,7 @@ function CourseProfile(props) {
           id="course-profile-name"
           name="course-profile-name"
           className="mb-4"
-          value={name}
+          value={courseName}
           onChange={handleNameChange}
         ></input>
         <label htmlFor="course-profile-image">Course profile image </label>
@@ -67,19 +69,19 @@ function CourseProfile(props) {
           className="d-block mb-4"
           id="course-profile-description"
           name="course-profile-description"
-          value={description}
+          value={courseDescription}
           onChange={handleDescriptionChange}
         ></textarea>
-        <button type="submit" className="bg-warning" onClick={handleFormSubmit}>
+        {/* <button type="submit" className="bg-warning" onClick={handleFormSubmit}>
           Save
-        </button>
-        <div
+        </button> */}
+        {/* <div
           className={
             "bg-success text-center " + `${profileSaved ? "" : "d-none"}`
           }
         >
           Successfully saved
-        </div>
+        </div> */}
       </form>
     </div>
   );

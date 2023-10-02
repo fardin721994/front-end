@@ -4,26 +4,31 @@ import Progress from "./Progress";
 import axios from "axios";
 
 const FileUpload = (props) => {
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState(null);
+  ///////////
   const [filename, setFilename] = useState("Choose File");
-  const [uploadedFile, setUploadedFile] = useState({});
   const [message, setMessage] = useState("");
   const [uploadPercentage, setUploadPercentage] = useState(0);
 
   const onChange = (e) => {
     setFile(e.target.files[0]);
-    setFilename(e.target.files[0].name);
-    /////////////////////
-    if (props.setUploadedFileSrc) {
-      let reader = new FileReader();
 
-      reader.readAsDataURL(e.target.files[0]);
+    if (props.fileType === "subtitle") {
+      props.setUploadedFile(e.target.files[0]);
+      setFilename(e.target.files[0].name);
+      /////////////////////
+      if (props.setUploadedFileSrc) {
+        let reader = new FileReader();
 
-      reader.onloadend = function () {
-        // imgavat.attr('src', reader.result);
-        props.setUploadedFileSrc(reader.result);
-      };
+        reader.readAsDataURL(e.target.files[0]);
+
+        reader.onloadend = function () {
+          // imgavat.attr('src', reader.result);
+          props.setUploadedFileSrc(reader.result);
+        };
+      }
     }
+
     /////////////////////
   };
 
@@ -95,14 +100,14 @@ const FileUpload = (props) => {
           className="btn btn-primary btn-block mt-4"
         />
       </form>
-      {uploadedFile ? (
+      {/* {uploadedFile ? (
         <div className="row mt-5">
           <div className="col-md-6 m-auto">
             <h3 className="text-center">{uploadedFile.fileName}</h3>
             <img style={{ width: "100%" }} src={uploadedFile.filePath} alt="" />
           </div>
         </div>
-      ) : null}
+      ) : null} */}
     </div>
   );
 };

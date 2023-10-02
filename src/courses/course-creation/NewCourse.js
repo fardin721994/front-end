@@ -21,7 +21,10 @@ function NewCourse(props) {
   });
   const [databaseWords, setDatabaseWords] = useState([]);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
-
+  // FOR SAVING SUBTITLE FILES AND THEIR SCRS BETWEEN RE-RENDERS
+  const [subtitles, setSubtitles] = useState([
+    { subtitleFile: null, subtitleSrc: null },
+  ]);
   ////////////////////
 
   const currentSectionIndex = selectedTab.includes("section")
@@ -65,7 +68,23 @@ function NewCourse(props) {
     });
     setSelectedTab(`section_${courseData.sections.length + 1}`);
   };
+  //////////////
+  // FOR SAVING SUBTITLE FILES AND THEIR SCRS BETWEEN RE-RENDERS
 
+  const setSectionSubtitleFile = (newSubtitleFile) => {
+    setSubtitles((subtitles) => [
+      ...subtitles.slice(0, currentSectionIndex),
+      { ...subtitles[currentSectionIndex], subtitleFile: newSubtitleFile },
+      ...subtitles.slice(currentSectionIndex + 1),
+    ]);
+  };
+  const setSectionSubtitleSrc = (newSubtitleSrc) => {
+    setSubtitles((subtitles) => [
+      ...subtitles.slice(0, currentSectionIndex),
+      { ...subtitles[currentSectionIndex], subtitleSrc: newSubtitleSrc },
+      ...subtitles.slice(currentSectionIndex + 1),
+    ]);
+  };
   ///////////////////////
   //// GETTING ALL THE WORDS FROM DATABASE
   React.useEffect(() => {
@@ -103,7 +122,7 @@ function NewCourse(props) {
       />
     );
   else if (selectedTab === "publish")
-    tabCorrespondingElement = <CoursePublish />;
+    tabCorrespondingElement = <CoursePublish courseData={courseData} />;
   else {
     tabCorrespondingElement = (
       <CourseSection
@@ -114,6 +133,11 @@ function NewCourse(props) {
         databaseWords={databaseWords}
         sectionData={courseData.sections[currentSectionIndex]}
         setSectionData={setSectionData}
+        //////////////
+        subtitleFile={subtitles[currentSectionIndex]?.subtitleFile}
+        setSubtitleFile={setSectionSubtitleFile}
+        subtitleSrc={subtitles[currentSectionIndex]?.subtitleSrc}
+        setSubtitleSrc={setSectionSubtitleSrc}
       />
     );
   }

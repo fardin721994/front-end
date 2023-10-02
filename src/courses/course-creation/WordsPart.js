@@ -41,20 +41,20 @@ function WordsPart({
     setWordList([...list]);
   };
 
-  const wordsSaveHandler = async () => {
-    // try {
-    //   await sendRequest(
-    //     process.env.REACT_APP_BACKEND_URL + "/courses/words",
-    //     "POST",
-    //     JSON.stringify({
-    //       name: "friends",
-    //       content: wordList,
-    //     }),
-    //     { "Content-Type": "application/json" }
-    //   );
-    // } catch (err) {}
-    console.log("wordList", wordList);
-  };
+  // const wordsSaveHandler = async () => {
+  //   // try {
+  //   //   await sendRequest(
+  //   //     process.env.REACT_APP_BACKEND_URL + "/courses/words",
+  //   //     "POST",
+  //   //     JSON.stringify({
+  //   //       name: "friends",
+  //   //       content: wordList,
+  //   //     }),
+  //   //     { "Content-Type": "application/json" }
+  //   //   );
+  //   // } catch (err) {}
+  //   console.log("wordList", wordList);
+  // };
 
   return (
     <div className="words-part" onClick={closeSuggestionBoxHandler}>
@@ -84,9 +84,9 @@ function WordsPart({
       <button className="add" onClick={handleWordAdd}>
         Add a word
       </button>
-      <button className="save" onClick={wordsSaveHandler}>
+      {/* <button className="save" onClick={wordsSaveHandler}>
         Save
-      </button>
+      </button> */}
     </div>
   );
 }

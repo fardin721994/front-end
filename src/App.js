@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
@@ -22,8 +23,8 @@ import AutoCompleteSearch from "./shared/components/UIElements/AutoCompleteSearc
 import CourseSection from "./courses/course-creation/CourseSection";
 import RBAutoCompleteSearch from "./shared/components/UIElements/RBAutoCompleteSearch";
 // import Ttest from "./shared/components/UIElements/Ttest";
-import CourseList from "./courses/course-view/CourseList";
-import CourseView from "./courses/course-view/CourseView";
+import Courses from "./courses/course-view/Courses";
+import SectionView from "./courses/course-view/SectionView";
 // import CourseTitle from "./courses/course-creation/CourseTitle";
 import Test from "./courses/course-creation/Test";
 import AudioStoring from "./courses/course-creation/word-creation/AudioStoring";
@@ -35,6 +36,23 @@ import WordsPart from "./courses/course-creation/WordsPart";
 import WordReview from "./courses/course-view/WordReview";
 import Carousel from "./courses/course-view/Carousel";
 import WordCreation from "./courses/word-creation/WordCreation";
+import {
+  BarLoader,
+  CircleLoader,
+  ClipLoader,
+  BounceLoader,
+  RingLoader,
+  BeatLoader,
+  ClockLoader,
+  DotLoader,
+  ClimbingBoxLoader,
+  RotateLoader,
+  ScaleLoader,
+  SyncLoader,
+  PropagateLoader,
+} from "react-spinners";
+import LoadingSpinner from "./courses/course-view/LoadingSpinner";
+import CourseView from "./courses/course-view/CourseView";
 
 function App() {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -83,38 +101,31 @@ function App() {
     { content: <h3>Slide 3</h3> },
     // Add more slides as needed
   ];
-
-  //////////////
+  ////////////////
   let data = [
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "gotta",
+      pronunciation: "/ˈɡɒtə $ ˈɡɑːtə/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
-      register: "",
+      partOfSpeech: "",
+      register: "informal",
       additionalInfo: "",
-      translation: "",
-      title: "act_noun_1",
+      translation: "باید",
+      title: "gotta",
       meaning: {
-        index: 1,
-        definition: "one thing that you do",
-        examples: [
-          "The new president’s first act should be to end the war.",
-          "A thoughtless act.",
-          "The act of writing a list can help to calm you down.",
-          "an act of violence",
-          "her many acts of kindness",
-          "in the act of doing something (=at the moment that you are doing something)",
-          "Lindsay paused in the act of putting down the phone.",
-        ],
+        index: 0,
+        definition:
+          "a short form of ‘have got to’, ‘has got to’, ‘have got a’, or ‘has got a’, which most people think is incorrect",
+        examples: ["We gotta go now."],
       },
+      images: [],
     },
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "hump",
+      pronunciation: "/hʌmp/",
       frequency: {
         written: "",
         spoken: "",
@@ -122,21 +133,41 @@ function App() {
       partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "act_noun_2",
+      translation:
+        " برآمدگی روی یک سطح ، مانع سرعتگیر ، کوهان (شتر) ، قوز کمر ",
+      title: "hump _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "a large round shape that rises above the surface of something",
+        examples: ["the hump of a hill"],
+      },
+      images: [],
+    },
+    {
+      word: "hump",
+      pronunciation: "/hʌmp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation:
+        " برآمدگی روی یک سطح ، مانع سرعتگیر ، کوهان (شتر) ، قوز کمر ",
+      title: "hump _ noun _ 2",
       meaning: {
         index: 2,
         definition:
-          "(also Act) , a law that has been officially accepted by Parliament or Congress",
-        examples: [
-          "The Housing and Community Development Act of 1977.",
-          "An act of Parliament.",
-        ],
+          "→ speed/traffic humps British English a series of humps in the road, designed to make traffic slow down",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "hump",
+      pronunciation: "/hʌmp/",
       frequency: {
         written: "",
         spoken: "",
@@ -144,21 +175,19 @@ function App() {
       partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "act_noun_3",
+      translation:
+        " برآمدگی روی یک سطح ، مانع سرعتگیر ، کوهان (شتر) ، قوز کمر ",
+      title: "hump _ noun _ 3",
       meaning: {
         index: 3,
-        definition:
-          "insincere behaviour in which you pretend to have a particular kind of feeling or to be a particular kind of person",
-        examples: [
-          "Mike played the loving husband in front of the children but it was all an act.",
-          "Be natural. Don’t feel you have to put on an act.",
-        ],
+        definition: "a raised part on the back of a camel",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "hump",
+      pronunciation: "/hʌmp/",
       frequency: {
         written: "",
         spoken: "",
@@ -166,20 +195,20 @@ function App() {
       partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "act_noun_4",
+      translation:
+        " برآمدگی روی یک سطح ، مانع سرعتگیر ، کوهان (شتر) ، قوز کمر ",
+      title: "hump _ noun _ 4",
       meaning: {
         index: 4,
         definition:
-          "→ get your act together, informal, to become more organized and behave in a more effective way, especially in order to achieve something",
-        examples: [
-          "You need to get your act together if you’re going to find the right house to buy.",
-        ],
+          "a raised part on someone’s back that is caused by an unusually curved spine",
+        examples: [],
       },
+      images: [1, 2, 3],
     },
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "hump",
+      pronunciation: "/hʌmp/",
       frequency: {
         written: "",
         spoken: "",
@@ -187,21 +216,20 @@ function App() {
       partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "act_noun_5",
+      translation:
+        " برآمدگی روی یک سطح ، مانع سرعتگیر ، کوهان (شتر) ، قوز کمر ",
+      title: "hump _ noun _ 5",
       meaning: {
         index: 5,
         definition:
-          "one of the main parts into which a stage play, opera etc is divided",
-        examples: [
-          "I arrived at the theatre late and missed the first act.",
-          "the beginning of Act 3",
-        ],
+          "→ be over the hump ,  to have finished the most difficult part of something",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "hairpiece",
+      pronunciation: "/ˈheəpiːs $ ˈher-/",
       frequency: {
         written: "",
         spoken: "",
@@ -209,18 +237,23 @@ function App() {
       partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "act_noun_6",
+      translation: "موی مصنوعی",
+      title: "hairpiece _ noun",
       meaning: {
-        index: 6,
+        index: 0,
         definition:
-          "a short performance on stage or television by someone who plays music or tells jokes",
-        examples: ["The argument was just part of their act."],
+          "a piece of false hair that you wear on your head to make your own hair look thicker",
+        examples: [
+          "The very first day her ad ran, she got a call for a hairpiece to be worn at a trendy wedding.",
+          "Look-Willard Scott has lost his hairpiece!",
+          "Brent, in spite of the obvious hairpiece and the gold chain, is a rebel.",
+        ],
       },
+      images: [1, 2, 3],
     },
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "chalk",
+      pronunciation: "/tʃɔːk $ tʃɒːk/",
       frequency: {
         written: "",
         spoken: "",
@@ -228,257 +261,42 @@ function App() {
       partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "act_noun_7",
-      meaning: {
-        index: 7,
-        definition: "a performer or a group of performers who perform together",
-        examples: [
-          "The band is one of many acts that have been booked for the concert.",
-        ],
-      },
-    },
-    {
-      word: "act",
-      pronunciation: "/ækt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "act_verb_1",
+      translation: "گچ",
+      title: "chalk _ noun _ 1",
       meaning: {
         index: 1,
         definition:
-          "to do something in a particular way or for a particular reason",
-        examples: [
-          "The company acted correctly in sacking him.",
-          "The jury decided that Walker had acted in self-defence.",
-          "act to do something",
-          "The UN must act now to restore democracy.",
-          "Politicians will only act when enough people demand that they do something.",
-        ],
+          "soft white or grey rock formed a long time ago from the shells of small sea animals",
+        examples: ["chalk cliffs"],
       },
+      images: [],
     },
     {
-      word: "act",
-      pronunciation: "/ækt/",
+      word: "chalk",
+      pronunciation: "/tʃɔːk $ tʃɒːk/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "verb",
+      partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "act_verb_2",
-      meaning: {
-        index: 2,
-        definition: "to behave in a particular way",
-        examples: [
-          "They acted unreasonably when they turned down Jill’s application.",
-          "He’s been acting strangely ever since his mom died.",
-          "Pip acted as if he was better than everyone else.",
-          "Stop acting like a baby.",
-          "She acted with dignity.",
-          "act your age (=used to tell someone to behave in a more adult way, suitable for someone of their age)",
-        ],
-      },
-    },
-    {
-      word: "act",
-      pronunciation: "/ækt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "act_verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "to pretend to have feelings, qualities etc that are different from your true ones",
-        examples: [
-          "When he’s angry, he acts the fool.",
-          "That guy is acting crazy.",
-          "Stella felt unnatural in their company, as if she was acting a part.",
-          "Why does he act as if he was stupid?",
-        ],
-      },
-    },
-    {
-      word: "act",
-      pronunciation: "/ækt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "act_verb_4",
-      meaning: {
-        index: 4,
-        definition: "to perform in a play or film",
-        examples: [
-          "I first started acting when I was 12 years old.",
-          "She is acting the role of Lady Macbeth six evenings a week.",
-          "The movie is very well acted.",
-        ],
-      },
-    },
-    {
-      word: "act",
-      pronunciation: "/ækt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "act_verb_5",
-      meaning: {
-        index: 5,
-        definition: "to have an effect or use act as",
-        examples: [
-          "The padding acts as a cushion if the player falls or is hit by the ball.",
-          "Disinfectants act on bacteria in two main ways.",
-        ],
-      },
-    },
-    {
-      word: "stand up",
-      pronunciation: "/stænd ʌp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stand up_phrasal verb_1",
-      meaning: {
-        index: 1,
-        definition: "to be on your feet, or to rise to your feet",
-        examples: [
-          "I've been standing up all day.",
-          "Stand up straight and don’t slouch!",
-          "Jim stood up stiffly.",
-        ],
-      },
-    },
-    {
-      word: "stand up",
-      pronunciation: "/stænd ʌp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stand up_phrasal verb_2",
+      translation: "گچ",
+      title: "chalk _ noun _ 2",
       meaning: {
         index: 2,
         definition:
-          "to stay healthy or in good condition in a difficult environment or after a lot of hard use",
-        examples: ["Most of the plants stood up well to the heat."],
-      },
-    },
-    {
-      word: "stand up",
-      pronunciation: "/stænd ʌp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stand up_phrasal verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "to be proved to be true, correct, useful, etc. when tested",
+          "small sticks of a white or coloured substance like soft rock, used for writing or drawing",
         examples: [
-          "The memoirs stand up well to cross-checking with other records.",
-          "Without a witness, the charges will never stand up in court (=be successfully proved in a court of law)..",
+          "a box of coloured chalks",
+          "a piece of chalk",
+          "writing in chalk on the blackboard",
         ],
       },
+      images: [1, 2],
     },
     {
-      word: "stand up",
-      pronunciation: "/stænd ʌp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stand up_phrasal verb_4",
-      meaning: {
-        index: 4,
-        definition:
-          "stand somebody up, informal, to not meet someone who you have arranged to meet",
-        examples: [
-          "I was supposed to go to a concert with Kyle on Friday, but he stood me up.",
-        ],
-      },
-    },
-    {
-      word: "stand-up",
-      pronunciation: "/'stændʌp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stand-up_adjective_1",
-      meaning: {
-        index: 1,
-        definition:
-          "stand-up comedy involves one person telling jokes alone as a performance",
-        examples: ["a stand-up comedian"],
-      },
-    },
-    {
-      word: "stand-up",
-      pronunciation: "/'stændʌp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stand-up_adjective_2",
-      meaning: {
-        index: 2,
-        definition:
-          "a stand-up meeting, meal etc is one in which people stand up",
-        examples: ["We had a stand-up buffet."],
-      },
-    },
-    {
-      word: "sit through something",
+      word: "go through",
       pronunciation: "",
       frequency: {
         written: "",
@@ -487,189 +305,173 @@ function App() {
       partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "sit through something_phrasal verb",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 1",
       meaning: {
         index: 1,
         definition:
-          "to attend a meeting, performance, etc., and stay until the end, even if it is very long and boring",
+          "to experience a difficult or unpleasant situation, feeling etc",
         examples: [
-          "I wasn't the least bit interested in all the speeches I had to sit through.",
+          "When you’re going through a crisis, it often helps to talk to someone.",
+          "He’s going through a divorce at the moment.",
         ],
       },
+      images: [],
     },
     {
-      word: "club",
-      pronunciation: "/klʌb/",
+      word: "go through",
+      pronunciation: "",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "club_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "a) an organization for people who share a particular interest or enjoy similar activities, or a group of people who meet together to do something they are interested in b) the building or place where the members of a particular club meet or play sport",
-        examples: [
-          "rugby/golf/squash etc club",
-          "Our chess club really needs new members.",
-          "a club for unemployed young people",
-          "It costs £15 to join the club.",
-          "She belongs to a local health club.",
-          "We could have dinner at the golf club.",
-        ],
-      },
-    },
-    {
-      word: "club",
-      pronunciation: "/klʌb/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "club_noun_2",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 2",
       meaning: {
         index: 2,
-        definition:
-          " especially British English, a professional organization including the players, managers, and owners of a sports team",
-        examples: ["Manchester United Football Club"],
-      },
-    },
-    {
-      word: "club",
-      pronunciation: "/klʌb/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "club_noun_3",
-      meaning: {
-        index: 3,
-        definition:
-          "a place where people go to dance, listen to music, and meet socially",
+        definition: "to experience a particular process",
         examples: [
-          "a jazz club",
-          "Shall we go to a club?",
-          "I’m not into the club scene at all.",
+          "Candidates must go through a process of selection.",
+          "Caterpillars go through several stages of growth.",
         ],
       },
+      images: [],
     },
     {
-      word: "club",
-      pronunciation: "/klʌb/",
+      word: "go through",
+      pronunciation: "",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "club_noun_4",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to use up money or a supply of something",
+        examples: ["We went through five pints of milk last week."],
+      },
+      images: [],
+    },
+    {
+      word: "go through",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 4",
       meaning: {
         index: 4,
         definition:
-          "a) an organization, traditionally for men only, which provides a comfortable place for its members to relax, eat, or stay the night b) the building where this organization is based",
-        examples: ["I always stay at my London club."],
+          "if a law goes through, or goes through Parliament, it is officially accepted",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "club",
-      pronunciation: "/klʌb/",
+      word: "go through",
+      pronunciation: "",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "club_noun_5",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 5",
       meaning: {
         index: 5,
         definition:
-          "→ book/record/wine etc club, an organization which people join to buy books, records, wine etc cheaply",
-        examples: [],
-      },
-    },
-    {
-      word: "club",
-      pronunciation: "/klʌb/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "club_noun_6",
-      meaning: {
-        index: 6,
-        definition:
-          "(also golf club) a long thin metal stick used in golf to hit the ball",
+          "if a deal or agreement goes through, it is officially accepted and agreed",
         examples: [
-          "He swung his club and missed the ball.",
-          "She has a new set of clubs.",
+          "He accepted the offer and the deal went through.",
+          "The sale of the land went through.",
         ],
       },
+      images: [],
     },
     {
-      word: "club",
-      pronunciation: "/klʌb/",
+      word: "go through",
+      pronunciation: "",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "club_noun_7",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 6",
+      meaning: {
+        index: 6,
+        definition: "to practise something, for example a performance",
+        examples: [
+          "Let’s go through the whole thing again, from the beginning.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "go through",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 7",
       meaning: {
         index: 7,
-        definition: "a thick heavy stick used to hit people",
-        examples: [],
+        definition:
+          "to search something in order to find something in particular",
+        examples: [
+          "Dave went through his pockets looking for the keys.",
+          "Customs officers went through all my bags.",
+        ],
       },
+      images: [],
     },
     {
-      word: "club",
-      pronunciation: "/klʌb/",
+      word: "go through",
+      pronunciation: "",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "club_noun_8",
+      translation: "تجربه کردن",
+      title: "go through _ phrasal verb _ 8",
       meaning: {
         index: 8,
         definition:
-          "a) one of the four suits (=types of cards) in a set of playing cards, which has the design of three round black leaves in a group together b) a card from this suit",
+          "to read or discuss something in order to make sure it is correct",
         examples: [
-          "ten/king etc of clubs",
-          "the ace of clubs",
-          "You have to play a club.",
+          "We’ll go through the details later on.",
+          "Do you want me to go through this and check your spellings?",
         ],
       },
+      images: [],
     },
     {
-      word: "club",
-      pronunciation: "/klʌb/",
+      word: "date",
+      pronunciation: "/deɪt/",
       frequency: {
         written: "",
         spoken: "",
@@ -677,18 +479,128 @@ function App() {
       partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
-      translation: "",
-      title: "club_noun_9",
+      translation: "تاریخ",
+      title: "date _ noun _ 1",
       meaning: {
-        index: 9,
+        index: 1,
         definition:
-          "→ in the club, British English, old-fashioned, if a woman is in the club, she is going to have a baby – used humorously SYN pregnant",
+          "a particular day of the month or year, especially shown by a number",
+        examples: [
+          "The date on the letter was 30th August 1962.",
+          "What’s today’s date?",
+          "What’s the date of the next meeting?",
+          "You should apply at least 8 weeks before your date of departure.",
+          "Have you set a date for the wedding yet?",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "date",
+      pronunciation: "/deɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "تاریخ",
+      title: "date _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition: "→ at a later/future date,  at some time in the future",
+        examples: [" The details will be agreed at a later date."],
+      },
+      images: [],
+    },
+    {
+      word: "date",
+      pronunciation: "/deɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "تاریخ",
+      title: "date _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition: "→ to date, up to now",
+        examples: [
+          "   The cost of the work to date has been about £150 million.",
+          "Her best performance to date was her third place at the World Junior Championships.  ",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "date",
+      pronunciation: "/deɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "تاریخ",
+      title: "date _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "an occasion when you go out with someone that you like in a romantic way or someone that you have a date with",
+        examples: [
+          "I’ve got a date with Andrea tomorrow night.",
+          "I felt like a teenager going out on a first date.",
+          "Can I bring my date to the party?",
+        ],
+      },
+      images: [1, 2],
+    },
+    {
+      word: "date",
+      pronunciation: "/deɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "تاریخ",
+      title: "date _ noun _ 5",
+      meaning: {
+        index: 5,
+        definition: "a time arranged to meet someone, especially socially",
+        examples: ["Let’s make a date to come over and visit."],
+      },
+      images: [],
+    },
+    {
+      word: "date",
+      pronunciation: "/deɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "تاریخ",
+      title: "date _ noun _ 6",
+      meaning: {
+        index: 6,
+        definition: "a sweet sticky brown fruit with a long hard seed inside",
         examples: [],
       },
+      images: [],
     },
     {
-      word: "club",
-      pronunciation: "/klʌb/",
+      word: "cafeteria",
+      pronunciation: "/ˌkæfəˈtɪəriə $ -ˈtɪr-/",
       frequency: {
         written: "",
         spoken: "",
@@ -697,36 +609,1096 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "club_noun_10",
+      title: "cafeteria _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a restaurant, often in a factory, college etc, where you choose from foods that have already been cooked and carry your own food to a table",
+        examples: ["the school cafeteria"],
+      },
+      images: [],
+    },
+    {
+      word: "turn out",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn out _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to happen in a particular way, or to have a particular result, especially one that you did not expect",
+        examples: [
+          "It was a difficult time, but eventually things turned out all right.",
+          "It turned out that I was wrong.",
+          "As it turned out, he passed the exam quite easily.",
+          "That guy turned out to be Maria’s second cousin.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "turn out",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn out _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to stop the flow of electricity to a light by pressing a switch, pulling a string etc",
+        examples: ["Don’t forget to turn out the lights when you go!"],
+      },
+      images: [],
+    },
+    {
+      word: "turn out",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn out _ phrasal verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "if a lot of people turn out for an event, they go to watch it or take part in it",
+        examples: [
+          "About 70% of the population turned out for the election.",
+          "Thousands turned out to watch yesterday’s match against Ireland.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "turn out",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn out _ phrasal verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "to force someone to leave a place permanently, especially their home",
+        examples: ["If you can’t pay the rent, they turn you out."],
+      },
+      images: [],
+    },
+    {
+      word: "weird",
+      pronunciation: "/wɪəd $ wɪrd/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "informal",
+      additionalInfo: "",
+      translation: "عجیب و غریب",
+      title: "weird _ adjective",
+      meaning: {
+        index: 0,
+        definition:
+          "very strange and unusual, and difficult to understand or explain",
+        examples: [
+          "A really weird thing happened last night.",
+          "He’s a weird bloke.",
+          "They sell all sorts of weird and wonderful (=very strange) products.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "grab",
+      pronunciation: "/ɡræb/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "grab _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to take hold of someone or something with a sudden or violent movement",
+        examples: [
+          "I grabbed my bag and ran off.",
+          "Two men grabbed her and pushed her to the ground.",
+          "Kay grabbed hold of my arm to stop herself falling.",
+          "I managed to grab the gun from Bowen.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "grab",
+      pronunciation: "/ɡræb/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "grab _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "to get some food or sleep quickly because you are busy",
+        examples: [
+          "Why don’t you go and grab some sleep",
+          "Hang on while I grab a cup of coffee.",
+          "Let’s grab a bite to eat before we go.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "grab",
+      pronunciation: "/ɡræb/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "grab _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to get something for yourself, sometimes in an unfair way",
+        examples: [
+          "Try to get there early and grab good seats.",
+          "Bob tried to grab all the profit.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "grab",
+      pronunciation: "/ɡræb/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "grab _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          " to take an opportunity, accept an invitation etc immediately",
+        examples: [
+          "I think you should grab your chance to travel while you’re young.",
+          "She grabbed the opportunity to go to America.",
+          "Melanie grabbed at the invitation to go.",
+          "This is our chance to grab a slice of this new market.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "grab",
+      pronunciation: "/ɡræb/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "grab _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition: "to get someone’s attention",
+        examples: [
+          "The book is full of good ideas to grab your students’ attention.",
+          "The plight of the refugees immediately grabbed the headlines (=was the most important story in the newspapers).",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "grab",
+      pronunciation: "/ɡræb/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "grab _ verb _ 6",
+      meaning: {
+        index: 6,
+        definition: "to take information on a computer, website etc",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "intestine",
+      pronunciation: "/ɪnˈtestɪn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "روده",
+      title: "intestine _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "the long tube in your body through which food passes after it leaves your stomach",
+        examples: [
+          "The village paths soon became covered with a mass of bodies, brains, blood and intestines.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "stuff",
+      pronunciation: "/stʌf/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "informal",
+      additionalInfo: "",
+      translation: "چیزها",
+      title: "stuff _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "used when you are talking about things such as substances, materials, or groups of objects when you do not know what they are called, or it is not important to say exactly what they are",
+        examples: [
+          "I’ve got some sticky stuff on my shoe.",
+          "How do you think you’re going to fit all that stuff into the car?",
+          "I felt sorry for the ones who had to eat the awful stuff.",
+          "Where’s all the camping stuff?",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "stuff",
+      pronunciation: "/stʌf/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "informal",
+      additionalInfo: "",
+      translation: "چیزها",
+      title: "stuff _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "somebody’s stuff, informal the things that belong to someone",
+        examples: ["Did you get the rest of your stuff?"],
+      },
+      images: [],
+    },
+    {
+      word: "stuff",
+      pronunciation: "/stʌf/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "informal",
+      additionalInfo: "",
+      translation: "چیزها",
+      title: "stuff _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "used when talking about different activities, subjects, or ideas, when you do not say exactly what these are",
+        examples: [
+          "What kind of stuff do you like to read?",
+          "I’ve got so much stuff to do this weekend.",
+          "There’s a lot of interesting stuff in this book.",
+          "He’s talked to me about all that stuff too.",
+          "He does mountain biking and skiing, and stuff like that.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "stuff",
+      pronunciation: "/stʌf/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "informal",
+      additionalInfo: "",
+      translation: "چیزها",
+      title: "stuff _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "used when you are talking about what someone has done or made, for example writing, music, or art",
+        examples: [
+          "I don’t like his stuff.",
+          "John Lee was getting ready to play his stuff.",
+          "He did some great stuff in his early films.",
+          "good stuff British English (=used to tell someone that their work is good)",
+          "This is good stuff.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "stuff",
+      pronunciation: "/stʌf/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "informal",
+      additionalInfo: "",
+      translation: "چیزها",
+      title: "stuff _ noun _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "→ ... and stuff, spoken informal, used to say that there are other things similar to what you have just mentioned, but you are not going to say what they are ",
+        examples: [
+          "There’s some very good music there, CD systems and stuff, and laser disks",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "cleanse",
+      pronunciation: "/klɛnz/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "پاک کردن",
+      title: "cleanse _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition: "to make something completely clean",
+        examples: [
+          "The body naturally cleanses itself of toxins.",
+          "The company claims that its products can cleanse the skin.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "cleanse",
+      pronunciation: "/klɛnz/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "پاک کردن",
+      title: "cleanse _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to remove everything that is bad or immoral from a person’s character, an organization, or a place – used especially in news reports",
+        examples: [
+          "The government is trying to cleanse the country of corruption.",
+          "The new law is aimed at cleansing the sport of drugs.",
+          "The mayor was elected on a promise to cleanse the city government of corruption.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "aura",
+      pronunciation: "/ˈɔːrə/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "aura _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a quality or feeling that seems to surround or come from a person or a place",
+        examples: ["The building retains an aura of mystery."],
+      },
+      images: [],
+    },
+    {
+      word: "fixated",
+      pronunciation: "/fɪkˈseɪtɪd/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "fixated _ adjective",
+      meaning: {
+        index: 0,
+        definition: "always thinking or talking about one particular thing",
+        examples: [
+          "He never used to be so fixated on losing weight.",
+          "She becomes fixated on pursuing justice at all costs.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "decaf",
+      pronunciation: "/ˈdiːkæf/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "informal",
+      additionalInfo: "",
+      translation: "",
+      title: "decaf _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "coffee that has had the caffeine (=a substance that keeps you awake) removed",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "bridesmaid",
+      pronunciation: "/ˈbraɪdzmeɪd/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "bridesmaid _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a girl or woman, usually unmarried, who helps a bride on her wedding day and is with her at the wedding",
+        examples: [
+          "She was one of my bridesmaids.",
+          "I’ve asked my sister to be my bridesmaid.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "gravy",
+      pronunciation: "/ˈɡreɪvi/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "gravy _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a sauce made from the juice that comes from meat as it cooks, mixed with flour and water",
+        examples: ["roast beef and gravy", "a jug of gravy"],
+      },
+      images: [],
+    },
+    {
+      word: "gravy boat",
+      pronunciation: "/ˈɡreɪvi bəʊt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "gravy boat _ noun",
+      meaning: {
+        index: 0,
+        definition: "a long jug that you pour gravy from",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "survivor",
+      pronunciation: "/səˈvaɪvə $ sərˈvaɪvər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "survivor _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "someone who continues to live after an accident, war, or illness",
+        examples: [
+          "Emergency help is needed for survivors of the earthquake.",
+          "She was the sole survivor (=only survivor) of the massacre.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "survivor",
+      pronunciation: "/səˈvaɪvə $ sərˈvaɪvər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "survivor _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "someone who manages to live normally in spite of many problems",
+        examples: ["Don’t worry about Kurt; he’s a survivor."],
+      },
+      images: [],
+    },
+    {
+      word: "survivor",
+      pronunciation: "/səˈvaɪvə $ sərˈvaɪvər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "survivor _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "someone who continues to live after other members of their family have died",
+        examples: ["She was the last survivor of the family."],
+      },
+      images: [],
+    },
+    {
+      word: "survivor",
+      pronunciation: "/səˈvaɪvə $ sərˈvaɪvər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "survivor _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "a company that continues to be successful in spite of many problems",
+        examples: [
+          "The company hopes to be one of the survivors of this recession.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn $ tɜːrn ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn on _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to make a machine or piece of electrical equipment such as a television, engine, light etc start operating by pushing a button, turning a key etc",
+        examples: ["Jake turned on his computer and checked his mail."],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn $ tɜːrn ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn on _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to make the supply of water, gas etc start flowing from something by turning a handle",
+        examples: [
+          "He turned on the gas and lit the stove.",
+          "‘I’m thirsty, ’ she said, turning on the tap.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn $ tɜːrn ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn on _ phrasal verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "to suddenly attack someone, using physical violence or unpleasant words",
+        examples: ["Peter turned on Rae and screamed, ‘Get out of my sight!’"],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn $ tɜːrn ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn on _ phrasal verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "if a situation, event, argument etc turns on a particular thing or idea, it depends on that thing",
+        examples: [
+          "As usual, everything turned on how much money was available.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn $ tɜːrn ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn on _ phrasal verb _ 5",
+      meaning: {
+        index: 5,
+        definition: "to make someone feel sexually excited",
+        examples: ["The way he looked at her really turned her on."],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn $ tɜːrn ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn on _ phrasal verb _ 6",
+      meaning: {
+        index: 6,
+        definition:
+          "to interest someone, or to make someone become interested in something",
+        examples: [
+          "Science fiction just doesn’t turn me on.",
+          "It was Walter who turned me on to vegetarian food.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn $ tɜːrn ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "turn on _ phrasal verb _ 7",
+      meaning: {
+        index: 7,
+        definition:
+          "to suddenly start to be very nice, amusing, and interesting, especially in a way that is not sincere",
+        examples: ["Simon was good at turning on the charm at parties."],
+      },
+      images: [],
+    },
+    {
+      word: "freak out",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "freak out _ phrasal verb",
+      meaning: {
+        index: 0,
+        definition:
+          "to become very anxious, upset, or afraid, or make someone very anxious, upset, or afraid",
+        examples: [
+          "People just freaked out when they heard the news.",
+          "The whole idea freaked me out.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to touch someone or something quickly and hard with your hand, a stick etc",
+        examples: [
+          "He raised the hammer and hit the bell.",
+          "The robbers hit him over the head with a baseball bat.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "to move into something or someone quickly and with force",
+        examples: [
+          "The tanks exploded as the plane hit the ground.",
+          "He was hit by a car.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "to move a part of your body quickly against something accidentally, causing pain",
+        examples: [
+          "The ceiling’s low, so be careful you don’t hit your head.",
+          "She slipped and hit her head on the sidewalk.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "if you hit a ball or other object, you make it move forward quickly by hitting it with a bat, stick etc",
+        examples: [
+          "Hit the ball as hard as you can.",
+          "Last year, Griffey hit 49 home runs.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition: "to press a part in a machine, car, etc to make it work",
+        examples: ["Maria hit the brakes just in time."],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 6",
+      meaning: {
+        index: 6,
+        definition:
+          "to attack something or wound someone with a bomb, bullet etc",
+        examples: [
+          "Our ship was badly hit and sank within minutes.",
+          "A second shot hit her in the back.",
+          "The bomb failed to hit its target.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 7",
+      meaning: {
+        index: 7,
+        definition:
+          "if something bad hits a place or a person, it suddenly happens and affects people badly",
+        examples: [
+          "The village has been hit by a devastating drought.",
+          "Hurricane Louis is expected to hit at the weekend.",
+          "The company has been hard hit by the drop in consumer confidence.",
+          "The south of the country is the worst hit by the recession.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 8",
+      meaning: {
+        index: 8,
+        definition: "to experience trouble, problems etc",
+        examples: ["My father hit a bad patch, and had to sell the house."],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 9",
+      meaning: {
+        index: 9,
+        definition: "to reach a particular level or number",
+        examples: [
+          "Sales have hit the 1 million mark.",
+          "Earnings hit a peak in the early 1980s.",
+          "Oil prices have hit rock-bottom.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hit",
+      pronunciation: "/hɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit _ verb _ 10",
       meaning: {
         index: 10,
         definition:
-          "(also welcome to the club American English), spoken, used after someone has described a bad situation that they are in, to tell them that you are in the same situation",
-        examples: ["‘He never listens to me.’ ‘Join the club.’"],
+          "if a fact hits you, you suddenly realize its importance and feel surprised or shocked",
+        examples: [
+          "It’s impossible to pinpoint a moment when it hit me that I was ‘a success’.",
+          "He was gone before they knew what had hit them.",
+        ],
       },
+      images: [],
     },
     {
-      word: "glacier",
-      pronunciation: "/ˈɡlæsiə $ ˈɡleɪʃər/",
+      word: "strip club",
+      pronunciation: "",
       frequency: {
         written: "",
         spoken: "",
       },
       partOfSpeech: "noun",
-      register: "",
+      register: "informal",
       additionalInfo: "",
       translation: "",
-      title: "glacier_noun",
+      title: "strip club _ noun",
       meaning: {
         index: 0,
         definition:
-          "a large mass of ice that moves slowly down a mountain valley",
+          "a place where people go to see performers who take off their clothes in a sexually exciting way",
         examples: [],
       },
+      images: [],
     },
     {
-      word: "catch up with somebody",
+      word: "strip joint",
       pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "informal",
+      additionalInfo: "",
+      translation: "",
+      title: "strip joint _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a strip club , a place where people go to see performers who take off their clothes in a sexually exciting way",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn/",
       frequency: {
         written: "",
         spoken: "",
@@ -735,17 +1707,18 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "catch up with somebody_phrasal verb_1",
+      title: "turn on _ phrasal verb _ 1",
       meaning: {
         index: 1,
         definition:
-          "to finally find someone who has been doing something illegal and punish them",
-        examples: ["It took six years for the law to catch up with them."],
+          "to make a machine or piece of electrical equipment such as a television, engine, light etc start operating by pushing a button, turning a key etc",
+        examples: ["Jake turned on his computer and checked his mail."],
       },
+      images: [],
     },
     {
-      word: "catch up with somebody",
-      pronunciation: "",
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn/",
       frequency: {
         written: "",
         spoken: "",
@@ -754,19 +1727,21 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "catch up with somebody_phrasal verb_2",
+      title: "turn on _ phrasal verb _ 2",
       meaning: {
         index: 2,
         definition:
-          "if something bad from the past catches up with you, you cannot avoid dealing with it any longer",
+          "to make the supply of water, gas etc start flowing from something by turning a handle",
         examples: [
-          "At the end of the movie his murky past catches up with him.",
+          "He turned on the gas and lit the stove.",
+          "‘I’m thirsty,’ she said, turning on the tap.",
         ],
       },
+      images: [],
     },
     {
-      word: "catch up with somebody",
-      pronunciation: "",
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn/",
       frequency: {
         written: "",
         spoken: "",
@@ -775,903 +1750,82 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "catch up with somebody_phrasal verb_3",
-      meaning: {
-        index: 3,
-        definition: "to reach someone who is ahead of you by going faster",
-        examples: ["Go on ahead. I'll catch up with you later."],
-      },
-    },
-    {
-      word: "erect",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "erect_verb_1",
-      meaning: {
-        index: 1,
-        definition: "formal, to build something such as a building or wall",
-        examples: [
-          "an imposing town hall, erected in 1892",
-          "Police have erected barriers across the main roads into the town.",
-        ],
-      },
-    },
-    {
-      word: "erect",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "erect_verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          "to fix all the pieces of something together, and put it in an upright position SYN put up",
-        examples: ["It took a couple of hours to erect the tent."],
-      },
-    },
-    {
-      word: "erect",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "erect_verb_3",
-      meaning: {
-        index: 3,
-        definition: "to establish something such as a system or institution",
-        examples: [],
-      },
-    },
-    {
-      word: "erect",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "erect_adjective_1",
-      meaning: {
-        index: 1,
-        definition: "in a straight upright position",
-        examples: ["Martin stood erect on the platform."],
-      },
-    },
-    {
-      word: "erect",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "erect_adjective_2",
-      meaning: {
-        index: 2,
-        definition:
-          "an erect penis or nipple is stiff and bigger than it usually is because a person is sexually excited",
-        examples: [],
-      },
-    },
-    {
-      word: "paranoid",
-      pronunciation: "/ˈpærənɔɪd/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "paranoid_adjective_1",
-      meaning: {
-        index: 1,
-        definition:
-          "believing unreasonably that you cannot trust other people, or that they are trying to harm you or have a bad opinion of you",
-        examples: [
-          "be/become/get paranoid",
-          "Malcolm got really paranoid, deciding that there was a conspiracy out to get him.",
-          "paranoid about",
-          "He has always been paranoid about his personal security.",
-        ],
-      },
-    },
-    {
-      word: "paranoid",
-      pronunciation: "/ˈpærənɔɪd/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "paranoid_adjective_2",
-      meaning: {
-        index: 2,
-        definition:
-          "medical suffering from a mental illness that makes you believe that other people are trying to harm you",
-        examples: ["a patient suffering from paranoid schizophrenia"],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "soft light bits of thread that have come from wool, cotton, or other materials",
-        examples: [
-          "He was picking bits of fluff off his trousers.",
-          "a ball of carpet fluff",
-        ],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "soft light hair or feathers, especially on a young bird or animal",
-        examples: ["The chicks were just balls of yellow fluff."],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_noun_3",
-      meaning: {
-        index: 3,
-        definition: "(verb) to make a mistake or do something badly",
-        examples: [
-          "He fluffed his shot and missed the goal.",
-          "She fluffed her lines in the first scene.",
-        ],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_noun_4",
-      meaning: {
-        index: 4,
-        definition: "(verb) to make something soft become larger by shaking it",
-        examples: [
-          "She fluffed up the pillows for me.",
-          "Fluff the couscous with a fork.",
-        ],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "soft light bits of thread that have come from wool, cotton, or other materials",
-        examples: [
-          "He was picking bits of fluff off his trousers.",
-          "a ball of carpet fluff",
-        ],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "soft light hair or feathers, especially on a young bird or animal",
-        examples: ["The chicks were just balls of yellow fluff."],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "informal, to make a mistake or do something badly SYN mess something ↔ up",
-        examples: [
-          "He fluffed his shot and missed the goal.",
-          "She fluffed her lines in the first scene.",
-        ],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          "(also fluff something ↔ up/out) to make something soft become larger by shaking it",
-        examples: ["She fluffed up the pillows for me."],
-      },
-    },
-    {
-      word: "fluff",
-      pronunciation: "/flʌf/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fluff_verb_3",
+      title: "turn on _ phrasal verb _ 3",
       meaning: {
         index: 3,
         definition:
-          "(also fluff something ↔ up/out) if a bird fluffs its feathers, it raises them and makes itself look bigger",
-        examples: [],
+          "to suddenly attack someone, using physical violence or unpleasant words",
+        examples: ["Peter turned on Rae and screamed, ‘Get out of my sight!’"],
       },
+      images: [],
     },
     {
-      word: "ammunition",
-      pronunciation: "/ˌæmjəˈnɪʃən/",
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "ammunition_noun_1",
-      meaning: {
-        index: 1,
-        definition: "bullets, shells (shell), etc. that are fired from guns",
-        examples: [],
-      },
-    },
-    {
-      word: "ammunition",
-      pronunciation: "/ˌæmjəˈnɪʃən/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "ammunition_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "information that you can use to criticize someone or win an argument against them",
-        examples: [
-          "give somebody ammunition/provide somebody with ammunition",
-          "His mistakes provided political opponents with even more ammunition.",
-        ],
-      },
-    },
-    {
-      word: "chaotic",
-      pronunciation: "/keɪˈɒtɪk $ -ˈɑːtɪk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "chaotic_adjective",
-      meaning: {
-        index: 0,
-        definition:
-          "a chaotic situation is one in which everything is happening in a confused way",
-        examples: ["a chaotic mixture of images"],
-      },
-    },
-    {
-      word: "twirl",
-      pronunciation: "/twɜːl $ twɜːrl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "twirl_verb",
-      meaning: {
-        index: 0,
-        definition: "to turn around and around or make something do this",
-        examples: [
-          "Couples were twirling around the dance floor.",
-          "She twirled the liquid around in her glass.",
-        ],
-      },
-    },
-    {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "concern_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "a) a feeling of worry about something important b) something that worries you",
-        examples: [
-          "The recent rise in crime is a matter of considerable public concern.",
-          "our concern for human rights",
-          "concern about/over/with",
-          "the rise of concern about the environment",
-          "the growing concern over inflation",
-          "concern with worsening law and order",
-          "increased concern that the war could continue for a long time",
-          "be a cause for concern/cause concern",
-          "The activities of the far right have been a cause for concern for a while now.",
-          "In her last days the poet expressed concern for her father.",
-          "One of the concerns that people have is the side effects of treatment.",
-          "Education remains the electorate’s main concern.",
-          "the concerns expressed by parents",
-        ],
-      },
-    },
-    {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "concern_noun_2",
-      meaning: {
-        index: 2,
-        definition: "something that is important to you or that involves you",
-        examples: [
-          "His main concern is to be able to provide for his family.",
-          "The consumer has become a major concern for this government.",
-          "of concern to somebody",
-          "topics of concern to television viewers",
-        ],
-      },
-    },
-    {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "concern_noun_3",
-      meaning: {
-        index: 3,
-        definition: "a feeling of wanting someone to be happy and healthy",
-        examples: [
-          "He was moved by her obvious concern.",
-          "parents’ loving concern for their children",
-        ],
-      },
-    },
-    {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "concern_noun_4",
+      title: "turn on _ phrasal verb _ 4",
       meaning: {
         index: 4,
         definition:
-          "→ somebody’s concern, if something is your concern, you are responsible for it",
-        examples: ["The money side of the business is your concern."],
+          "if a situation, event, argument etc turns on a particular thing or idea, it depends on that thing",
+        examples: [
+          "As usual, everything turned on how much money was available.",
+        ],
       },
+      images: [],
     },
     {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "concern_noun_5",
+      title: "turn on _ phrasal verb _ 5",
       meaning: {
         index: 5,
-        definition:
-          "→ not somebody’s concern/none of somebody’s concern, if something is not your concern, you are not interested in it and you do not need to worry about it or become involved in it",
-        examples: ["His affairs were none of her concern."],
+        definition: "to make someone feel sexually excited",
+        examples: ["The way he looked at her really turned her on."],
       },
+      images: [],
     },
     {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "phrasal verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "concern_noun_6",
+      title: "turn on _ phrasal verb _ 6",
       meaning: {
         index: 6,
-        definition: "a business or company",
+        definition:
+          "to interest someone, or to make someone become interested in something",
         examples: [
-          "The restaurant is a family concern.",
-          "We will continue to run the company as a going concern.",
+          "Science fiction just doesn’t turn me on.",
+          "It was Walter who turned me on to vegetarian food.",
         ],
       },
+      images: [],
     },
     {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "concern_verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "if a story, book, report etc concerns someone or something, it is about them",
-        examples: [
-          "This study concerns couples’ expectations of marriage.",
-          "The report concerns the drug traffic on the Mexican–US border.",
-        ],
-      },
-    },
-    {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "concern_verb_2",
-      meaning: {
-        index: 2,
-        definition: "to make someone feel worried or upset",
-        examples: ["Issues like food additives do concern me."],
-      },
-    },
-    {
-      word: "concern",
-      pronunciation: "/kənˈsɜːn $ -ɜːrn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "concern_verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "if an activity, situation, rule etc concerns you, it affects you or involves you",
-        examples: [
-          "The tax changes will concern large corporations rather than small businesses.",
-        ],
-      },
-    },
-    {
-      word: "engagement",
-      pronunciation: "/ɪnˈɡeɪdʒmənt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "engagement_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "an agreement between two people to marry, or the period of time they are engaged",
-        examples: [
-          "Their engagement was announced in the paper.",
-          "Tony was stunned when Lisa suddenly broke off their engagement (=finished it).",
-          "engagement ring (=a ring that a man gives a woman to show that they are engaged)",
-        ],
-      },
-    },
-    {
-      word: "engagement",
-      pronunciation: "/ɪnˈɡeɪdʒmənt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "engagement_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "an official arrangement to do something, especially one that is related to your work",
-        examples: [
-          "The princess will continue to carry out royal engagements.",
-          "This is his only public speaking engagement on the tour.",
-          "His excuse of a prior engagement was accepted.",
-        ],
-      },
-    },
-    {
-      word: "engagement",
-      pronunciation: "/ɪnˈɡeɪdʒmənt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "engagement_noun_3",
-      meaning: {
-        index: 3,
-        definition:
-          "when you become involved with someone or something in order to understand them",
-        examples: [
-          "a strategy of engagement and cooperation with China",
-          "Many students pass without any real engagement in learning.",
-        ],
-      },
-    },
-    {
-      word: "engagement",
-      pronunciation: "/ɪnˈɡeɪdʒmənt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "engagement_noun_4",
-      meaning: {
-        index: 4,
-        definition: " technical fighting between armies etc",
-        examples: ["military rules of engagement"],
-      },
-    },
-    {
-      word: "engagement",
-      pronunciation: "/ɪnˈɡeɪdʒmənt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "engagement_noun_5",
-      meaning: {
-        index: 5,
-        definition:
-          "formal, an official arrangement to employ or pay someone to do a particular job",
-        examples: [
-          "Please sign to indicate your acceptance of the terms of engagement.",
-        ],
-      },
-    },
-    {
-      word: "engagement",
-      pronunciation: "/ɪnˈɡeɪdʒmənt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "engagement_noun_6",
-      meaning: {
-        index: 6,
-        definition: "the fitting together of the working parts of a machine",
-        examples: [],
-      },
-    },
-    {
-      word: "dread",
-      pronunciation: "/dred/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "dread_verb",
-      meaning: {
-        index: 0,
-        definition:
-          "to feel anxious or worried about something that is going to happen or may happen",
-        examples: [
-          "I’ve got an interview tomorrow and I’m dreading it.",
-          "dread doing something",
-          "I’m dreading going back to work.",
-          "dread somebody doing something",
-          "Tim dreaded his parents finding out.",
-          "I’m dreading that I’ll be asked to make a speech.",
-          "dread the thought/prospect of (doing) something",
-          "He dreaded the prospect of being all alone in that house.",
-          "I dread to think what will happen if they get elected (=I think it will be very bad).",
-        ],
-      },
-    },
-    {
-      word: "dread",
-      pronunciation: "/dred/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "dread_noun",
-      meaning: {
-        index: 0,
-        definition:
-          "a strong fear of something that is going to happen or may happen",
-        examples: [
-          "dread of (doing) something",
-          "the dread of losing those we love",
-          "Bernice looked with dread at the end of the passage.",
-          "The prospect of flying filled me with dread.",
-          "She lives in dread of (=is continuously very afraid of) the disease returning.",
-        ],
-      },
-    },
-    {
-      word: "stomp",
-      pronunciation: "/stɒmp $ stɑːmp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stomp_verb",
-      meaning: {
-        index: 0,
-        definition:
-          "to walk with heavy steps or to put your foot down very hard, especially because you are angry SYN stamp",
-        examples: [
-          "Alex stomped angrily out of the meeting.",
-          "Rogers was injured after being stomped on by another player.",
-        ],
-      },
-    },
-    {
-      word: "perspective",
-      pronunciation: "/pəˈspektɪv $ pər-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "perspective_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "a way of thinking about something, especially one which is influenced by the type of person you are or by your experiences",
-        examples: [
-          "His father’s death gave him a whole new perspective on life.",
-          "The novel is written from a child’s perspective.",
-          "We have to look at everything from an international perspective.",
-          "a much-needed historical perspective",
-          "wider/broader perspective",
-          "Our work in Uganda and Romania adds a wider perspective.",
-        ],
-      },
-    },
-    {
-      word: "perspective",
-      pronunciation: "/pəˈspektɪv $ pər-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "perspective_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "a sensible way of judging and comparing situations so that you do not imagine that something is more serious than it really is",
-        examples: [
-          "I think Viv’s lost all sense of perspective.",
-          "The figures have to be put into perspective.",
-          "get/keep something in perspective (=judge the importance of something correctly)",
-        ],
-      },
-    },
-    {
-      word: "perspective",
-      pronunciation: "/pəˈspektɪv $ pər-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "perspective_noun_3",
-      meaning: {
-        index: 3,
-        definition:
-          "a method of drawing a picture that makes objects look solid and shows distance and depth, or the effect this method produces in a picture",
-        examples: ["the artist’s use of perspective"],
-      },
-    },
-    {
-      word: "perspective",
-      pronunciation: "/pəˈspektɪv $ pər-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "perspective_noun_4",
-      meaning: {
-        index: 4,
-        definition:
-          "formal, a view, especially one in which you can see a long way into the distance",
-        examples: [],
-      },
-    },
-    {
-      word: "fit into something",
-      pronunciation: "",
+      word: "turn on",
+      pronunciation: "/tɜːn ɒn/",
       frequency: {
         written: "",
         spoken: "",
@@ -1680,158 +1834,18 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "fit into something_phrasal verb_1",
+      title: "turn on _ phrasal verb _ 7",
       meaning: {
-        index: 1,
-        definition: "to be part of a group or system",
-        examples: [
-          "Some of the patients we see do not fit neatly into any of the existing categories.",
-          "How does this fit into the company’s overall marketing strategy?",
-        ],
-      },
-    },
-    {
-      word: "fit into something",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "fit into something_phrasal verb_2",
-      meaning: {
-        index: 2,
-        definition: "to be accepted by the people in a group or organization",
-        examples: ["She fitted into the team very well."],
-      },
-    },
-    {
-      word: "be up to somebody",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "be up to somebody_phrasal verb",
-      meaning: {
-        index: 0,
+        index: 7,
         definition:
-          "a) used to say that someone can decide about something b)used to say that someone is responsible for a particular duty",
-        examples: [
-          "You can pay weekly or monthly – it’s up to you.",
-          "It’s up to the travel companies to warn customers of any possible dangers.",
-        ],
+          "to suddenly start to be very nice, amusing, and interesting, especially in a way that is not sincere",
+        examples: ["Simon was good at turning on the charm at parties."],
       },
+      images: [],
     },
     {
-      word: "presumably",
-      pronunciation: "/prɪˈzjuːməbli $ -ˈzuː-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adverb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "presumably_adverb",
-      meaning: {
-        index: 0,
-        definition: "used to say that you think something is probably true",
-        examples: [
-          "It’s raining, which presumably means that your football match will be cancelled.",
-          "He’s dead now, presumably?",
-        ],
-      },
-    },
-    {
-      word: "sonogram",
-      pronunciation: "/ˈsɒnəɡræm $ ˈsɑː-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "sonogram_noun",
-      meaning: {
-        index: 0,
-        definition:
-          "American English, technical, an image, for example of an unborn baby inside its mother’s body, that is produced by a special machine SYN ultrasound British English",
-        examples: [],
-      },
-    },
-    {
-      word: "ruin",
-      pronunciation: "/ˈruːɪn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "ruin_verb_1",
-      meaning: {
-        index: 1,
-        definition: "to spoil or destroy something completely",
-        examples: [
-          "This illness has ruined my life.",
-          "His career would be ruined.",
-          "All this mud’s going to ruin my shoes.",
-        ],
-      },
-    },
-    {
-      word: "ruin",
-      pronunciation: "/ˈruːɪn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "ruin_verb_2",
-      meaning: {
-        index: 2,
-        definition: "to make someone lose all their money",
-        examples: ["Jefferson was ruined by the lawsuit."],
-      },
-    },
-    {
-      word: "curry",
-      pronunciation: "/ˈkʌri $ ˈkɜːri/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "curry_noun",
-      meaning: {
-        index: 0,
-        definition:
-          "a type of food from India, consisting of meat or vegetables in a spicy sauce",
-        examples: ["chicken curry"],
-      },
-    },
-    {
-      word: "have a thing about somebody/something",
-      pronunciation: "",
+      word: "freak out",
+      pronunciation: "/friːk aʊt/",
       frequency: {
         written: "",
         spoken: "",
@@ -1840,611 +1854,178 @@ function App() {
       register: "informal",
       additionalInfo: "",
       translation: "",
-      title: "have a thing about somebody/something_phrasal verb",
+      title: "freak out _ phrasal verb",
       meaning: {
         index: 0,
         definition:
-          "to like or dislike someone or something very much, often without a good reason",
-        examples: ["She’s always had a thing about Peter."],
+          "to become very anxious, upset, or afraid, or to make someone very anxious, upset, or afraid",
+        examples: [
+          "People just freaked out when they heard the news.",
+          "The whole idea freaked me out.",
+        ],
       },
+      images: [],
     },
     {
-      word: "selfish",
-      pronunciation: "/ˈselfɪʃ/",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "adjective",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "selfish_adjective",
+      title: "hit _ verb _ 1",
       meaning: {
         index: 1,
         definition:
-          "caring only about yourself and not about other people – used to show disapproval",
-        examples: ["How can you be so selfish?", "selfish behaviour"],
+          "to touch someone or something quickly and hard with your hand, a stick etc",
+        examples: [
+          "He raised the hammer and hit the bell.",
+          "The robbers hit him over the head with a baseball bat.",
+        ],
       },
+      images: [],
     },
     {
-      word: "bring something ↔ up",
-      pronunciation: "",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "bring something ↔ up_phrasal verb_1",
-      meaning: {
-        index: 1,
-        definition: "to mention a subject or start to talk about it SYN raise",
-        examples: ["Why did you have to bring up the subject of money?"],
-      },
-    },
-    {
-      word: "bring something ↔ up",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "bring something ↔ up_phrasal verb_2",
+      title: "hit _ verb _ 2",
       meaning: {
         index: 2,
-        definition:
-          " to look after and influence a child until he or she is grown up SYN raise",
+        definition: "to move into something or someone quickly and with force",
         examples: [
-          "He was brought up by his grandparents.",
-          "bring somebody up to do something",
-          "In my day, children were brought up to respect the law.",
-          "be brought up (as) a Catholic/Muslim etc",
-          "I was brought up a Catholic.",
+          "The tanks exploded as the plane hit the ground.",
+          "He was hit by a car.",
         ],
       },
+      images: [],
     },
     {
-      word: "bring something ↔ up",
-      pronunciation: "",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "bring something ↔ up_phrasal verb_3",
-      meaning: {
-        index: 3,
-        definition: "to make something appear on a computer screen",
-        examples: ["Can you bring up the list of candidates again?"],
-      },
-    },
-    {
-      word: "bring something ↔ up",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "bring something ↔ up_phrasal verb_4",
-      meaning: {
-        index: 4,
-        definition:
-          "British English, if you bring food up, it comes back up from your stomach and out of your mouth",
-        examples: [
-          "I had a sandwich for lunch and promptly brought it up again.",
-        ],
-      },
-    },
-    {
-      word: "bring something ↔ up",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "bring something ↔ up_phrasal verb_5",
-      meaning: {
-        index: 5,
-        definition:
-          "to charge someone with a particular crime and make them go to a court to be judged",
-        examples: [
-          "He was brought up before a magistrate, charged with dangerous driving.",
-        ],
-      },
-    },
-    {
-      word: "bring something ↔ up",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "bring something ↔ up_phrasal verb_6",
-      meaning: {
-        index: 6,
-        definition:
-          "bring somebody up short/with a start, to surprise someone and make them suddenly stop talking or doing something",
-        examples: ["Her question brought me up short."],
-      },
-    },
-    {
-      word: "heat",
-      pronunciation: "/hiːt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "heat_noun_1",
-      meaning: {
-        index: 1,
-        definition: "warmth or the quality of being hot",
-        examples: [
-          "Ice needs heat to melt.",
-          "Insulating the attic is a good way to reduce heat loss.",
-        ],
-      },
-    },
-    {
-      word: "heat",
-      pronunciation: "/hiːt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "heat_noun_2",
-      meaning: {
-        index: 2,
-        definition: "→ the heat, very hot weather or a high temperature",
-        examples: [
-          "The heat was making them tired.",
-          "Angela liked to rest during the heat of the day (=the hottest part of the day).",
-          "Firefighters were beaten back by the intense heat.",
-        ],
-      },
-    },
-    {
-      word: "heat",
-      pronunciation: "/hiːt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "heat_noun_3",
+      title: "hit _ verb _ 3",
       meaning: {
         index: 3,
         definition:
-          "the level of temperature used when cooking or heating something",
+          " to move a part of your body quickly against something accidentally, causing pain",
         examples: [
-          "Cook the chicken portions over a high heat.",
-          "Turn off the heat when the milk comes to the boil.",
-          "Reduce the heat and cover the pan.",
+          "The ceiling’s low, so be careful you don’t hit your head.",
+          "She slipped and hit her head on the sidewalk.",
         ],
       },
+      images: [],
     },
     {
-      word: "heat",
-      pronunciation: "/hiːt/",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "heat_noun_4",
+      title: "hit _ verb _ 4",
       meaning: {
         index: 4,
-        definition: "strong feelings, especially anger or excitement",
+        definition:
+          " a) if you hit a ball or other object, you make it move forward quickly by hitting it with a bat, stick etc b) to get points by hitting a ball in a game such as baseball or cricket",
         examples: [
-          "Reconciliation services can take the heat out of (=reduce the anger in) the dispute.",
-          "Quick decisions had to be made in the heat of the negotiations.",
-          "In the heat of the moment (=when feelings were very strong), Nick threatened to resign.",
+          "Hit the ball as hard as you can.",
+          "Last year, Griffey hit 49 home runs.",
         ],
       },
+      images: [],
     },
     {
-      word: "heat",
-      pronunciation: "/hiːt/",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "heat_noun_5",
+      title: "hit _ verb _ 5",
       meaning: {
         index: 5,
-        definition: "strong pressure on someone",
-        examples: [
-          "The heat is on (=there is a lot of pressure) as schools struggle to finish their entries by the deadline.",
-          "The team turned up the heat (=used more effort against their opponents) in the last few minutes to score two more goals.",
-          "There was a lot of heat, and it affected our relationship.",
-        ],
+        definition:
+          "to make something start working or operating by pressing a button, turning a key etc",
+        examples: ["Jake turned on his computer and checked his mail."],
       },
+      images: [],
     },
     {
-      word: "heat",
-      pronunciation: "/hiːt/",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "heat_noun_6",
+      title: "hit _ verb _ 6",
       meaning: {
         index: 6,
         definition:
-          "American English, the system in a house or other building that keeps it warm in the winter, or the warmth from this system SYN heating British English",
-        examples: ["Can you turn up the heat?"],
+          "to attack something or wound someone with a bomb, bullet etc",
+        examples: [
+          "Our ship was badly hit and sank within minutes.",
+          "A second shot hit her in the back.",
+        ],
       },
+      images: [],
     },
     {
-      word: "heat",
-      pronunciation: "/hiːt/",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "heat_noun_7",
+      title: "hit _ verb _ 7",
       meaning: {
         index: 7,
         definition:
-          "a part of a race or competition whose winners then compete against each other in the next part",
-        examples: ["Bill finished second in his heat."],
-      },
-    },
-    {
-      word: "altar",
-      pronunciation: "/ˈɔːltə $ ˈɒːltər/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "altar_noun_1",
-      meaning: {
-        index: 1,
-        definition: "a holy table or surface used in religious ceremonies",
+          "if something bad hits a place or a person, it suddenly happens and affects people badly",
         examples: [
-          "a crucifix above the high altar (=the main altar in a church)",
-          "The victim was tied to a sacrificial altar.",
+          "The village has been hit by a devastating drought.",
+          "Hurricane Louis is expected to hit at the weekend.",
         ],
       },
+      images: [],
     },
     {
-      word: "altar",
-      pronunciation: "/ˈɔːltə $ ˈɒːltər/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "altar_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "the area furthest from the entrance of a church, where the priest or minister stands",
-        examples: [],
-      },
-    },
-    {
-      word: "chubby",
-      pronunciation: "/ˈtʃʌbi/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "chubby_adjective",
-      meaning: {
-        index: 0,
-        definition: "slightly fat in a way that looks healthy and attractive",
-        examples: ["a chubby six-year-old", "a baby with round chubby cheeks"],
-      },
-    },
-    {
-      word: "anecdote",
-      pronunciation: "/ˈænɪkdəʊt $ -doʊt/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "anecdote_noun",
-      meaning: {
-        index: 0,
-        definition: "a short story based on your personal experience",
-        examples: [
-          "The book is full of amusing anecdotes about his life in Japan.",
-        ],
-      },
-    },
-    {
-      word: "folk",
-      pronunciation: "/fəʊk $ foʊk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "folk_noun_1",
-      meaning: {
-        index: 1,
-        definition: "[plural] (also folks) especially American English, people",
-        examples: [
-          "I’m sure there are some folk who would rather they weren’t here.",
-          "Thanks to the folks at NBC.",
-          "Wait till the folks back home hear about this!",
-        ],
-      },
-    },
-    {
-      word: "folk",
-      pronunciation: "/fəʊk $ foʊk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "folk_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "→ folks, [plural]  a) especially American English your parents and family b) used when talking to a group of people in a friendly way",
-        examples: [
-          "Is it OK if I call my folks?",
-          "That’s all for now, folks.",
-        ],
-      },
-    },
-    {
-      word: "folk",
-      pronunciation: "/fəʊk $ foʊk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "folk_noun_3",
-      meaning: {
-        index: 3,
-        definition:
-          "→ country/farming etc folk, [plural] (also country etc folks American English), literary, people who live in a particular area or do a particular kind of work",
-        examples: ["simple country folk"],
-      },
-    },
-    {
-      word: "folk",
-      pronunciation: "/fəʊk $ foʊk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "folk_noun_4",
-      meaning: {
-        index: 4,
-        definition: "folk music",
-        examples: ["a folk singer"],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "an agreement or arrangement, especially in business or politics, that helps both sides involved",
-        examples: [
-          "They made a deal to sell the land to a property developer.",
-          "rumors that the company had done a deal with Microsoft to market its products",
-          "Twelve US soldiers were released after a deal between the army and the guerillas.",
-        ],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "→ a great/good deal, a large quantity of something SYN a lot",
-        examples: [
-          "It took a great deal of time and effort.",
-          "His work has been attracting a great deal of attention.",
-          "a great/good deal more/less etc (=a lot more, less etc)",
-          "He knew a good deal more than I did.",
-          "She’s married to a man a good deal older than herself.",
-        ],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_noun_3",
-      meaning: {
-        index: 3,
-        definition: "treatment of a particular type that is given or received",
-        examples: [
-          "a better/fairer etc deal",
-          "a better deal for nurses",
-          "The prime minister promised farmers a new deal (=a new and fairer system).",
-          "a rough/raw deal (=unfair treatment)",
-          "Women tend to get a raw deal from employers.",
-        ],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_noun_4",
-      meaning: {
-        index: 4,
-        definition:
-          "→ it’s a deal, spoken, used to say that you agree to do something",
-        examples: ["OK, it’s a deal."],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_noun_5",
-      meaning: {
-        index: 5,
-        definition:
-          "→ what's the deal?, American English spoken used when you want to know about a problem or something strange that is happening",
-        examples: ["So what's the deal? Why is he so mad?"],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_noun_6",
-      meaning: {
-        index: 6,
-        definition: "when you give out cards to players in a card game",
-        examples: ["It’s your deal, Alison."],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_noun_7",
-      meaning: {
-        index: 7,
-        definition: "British English, fir or pine wood used for making things",
-        examples: ["a deal table"],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
@@ -2453,1647 +2034,1043 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "deal_verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "(also deal something ↔ out) to give playing cards to each of the players in a game",
-        examples: ["Whose turn is it to deal?"],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_verb_2",
-      meaning: {
-        index: 2,
-        definition: "informal, to buy and sell illegal drugs",
-        examples: ["Many users end up dealing to support their habit."],
-      },
-    },
-    {
-      word: "deal",
-      pronunciation: "/diːl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal_verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "→ deal a blow (to somebody/something), to cause harm to someone or something – used in news reports",
-        examples: [
-          "deal a heavy/severe/serious etc blow",
-          "The sanctions have dealt a severe blow to the local tourism industry.",
-          "This will deal a blow to consumer confidence.",
-        ],
-      },
-    },
-    {
-      word: "deal with somebody/something",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal with somebody/something_phrasal verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "to take the necessary action, especially in order to solve a problem SYN handle",
-        examples: [
-          "a strategy for dealing with disruptive pupils",
-          "Don’t worry, I’ll deal with this.",
-          "deal with a problem/issue/matter etc",
-          "The council has failed to deal with the problem of homelessness in the city.",
-          "deal effectively/adequately etc with something",
-          "They should deal properly and fairly with any complaint.",
-        ],
-      },
-    },
-    {
-      word: "deal with somebody/something",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal with somebody/something_phrasal verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          "if a book, speech etc deals with a particular subject, it is about that subject",
-        examples: ["These ideas are dealt with more fully in Chapter Four."],
-      },
-    },
-    {
-      word: "deal with somebody/something",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal with somebody/something_phrasal verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "to do business with someone or have a business connection with someone",
-        examples: [
-          "Most travel agents do not deal directly with these companies.",
-        ],
-      },
-    },
-    {
-      word: "deal with somebody/something",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "deal with somebody/something_phrasal verb_4",
-      meaning: {
-        index: 4,
-        definition:
-          "to succeed in controlling your feelings about an emotional problem so that it does not affect your life SYN cope with",
-        examples: ["How’s he dealing with the whole thing?"],
-      },
-    },
-    {
-      word: "pro",
-      pronunciation: "/prəʊ $ proʊ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "pro_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "someone who is paid to do something, especially play a sport, that other people do for pleasure SYN professional OPP amateur",
-        examples: [
-          "a tennis pro",
-          "the small gap between top amateurs and pros in golf",
-        ],
-      },
-    },
-    {
-      word: "pro",
-      pronunciation: "/prəʊ $ proʊ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "pro_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          " informal, (also old pro), someone who has had a lot of experience with a particular type of situation",
-        examples: ["Cathy’s an old pro at organizing raffles."],
-      },
-    },
-    {
-      word: "pro",
-      pronunciation: "/prəʊ $ proʊ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "pro_noun_3",
-      meaning: {
-        index: 3,
-        definition:
-          "→ pros and cons, the advantages and disadvantages of something",
-        examples: ["the pros and cons of nuclear power"],
-      },
-    },
-    {
-      word: "time",
-      pronunciation: "/taɪm/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "time_verb",
-      meaning: {
-        index: 25,
-        definition:
-          "a) to do something slowly or carefully without hurrying b) to do something more slowly than seems reasonable",
-        examples: [
-          "take your time doing something",
-          "Marie took her time cutting my hair and did it really well.",
-          "take your time over",
-          "He had planned to take his time over the journey.",
-          "You’re taking your time with the lab tests. We need the results now.",
-        ],
-      },
-    },
-    {
-      word: "twin",
-      pronunciation: "/twɪn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "twin_noun",
-      meaning: {
-        index: 0,
-        definition:
-          "one of two children born at the same time to the same mother",
-        examples: ["The twins are now eight months old."],
-      },
-    },
-    {
-      word: "identical twin",
-      pronunciation: "/aɪˌdentɪkəl ˈtwɪn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "identical twin_noun",
-      meaning: {
-        index: 0,
-        definition:
-          "one of a pair of brothers or sisters born at the same time, who develop from the same egg and look almost exactly alike",
-        examples: [],
-      },
-    },
-    {
-      word: "high-powered",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "high-powered_adjective_1",
-      meaning: {
-        index: 1,
-        definition:
-          "a high-powered machine, vehicle, or piece of equipment is very powerful",
-        examples: ["a high-powered automobile"],
-      },
-    },
-    {
-      word: "high-powered",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "high-powered_adjective_2",
-      meaning: {
-        index: 2,
-        definition: "very important or successful",
-        examples: ["a high-powered publisher"],
-      },
-    },
-    {
-      word: "driven",
-      pronunciation: "/ˈdrɪvən/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "driven_adjective",
-      meaning: {
-        index: 0,
-        definition: "trying extremely hard to achieve what you want",
-        examples: ["He claims he is not a driven workaholic."],
-      },
-    },
-    {
-      word: "career woman",
-      pronunciation: "/kəˈrɪə ˌwʊmən $ -ˈrɪər/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "career woman_noun",
-      meaning: {
-        index: 0,
-        definition:
-          "a woman whose career is very important to her, so that she may not want to get married or have children",
-        examples: ["independent career women"],
-      },
-    },
-    {
-      word: "dump",
-      pronunciation: "/dʌmp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "dump_verb_1",
-      meaning: {
-        index: 1,
-        definition: "to put something somewhere in a careless untidy way",
-        examples: [
-          "Merrill dumped her suitcase down in the hall.",
-          "dump something on something",
-          "They dump tons of salt on icy road surfaces to make driving safer.",
-          "dump something in/into something",
-          "He found a can of beef stew and dumped it in a saucepan to heat.",
-        ],
-      },
-    },
-    {
-      word: "dump",
-      pronunciation: "/dʌmp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "dump_verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          "a) to get rid of something that you do not want b) to get rid of waste material by taking it from people’s houses and burying it under the soil",
-        examples: [
-          "Ellie dumped all the photos of her ex-husband.",
-          "He dumped her body into the sea.",
-          "Britain dumps more of its waste than any other European country.",
-        ],
-      },
-    },
-    {
-      word: "dump",
-      pronunciation: "/dʌmp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "dump_verb_3",
-      meaning: {
-        index: 3,
-        definition: "informal, to end a relationship with someone",
-        examples: ["Vicky dumped Neil yesterday."],
-      },
-    },
-    {
-      word: "dump",
-      pronunciation: "/dʌmp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "dump_verb_4",
-      meaning: {
-        index: 4,
-        definition:
-          "to get rid of goods by selling them in a foreign country at a much lower price",
-        examples: [
-          "a campaign to stop cheap European beef being dumped in West Africa",
-        ],
-      },
-    },
-    {
-      word: "dump",
-      pronunciation: "/dʌmp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "dump_verb_5",
-      meaning: {
-        index: 5,
-        definition:
-          "technical, to copy information stored in a computer’s memory on to something else such as a disk or magnetic tape",
-        examples: [],
-      },
-    },
-    {
-      word: "steer",
-      pronunciation: "/stɪə $ stɪr/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "steer_verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "to control the direction a vehicle is going, for example by turning a wheel",
-        examples: [
-          "He was steering with only one hand.",
-          "Steer towards the left.",
-        ],
-      },
-    },
-    {
-      word: "steer",
-      pronunciation: "/stɪə $ stɪr/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "steer_verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          "to guide someone’s behaviour or the way a situation develops",
-        examples: [
-          "steer somebody towards/away from/through etc something",
-          "Teachers try to steer pupils away from drugs.",
-          "Helen tried to steer the conversation away from herself.",
-        ],
-      },
-    },
-    {
-      word: "steer",
-      pronunciation: "/stɪə $ stɪr/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "steer_verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "to be in charge of an organization, team etc and make decisions that help it to be successful, especially during a difficult time",
-        examples: [
-          "steer something through/to etc something",
-          "McKinney steered the company through the recession.",
-        ],
-      },
-    },
-    {
-      word: "steer",
-      pronunciation: "/stɪə $ stɪr/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "steer_verb_4",
-      meaning: {
-        index: 4,
-        definition:
-          "to guide someone to a place, especially while touching them",
-        examples: [
-          "steer somebody towards/to etc something",
-          "Joel steered Don and Louise towards the backyard.",
-        ],
-      },
-    },
-    {
-      word: "steer",
-      pronunciation: "/stɪə $ stɪr/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "steer_verb_5",
-      meaning: {
-        index: 5,
-        definition:
-          "steer somebody towards/to etc something, informal, to avoid someone or something unpleasant or difficult ",
-        examples: ["Jo tried to steer clear of political issues."],
-      },
-    },
-    {
-      word: "shell",
-      pronunciation: "/ʃel/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "shell_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "a) the hard outer part that covers and protects an egg, nut, or seed b) the hard protective covering of an animal such as a snail, mussel, or crab",
-        examples: [
-          "Never buy eggs with cracked shells.",
-          "peanuts roasted in their shells",
-          "a snail shell",
-          "The children were collecting shells on the beach.",
-        ],
-      },
-    },
-    {
-      word: "shell",
-      pronunciation: "/ʃel/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "shell_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "a metal container, like a large bullet, which is full of an explosive substance and is fired from a large gun",
-        examples: [
-          "We ran for cover as shells dropped all around us.",
-          "an exploding mortar shell",
-        ],
-      },
-    },
-    {
-      word: "shell",
-      pronunciation: "/ʃel/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "shell_noun_3",
-      meaning: {
-        index: 3,
-        definition:
-          "especially American English, a metal tube containing a bullet and an explosive substance SYN cartridge",
-        examples: [],
-      },
-    },
-    {
-      word: "shell",
-      pronunciation: "/ʃel/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "shell_noun_4",
-      meaning: {
-        index: 4,
-        definition:
-          "the outside structure of something, especially the part of a building that remains when the rest of it has been destroyed",
-        examples: ["the burnt-out shell of a nightclub"],
-      },
-    },
-    {
-      word: "shell",
-      pronunciation: "/ʃel/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "shell_noun_5",
-      meaning: {
-        index: 5,
-        definition:
-          "→ out of your shell, becoming less shy and more confident and willing to talk to people",
-        examples: [
-          "I had hoped that university would bring him out of his shell.",
-          "She’s started to come out of her shell a little.",
-        ],
-      },
-    },
-    {
-      word: "complicated",
-      pronunciation: "/ˈkɒmplɪkeɪtɪd $ ˈkɑːm-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "complicated_adjective_1",
-      meaning: {
-        index: 1,
-        definition:
-          "difficult to understand or deal with, because many parts or details are involved SYN complex",
-        examples: [
-          "a complicated voting system",
-          "For young children, getting dressed is a complicated business.",
-          "very/extremely/immensely/highly etc complicated",
-          "Mental illness is a very complicated subject.",
-        ],
-      },
-    },
-    {
-      word: "complicated",
-      pronunciation: "/ˈkɒmplɪkeɪtɪd $ ˈkɑːm-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "complicated_adjective_2",
-      meaning: {
-        index: 2,
-        definition: "consisting of many closely connected parts SYN complex",
-        examples: [
-          "a complicated pattern",
-          "The human brain is an incredibly complicated organ.",
-        ],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_1",
-      meaning: {
-        index: 1,
-        definition: "impossible or unable to move from a particular position",
-        examples: [
-          "Sara tried to open the window but it was stuck.",
-          "The boat was stuck in the mud.",
-          "I’ve got something stuck in my throat.",
-        ],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_2",
-      meaning: {
-        index: 2,
-        definition: "informal, unable to escape from a bad or boring situation",
-        examples: [
-          "Mum resented being stuck at home with two young kids.",
-          "We could be stuck in this place for days.",
-        ],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_3",
-      meaning: {
-        index: 3,
-        definition:
-          "unable to do any more of something that you are working on because it is too difficult",
-        examples: [
-          "Can you help me with my homework, Dad? I’m stuck.",
-          "If you get stuck on a difficult word, just ask for help.",
-          "I'm stuck on this crossword clue.",
-        ],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_4",
-      meaning: {
-        index: 4,
-        definition:
-          "→ be stuck with something, informal, to have something you do not want because you cannot get rid of it",
-        examples: [
-          "We are, unfortunately, stuck with this huge, ugly building.",
-        ],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_5",
-      meaning: {
-        index: 5,
-        definition:
-          "→ be stuck with somebody, to have to spend time with someone or have a relationship with them, even though you do not want to",
-        examples: ["They are stuck with each other with no end in sight."],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_6",
-      meaning: {
-        index: 6,
-        definition:
-          "→ be stuck for something, to be unable to think what to say or do",
-        examples: [
-          "For once Anthony was stuck for words (=did not know what to say).",
-        ],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_7",
-      meaning: {
-        index: 7,
-        definition:
-          "→ get stuck in/get stuck into something, British English, spoken, to start doing something eagerly and with a lot of energy",
-        examples: ["Take your jacket off and get stuck in!"],
-      },
-    },
-    {
-      word: "stuck",
-      pronunciation: "/stʌk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "adjective",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stuck_adjective_8",
-      meaning: {
-        index: 8,
-        definition:
-          "→ be stuck on somebody, informal, to be attracted to someone",
-        examples: ["He says he’s stuck on me."],
-      },
-    },
-    {
-      word: "cervix",
-      pronunciation: "/ˈsɜːvɪks $ ˈsɜːr-/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "cervix_noun",
-      meaning: {
-        index: 0,
-        definition: "the narrow passage into a woman’s uterus",
-        examples: [],
-      },
-    },
-    {
-      word: "gag",
-      pronunciation: "/ɡæɡ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "gag_noun_1",
-      meaning: {
-        index: 1,
-        definition: "a joke or funny story",
-        examples: [
-          "He told a few gags.",
-          "It was a bit of a running gag (=a joke which is repeated) in the show.",
-        ],
-      },
-    },
-    {
-      word: "gag",
-      pronunciation: "/ɡæɡ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "gag_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "a piece of cloth put over someone’s mouth to stop them making a noise",
-        examples: [""],
-      },
-    },
-    {
-      word: "gag",
-      pronunciation: "/ɡæɡ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "gag_verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "to be unable to swallow and feel as if you are about to bring up food from your stomach",
-        examples: [
-          "The foul smell made her gag.",
-          "He almost gagged on his first mouthful of food.",
-        ],
-      },
-    },
-    {
-      word: "gag",
-      pronunciation: "/ɡæɡ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "gag_verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          "to put a piece of cloth over someone’s mouth to stop them making a noise",
-        examples: [
-          "Thugs gagged her and tied her to a chair.",
-          "He left his victim bound and gagged (=tied up and with something over their mouth that stops them speaking).",
-        ],
-      },
-    },
-    {
-      word: "gag",
-      pronunciation: "/ɡæɡ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "gag_verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "to stop people saying what they want to say and expressing their opinions",
-        examples: ["an attempt to gag political activists"],
-      },
-    },
-    {
-      word: "gag",
-      pronunciation: "/ɡæɡ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "gag_verb_4",
-      meaning: {
-        index: 4,
-        definition:
-          "→ be gagging to do something/be gagging for something, British English, informal, to be very eager to do or have something",
-        examples: ["They were gagging to sign the contract."],
-      },
-    },
-    {
-      word: "gag",
-      pronunciation: "/ɡæɡ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "gag_verb_5",
-      meaning: {
-        index: 5,
-        definition:
-          "→ be gagging for it, British English, informal, to be very eager to have sex",
-        examples: [],
-      },
-    },
-    {
-      word: "instance",
-      pronunciation: "/ˈɪnstəns/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "instance_noun_1",
-      meaning: {
-        index: 1,
-        definition: "→ for instance, for example",
-        examples: [
-          "We need to rethink the way we consume energy. Take, for instance, our approach to transport.",
-        ],
-      },
-    },
-    {
-      word: "instance",
-      pronunciation: "/ˈɪnstəns/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "instance_noun_2",
-      meaning: {
-        index: 2,
-        definition: "an example of a particular kind of situation",
-        examples: [
-          "They came across many instances of discrimination.",
-          "instances where safety regulations have been breached",
-          "In this instance I think she was mistaken.",
-        ],
-      },
-    },
-    {
-      word: "instance",
-      pronunciation: "/ˈɪnstəns/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "instance_noun_3",
-      meaning: {
-        index: 3,
-        definition:
-          "→ in the first instance, at the beginning of a series of actions",
-        examples: [
-          "Anyone wishing to join the society should apply in the first instance to the secretary.",
-        ],
-      },
-    },
-    {
-      word: "instance",
-      pronunciation: "/ˈɪnstəns/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "instance_noun_4",
-      meaning: {
-        index: 4,
-        definition:
-          "→ at somebody’s instance, formal, because of someone’s wish or request",
-        examples: [],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "a piece of paper, film, money etc that has been rolled into the shape of a tube",
-        examples: [
-          "There’s a new roll of silver foil in there.",
-          "I used up three rolls of film on holiday.",
-          "wallpaper costing £3 a roll",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_2",
-      meaning: {
-        index: 2,
-        definition: "a small round loaf of bread for one person",
-        examples: [
-          "hot soup served with crusty rolls",
-          "bread rolls with butter",
-          "ham/cheese etc roll, British English, (=one that is filled with ham, cheese etc)",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_3",
-      meaning: {
-        index: 3,
-        definition: "an official list of names SYN register",
-        examples: [
-          "on the roll, British English",
-          "a school with 300 pupils on the roll",
-          "call/take the roll (=say the list of names to check who is there)",
-          "The teacher called the roll.",
-          "the electoral roll, British English, the (voter) rolls, American English, (=a list of the people who are allowed to vote)",
-          "welfare rolls, American English, (=a list of people without jobs who claim money from the state)",
-          "Thompson said he had cut welfare rolls by 39%.",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_4",
-      meaning: {
-        index: 4,
-        definition:
-          "→ be on a roll, informal, to be having a lot of success with what you are trying to do ",
-        examples: [
-          "Midvale High was on a roll, having won their last six basketball games.",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_5",
-      meaning: {
-        index: 5,
-        definition: "the action of throwing dice as part of a game",
-        examples: ["If you get a 7 or 11 on your first roll, you win."],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_6",
-      meaning: {
-        index: 6,
-        definition:
-          "a thick layer of skin or fat, usually just below your waist",
-        examples: ["the rolls of fat on her stomach"],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_7",
-      meaning: {
-        index: 7,
-        definition:
-          "a) British English a movement in which you roll forward or back in a controlled way with your body curled so that your head is near your feet, often done as part of a sport SYN somersault b) especially British English the action of turning your body over one or more times while lying down",
-        examples: [
-          "a forward roll",
-          "gymnasts doing rolls and handsprings",
-          "a young horse having a roll in the field",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_8",
-      meaning: {
-        index: 8,
-        definition: "a long low fairly loud sound made by drums etc",
-        examples: [
-          "There was a roll of thunder, and the rain started pelting down.",
-          "a drum roll",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "noun",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_noun_9",
+      title: "hit _ verb _ 8",
       meaning: {
         index: 9,
-        definition:
-          "the movement of a ship or plane when it leans from side to side with the movement of the water or air",
-        examples: [],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "if something rolls, especially something round, or if you roll it, it moves along a surface by turning over and over",
+        definition: "to reach a particular level or number",
         examples: [
-          "roll down/into/through etc",
-          "The ball rolled into the street.",
-          "roll something along/in/onto etc something",
-          "Roll the dough into small balls.",
+          "Sales have hit the 1 million mark.",
+          "Earnings hit a peak in the early 1980s.",
         ],
       },
+      images: [],
     },
     {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
+      word: "hit",
+      pronunciation: "/hɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      register: "",
       partOfSpeech: "verb",
+      register: "",
       additionalInfo: "",
       translation: "",
-      title: "roll_verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          " (also roll over) to turn your body over one or more times while lying down, or to turn someone else’s body over",
-        examples: [
-          "roll down/onto/off etc",
-          "The children rolled down the hill, laughing.",
-          " Ralph rolled onto his stomach.",
-          "roll somebody onto/off something",
-          "I tried to roll him onto his side.",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "(also roll up) to make something into the shape of a tube or ball",
-        examples: [
-          "roll something into a ball/tube",
-          "Roll the dough into small balls.",
-          "Would you like the paper rolled or folded?",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_4",
-      meaning: {
-        index: 4,
-        definition:
-          "(also roll up) to make something flat by rolling something heavy over it",
-        examples: ["Pizza dough should be rolled thinly."],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_5",
-      meaning: {
-        index: 5,
-        definition:
-          "(also roll up) to fold the sleeves or legs of something that you are wearing upwards, so that they are shorter",
-        examples: ["His sleeves were rolled above his elbows."],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_6",
-      meaning: {
-        index: 6,
-        definition: "to move on wheels, or make something that has wheels move",
-        examples: [
-          "Her car was slowly rolling away from the curb.",
-          "The waitress rolled the dessert trolley over to our table.",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_7",
-      meaning: {
-        index: 7,
-        definition: "to move over a surface smoothly without stopping",
-        examples: ["Tears rolled down her cheeks."],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_8",
-      meaning: {
-        index: 8,
-        definition: "to move continuously in a particular direction",
-        examples: [
-          "roll into/towards etc",
-          "Mist rolled in from the sea.",
-          "We watched the waves rolling onto the beach.",
-        ],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_9",
-      meaning: {
-        index: 9,
-        definition: " if you roll dice, you throw them as part of a game",
-        examples: [],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_10",
+      title: "hit _ verb _ 9",
       meaning: {
         index: 10,
         definition:
-          "if drums or thunder roll, they make a long low series of sounds",
-        examples: ["Thunder rolled in the distance."],
+          "if a fact hits you, you suddenly realize its importance and feel surprised or shocked",
+        examples: [
+          "It’s impossible to pinpoint a moment when it hit me that I was ‘a success’.",
+          "He was gone before they knew what had hit them (=realized what had happened).",
+        ],
       },
+      images: [],
     },
     {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
+      word: "wonder",
+      pronunciation: "/ˈwʌndər/",
       frequency: {
         written: "",
         spoken: "",
       },
-      register: "",
       partOfSpeech: "verb",
+      register: "",
       additionalInfo: "",
       translation: "",
-      title: "roll_verb_11",
+      title: "wonder _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to think about something that you are not sure about and try to guess what is true, what will happen etc",
+        examples: [
+          "I wonder how James is getting on.",
+          "What are they going to do now, I wonder?",
+          "I wonder if I’ll recognize Philip after all these years.",
+          " He’s been leaving work early a lot – it makes you wonder, doesn’t it?",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "wonder",
+      pronunciation: "/ˈwʌndər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "wonder _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "→ I wonder if/whether, spoken, used to ask politely for something",
+        examples: [" I wonder if I might have a drink? "],
+      },
+      images: [],
+    },
+    {
+      word: "wonder",
+      pronunciation: "/ˈwʌndər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "wonder _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "→ I was wondering if/whether, a) spoken used to ask someone politely to help you b) used to ask someone politely if they would like to do something",
+        examples: [
+          " I was wondering if I could borrow your car?",
+          "I was wondering if you’d like to come to dinner.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "wonder",
+      pronunciation: "/ˈwʌndər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "wonder _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition: "to feel surprised and unable to believe something",
+        examples: [
+          "He says he's had no formal training but when you see how good his work is, you start to wonder.",
+          "The picture forces the viewer to wonder at the subject of the crowd's attention.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "wonder",
+      pronunciation: "/ˈwʌndər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "wonder _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition: "to doubt or question whether something is true",
+        examples: [
+          "Sometimes I wonder if he’s got any sense at all!",
+          "Is she serious?’ ‘I wonder.’",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "drift apart",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "drift apart _ phrasal verb",
+      meaning: {
+        index: 0,
+        definition: "if people drift apart, their relationship gradually ends",
+        examples: [
+          "Over the years my college friends and I have drifted apart.",
+          "Teddy and Maria never really argued -- they just drifted apart.",
+          "We grew up, went off to different places, drifted apart.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "organ",
+      pronunciation: "/ˈɔːɡən $ ˈɔːr-/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "organ _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "a part of the body, such as the heart or lungs, that has a particular purpose",
+        examples: [
+          "the liver, heart, and other internal organs",
+          "loss of blood flow to his vital organs",
+          "Extra doses of the hormone caused the animals’ reproductive organs to develop sooner than usual.",
+          "In Arizona, 480 people are waiting for organ transplants.",
+          "dying people who have agreed to be organ donors",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "organ",
+      pronunciation: "/ˈɔːɡən $ ˈɔːr-/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "organ _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "a) (also pipe organ) a large musical instrument used especially in churches, with keys like a piano and large pipes that air passes through to produce the sound b) an electronic musical instrument that produces music similar to a pipe organ, but that does not have pipes",
+        examples: [
+          "He played the organ at his local church.",
+          "an electronic organ",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "organ",
+      pronunciation: "/ˈɔːɡən $ ˈɔːr-/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "organ _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "an organization that is part of, or works for, a larger organization or group",
+        examples: [
+          "The courts are organs of government.",
+          "the decision-making organs",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "organ",
+      pronunciation: "/ˈɔːɡən $ ˈɔːr-/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "organ _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "a newspaper or magazine which gives information, news etc for an organization or group",
+        examples: ["the official organ of the Communist Party"],
+      },
+      images: [],
+    },
+    {
+      word: "metaphor",
+      pronunciation: "/ˈmetəfə, -fɔː $ -fɔːr/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "metaphor _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a way of describing something by referring to it as something different and suggesting that it has similar qualities to that thing",
+        examples: [
+          "She uses some wonderful images and metaphors in her writing.",
+          "a very creative use of metaphor",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "establish",
+      pronunciation: "/ɪˈstæblɪʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "establish _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to start a company, organization, system, etc that is intended to exist or continue for a long time",
+        examples: [
+          "The city of Boerne was established by German settlers in the 1840s.",
+          "Our goal is to establish a new research centre in the North.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "establish",
+      pronunciation: "/ɪˈstæblɪʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "establish _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to begin a relationship with someone or a situation that will continue",
+        examples: [
+          "Hungary established diplomatic relations with Chile in 1990.",
+          "I wondered why he should bother to try and establish contact with me.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "establish",
+      pronunciation: "/ɪˈstæblɪʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "establish _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to find out facts that will prove that something is true",
+        examples: [
+          "The police must establish the facts of the case before proceeding.",
+          "The autopsy established that he had been murdered.",
+          "I was never able to establish whether she was telling the truth.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "establish",
+      pronunciation: "/ɪˈstæblɪʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "establish _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "to make people accept that you can do something, or that you have a particular quality",
+        examples: [
+          "He had three years in which to establish himself as prime minister.",
+          "He’d already begun to establish quite a reputation as a journalist.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "whisker",
+      pronunciation: "/ˈwɪskə $ -ər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "whisker _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "one of the long stiff hairs that grow near the mouth of a cat, mouse etc",
+        examples: [
+          "The cat's whiskers twitched.",
+          "The mouse's whiskers were moving.",
+          "He had a beard and bushy whiskers.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "whisker",
+      pronunciation: "/ˈwɪskə $ -ər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "whisker _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition: "one of the hairs that grow on a man’s face",
+        examples: ["He had a few whiskers on his chin."],
+      },
+      images: [],
+    },
+    {
+      word: "whisker",
+      pronunciation: "/ˈwɪskə $ -ər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "whisker _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "→ win/lose by a whisker,informal to win or lose by a very small amount",
+        examples: [
+          "Doctors say he came within a whisker of dying on the operating table.",
+          "Schmidt finished second, losing by a whisker in the final event.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "kitten",
+      pronunciation: "/ˈkɪtn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "kitten _ noun",
+      meaning: {
+        index: 0,
+        definition: "a young cat",
+        examples: [
+          "She has a kitten and a puppy.",
+          "The kitten was playing with a ball of wool.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "sleigh",
+      pronunciation: "/sleɪ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "sleigh _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a large open vehicle with no wheels that is used for travelling over snow and is pulled along by animals",
+        examples: [
+          "We went for a sleigh ride through the woods.",
+          "The children were riding on a sleigh.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "mitten",
+      pronunciation: "/ˈmɪtn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "mitten _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a type of glove that covers the thumb separately from the other four fingers",
+        examples: [
+          "She was wearing a pair of mittens.",
+          "He put on his mittens and went outside.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "be for the best",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "be for the best",
+      meaning: {
+        index: 0,
+        definition:
+          "especially spoken used to say that a particular event may seem bad now, but might have a good result later",
+        examples: [
+          "I still don’t want him to go, but maybe it’s for the best.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "wine",
+      pronunciation: "/waɪn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "wine _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "an alcoholic drink made from grapes, or a type of this drink",
+        examples: [
+          "a glass of wine",
+          "red/white wine",
+          "a bottle of red wine",
+          "dry/sweet/sparkling wine",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "wine",
+      pronunciation: "/waɪn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "wine _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition: "an alcoholic drink made from another fruit or plant",
+        examples: ["damson wine"],
+      },
+      images: [],
+    },
+    {
+      word: "hit on somebody/something",
+      pronunciation: "/hɪt ɒn ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit on somebody/something _ phrasal verb _ 1",
+      meaning: {
+        index: 2,
+        definition:
+          "to talk to someone in a way that shows you are sexually attracted to them",
+        examples: ["Dave has hit on most of the women in the department."],
+      },
+      images: [],
+    },
+    {
+      word: "hit on somebody/something",
+      pronunciation: "/hɪt ɒn ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hit on somebody/something _ phrasal verb _ 2",
+      meaning: {
+        index: 1,
+        definition:
+          "to have an idea or discover something suddenly or unexpectedly",
+        examples: [
+          "Then we hit on the idea of asking viewers to donate money over the Net.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "diary",
+      pronunciation: "/ˈdaɪəri $ ˈdaɪri/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "diary _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "a book in which you write down the things that happen to you each day SYN journal",
+        examples: [
+          "Inge kept a diary during the war years.",
+          "a diary entry (=what you have written for a particular day)",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "diary",
+      pronunciation: "/ˈdaɪəri $ ˈdaɪri/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "diary _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "a book with separate spaces for each day of the year, in which you write down the meetings, events etc that are planned for each day SYN calendar American English",
+        examples: ["Did you put the meeting date in your diary?"],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "a) to get hold of and stop an object such as a ball that is moving through the air b) to suddenly take hold of someone or something with your hand",
+        examples: [
+          "Stephen leapt up and caught the ball in one hand.",
+          "The kids were throwing and catching a Frisbee down on the beach.",
+          "He caught her elbow to steady her.",
+          "Miss Perry caught hold of my sleeve and pulled me back.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "a) to stop someone after you have been chasing them and not let them get away b) to find a criminal or enemy and stop them from escaping SYN capture",
+        examples: [
+          "‘You can’t catch me!’ she yelled, running away.",
+          "State police have launched a massive operation to catch the murderer.",
+          "If you go back to the city, you’re bound to get caught.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "to see someone doing something that they did not want you to know they were doing",
+        examples: [
+          "I caught him reading my private letters.",
+          "Gemma turned around and caught the stranger looking at her intently.",
+          "catch somebody in the act (of doing something) (=catch someone while they are doing something illegal)",
+          "The gang was caught in the act of unloading the cigarettes.",
+          "He was caught red-handed (=as he was doing something wrong) taking money from the cash register.",
+          "catch somebody at it",
+          "We knew he’d been cheating, but we’d never caught him at it before.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition: "to get an infectious disease",
+        examples: [
+          "Anton caught malaria in Mali, and nearly died.",
+          "Many young people are still ignorant about how HIV is caught.",
+          "catch something from/off somebody/something",
+          "Typhoid and cholera are often caught from contaminated water supplies.",
+          "I caught chicken pox off my friend at school.",
+          "catch your death (of cold) British English spoken (=get a very bad cold)",
+          "Don’t stand out in the rain. You’ll catch your death.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 5",
+      meaning: {
+        index: 7,
+        definition:
+          "to trap an animal or fish by using a trap, net, or hook, or by hunting it",
+        examples: [
+          "Did you catch any fish?",
+          "Early settlers caught rabbits and squirrels and even rats in order to survive.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 6",
+      meaning: {
+        index: 5,
+        definition:
+          "→ catch somebody by surprise, catch somebody off guard, catch somebody napping/unawares , (also catch somebody on the hop British English) to do something or to happen when someone is not expecting it or prepared for it ",
+        examples: ["Her question caught him off guard."],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 7",
+      meaning: {
+        index: 6,
+        definition:
+          "→ catch somebody with their pants/trousers down ,to discover that someone is doing something that they should not be doing or has not done something that they should have done ",
+        examples: [
+          "He’s not the first politician to be caught with his pants down, and he won’t be the last.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 8",
+      meaning: {
+        index: 8,
+        definition:
+          "→ catch a train/plane/bus , to get on a train, plane etc in order to travel on it, or to be in time to get on a train, plane etc before it leaves",
+        examples: [
+          "I caught the 7.15 train to London.",
+          "There’s a train in now. If you run, you’ll just catch it.",
+          "I have to hurry – I have a bus to catch.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 9",
+      meaning: {
+        index: 9,
+        definition:
+          "to not be too late to do something, see something, talk to someone etc OPP miss",
+        examples: [
+          "I managed to catch her just as she was leaving.",
+          "I just caught the last few minutes of the documentary.",
+          "Tumours like these can be treated quite easily if they’re caught early enough.",
+          "catch the post, British English, (=post letters in time for them to be collected that day)",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 10",
+      meaning: {
+        index: 10,
+        definition:
+          "if your hand, finger, clothing etc catches or is caught in something, it gets stuck in it accidentally",
+        examples: [
+          "His overalls caught in the engine.",
+          "Her microphone was forever getting caught on her clothes.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch",
+      pronunciation: "/kætʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "catch _ verb _ 11",
       meaning: {
         index: 11,
         definition:
-          "if a machine such as a film camera or a printing press rolls, it operates",
-        examples: ["There was silence as the cameras started to roll."],
+          "→ catch somebody’s attention/interest/imagination etc , to make you notice something and feel interested in it ",
+        examples: [
+          "Lucie whistled sharply to catch the other girl’s attention.",
+          "This is a story that will catch the imagination of every child.",
+        ],
       },
+      images: [],
     },
     {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
+      word: "catch",
+      pronunciation: "/kætʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      register: "",
       partOfSpeech: "verb",
+      register: "",
       additionalInfo: "",
       translation: "",
-      title: "roll_verb_12",
+      title: "catch _ verb _ 12",
       meaning: {
         index: 12,
         definition:
-          "if a ship or plane rolls, it leans one way and then another with the movement of the water or air",
-        examples: [],
+          "→ not catch something, spoken, to not hear or understand what someone says",
+        examples: ["I’m afraid I didn’t catch your name."],
       },
+      images: [],
     },
     {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
+      word: "catch",
+      pronunciation: "/kætʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      register: "",
       partOfSpeech: "verb",
+      register: "",
       additionalInfo: "",
       translation: "",
-      title: "roll_verb_13",
+      title: "catch _ verb _ 13",
       meaning: {
         index: 13,
-        definition:
-          "to make your own cigarette, using tobacco or marijuana and special paper",
+        definition: "to manage to hear a sound",
         examples: [
-          "Ben rolled a joint (=a cigarette containing marijuana) and lit it.",
-          "It’s cheaper to roll your own (=make your own cigarettes).",
+          "I caught the muffled thud of a car door slamming in the street.",
         ],
       },
+      images: [],
     },
     {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
+      word: "catch",
+      pronunciation: "/kætʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      register: "",
       partOfSpeech: "verb",
+      register: "",
       additionalInfo: "",
       translation: "",
-      title: "roll_verb_14",
+      title: "catch _ verb _ 14",
       meaning: {
         index: 14,
-        definition: "to move your shoulders forward, up, and back down",
-        examples: ["He rolled his shoulders back"],
+        definition: "→ catch you later, spoken , used to say goodbye",
+        examples: [
+          "‘I’ll give you a call in a couple of days.’ ‘Okay. Catch you later.’",
+        ],
       },
+      images: [],
     },
     {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
+      word: "catch",
+      pronunciation: "/kætʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      register: "",
       partOfSpeech: "verb",
+      register: "",
       additionalInfo: "",
       translation: "",
-      title: "roll_verb_15",
+      title: "catch _ verb _ 15",
       meaning: {
         index: 15,
         definition:
-          "to move your eyes around and up, especially in order to show that you are annoyed or think something is silly",
-        examples: ["Lucy rolled her eyes as Tom sat down beside her."],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_16",
-      meaning: {
-        index: 16,
-        definition:
-          "American English, informal, to rob someone, especially when they are drunk and asleep",
-        examples: ["Kids on the streets rolled drunks for small change."],
-      },
-    },
-    {
-      word: "roll",
-      pronunciation: "/rəʊl $ roʊl/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      register: "",
-      partOfSpeech: "verb",
-      additionalInfo: "",
-      translation: "",
-      title: "roll_verb_17",
-      meaning: {
-        index: 23,
-        definition:
-          "→ roll with the punches, to deal with problems or difficulties by doing whatever you need to do, rather than by trying only one method",
+          "spoken, especially American English, to go somewhere in order to do or see something",
         examples: [
-          "Strong industries were able to roll with the punches during the recession.",
+          "We could catch a movie (=go to a movie).",
+          "M Records caught his act and signed him immediately.",
         ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "eyelash",
+      pronunciation: "/ˈaɪlæʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "eyelash _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "one of the small hairs that grow along the edge of your eyelids",
+        examples: [
+          "If Claire had flicked an eyelash at him, Harvey would never have come near them again.",
+          "The eyebrows and eyelashes were drawn in and then very pale washes were put on, the paint smooth and even.",
+          "She was missing clumps of hair, eyelashes, eyebrows.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "suppose",
+      pronunciation: "/səˈpəʊz $ -ˈpoʊz/",
       frequency: {
         written: "",
         spoken: "",
@@ -4102,20 +3079,26 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_verb_1",
+      title: "suppose _ verb _ 1",
       meaning: {
         index: 1,
         definition:
-          "to hit someone or something hard with your fist (=closed hand)",
+          "→ I suppose, a) used to say you think something is true, although you are uncertain about it SYN I guess b) used when agreeing to let someone do something, especially when you do not really want to SYN I guess c) used when saying in an angry way that you expect something is true SYN I guess d) used to say that you think that something is probably true, although you wish it was not and hope someone will tell you it is not SYN I guess e) used when guessing that something is true SYN I guess",
         examples: [
-          "He punched me and knocked my teeth out.",
-          "He punched Jack in the face.",
+          "I suppose you’re right.",
+          "So things worked out for the best, I suppose.",
+          "‘Aren’t you pleased?’ ‘Yes, I suppose so.’",
+          "Can we come with you?’ ‘Oh, I suppose so.’",
+          "I suppose you thought you were being clever!",
+          "I suppose it’s too late to apply for that job now.",
+          "She looked about 50, I suppose.",
         ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "suppose",
+      pronunciation: "/səˈpəʊz $ -ˈpoʊz/",
       frequency: {
         written: "",
         spoken: "",
@@ -4124,20 +3107,22 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_verb_2",
+      title: "suppose _ verb _ 2",
       meaning: {
         index: 2,
         definition:
-          "to make a hole in something, using a metal tool or other sharp object",
+          "→ I don’t suppose (that) , a) used to ask a question in an indirect way, especially if you think the answer will be ‘no’ b) used to ask for something in a very polite way  c) used to say that you think it is unlikely something will happen",
         examples: [
-          "The guard punched my ticket and I got on.",
-          "These bullets can punch a hole through 20 mm steel plate.",
+          "I don’t suppose you have any idea where my address book is, do you?",
+          "I don’t suppose you’d give me a lift to the station?",
+          "I don’t suppose I’ll ever see her again.",
         ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "suppose",
+      pronunciation: "/səˈpəʊz $ -ˈpoʊz/",
       frequency: {
         written: "",
         spoken: "",
@@ -4146,16 +3131,23 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_verb_3",
+      title: "suppose _ verb _ 3",
       meaning: {
         index: 3,
-        definition: "to push a button or key on a machine",
-        examples: ["Just punch the button to select a track."],
+        definition:
+          "→ do you suppose (that) ... ?, used to ask someone their opinion about something, although you know that it is unlikely that they have any more information about the situation than you do ",
+        examples: [
+          "Do you suppose this is the exact spot?",
+          "who/what/why etc do you suppose ... ?",
+          "Who on earth do you suppose could have done this?",
+          "How do you suppose he got here?",
+        ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "suppose",
+      pronunciation: "/səˈpəʊz $ -ˈpoʊz/",
       frequency: {
         written: "",
         spoken: "",
@@ -4164,17 +3156,20 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_verb_4",
+      title: "suppose _ verb _ 4",
       meaning: {
         index: 4,
         definition:
-          "→ punch holes in somebody’s argument/idea/plans etc, to criticize someone’s views, idea, plans etc by showing why they are wrong",
-        examples: [],
+          "→ what’s that supposed to mean?, used when you are annoyed by what someone has just said",
+        examples: [
+          "‘It sounds like things aren’t going too well for you lately.’ ‘What’s that supposed to mean?’",
+        ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "suppose",
+      pronunciation: "/səˈpəʊz $ -ˈpoʊz/",
       frequency: {
         written: "",
         spoken: "",
@@ -4183,17 +3178,21 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_verb_5",
+      title: "suppose _ verb _ 5",
       meaning: {
         index: 5,
         definition:
-          "→ punch the air, to make a movement like a punch towards the sky, to show that you are very pleased",
-        examples: ["He punched the air in triumph."],
+          "→ suppose/supposing (that), used when talking about a possible condition or situation, and then imagining the result",
+        examples: [
+          "Look, suppose you lost your job tomorrow, what would you do?",
+          "Supposing it really is a fire!",
+        ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "suppose",
+      pronunciation: "/səˈpəʊz $ -ˈpoʊz/",
       frequency: {
         written: "",
         spoken: "",
@@ -4202,17 +3201,28 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_verb_6",
+      title: "suppose _ verb _ 6",
       meaning: {
         index: 6,
         definition:
-          "→ punch somebody’s lights out, informal, to hit someone hard in the face",
-        examples: [],
+          "→ be supposed to do/be something, a) used to say what someone should or should not do, especially because of rules or what someone in authority has said b) used to say what was or is expected or intended to happen, especially when it did not happen b) used to say what was or is expected or intended to happen, especially when it did not happen  ",
+        examples: [
+          "We’re supposed to check out of the hotel by 11 o'clock.",
+          "I’m not supposed to tell anyone.",
+          "What time are you supposed to be there?",
+          "No one was supposed to know about it.",
+          "The meeting was supposed to take place on Tuesday, but we’ve had to postpone it.",
+          "The new laws are supposed to prevent crime.",
+          "The castle is supposed to be haunted.",
+          "‘Dirty Harry’ is supposed to be one of Eastwood’s best films.",
+          "Mrs Carver is supposed to have a lot of money.",
+        ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "head",
+      pronunciation: "/hed/",
       frequency: {
         written: "",
         spoken: "",
@@ -4221,98 +3231,96 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_verb_7",
-      meaning: {
-        index: 7,
-        definition:
-          "→ punch the clock, American English, informal, to record the time that you start or finish work by putting a card into a special machine",
-        examples: [],
-      },
-    },
-    {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "punch_noun_1",
+      title: "head _ verb _ 1",
       meaning: {
         index: 1,
-        definition: "a quick strong hit made with your fist (=closed hand)",
+        definition:
+          " (also be headed) to go or travel towards a particular place, especially in a deliberate way",
         examples: [
-          "a punch in the kidneys",
-          "I managed to land a punch on his chin.",
-          "The two men started throwing punches (=trying to hit each other).",
+          "head for/towards/back etc",
+          "The ship was heading for Cuba.",
+          "It’s about time we were heading home.",
+          "head north/south etc",
+          "We headed south towards the capital.",
+          "Where are you guys headed?",
         ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "head",
+      pronunciation: "/hed/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_noun_2",
+      title: "head _ verb _ 2",
       meaning: {
         index: 2,
         definition:
-          "a strong effective way of expressing things that makes people interested",
+          "2 → be heading, (also be headed) if you are heading for a particular situation, especially a bad one, it seems likely to happen ",
         examples: [
-          "Thirty years after it was written, Orton’s ‘Entertaining Mr Sloane’ still packs a punch.",
+          "be heading for",
+          "Forecasters predict the region’s economy is heading for disaster.",
+          "Where is your life heading?",
         ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "head",
+      pronunciation: "/hed/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_noun_3",
+      title: "head _ verb _ 3",
       meaning: {
         index: 3,
         definition:
-          "a drink made from fruit juice, sugar, water, and usually some alcohol",
-        examples: ["a glass of hot punch"],
+          "(also head up) to be in charge of a team, government, organization etc",
+        examples: [
+          "David was asked to head up the technical team.",
+          "an interim government headed by the former prime minister",
+        ],
       },
+      images: [],
     },
     {
-      word: "punch",
-      pronunciation: "/pʌntʃ/",
+      word: "head",
+      pronunciation: "/hed/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "punch_noun_4",
+      title: "head _ verb _ 4",
       meaning: {
         index: 4,
         definition:
-          "a metal tool for cutting holes or for pushing something into a small hole",
-        examples: [],
+          "a) to be at the top of a list or group of people or things b) be headed if a page is headed with a particular name, title, image etc, it has it on the top",
+        examples: [
+          "The movie heads the list of Oscar nominations.",
+          "The page was headed ‘Expenses’.",
+          "officially-headed writing paper",
+        ],
       },
+      images: [],
     },
     {
-      word: "table",
-      pronunciation: "/ˈteɪbəl/",
+      word: "lizard",
+      pronunciation: "/ˈlɪzəd $ -ərd/",
       frequency: {
         written: "",
         spoken: "",
@@ -4321,17 +3329,684 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "table_noun_1",
+      title: "lizard _ noun",
+      meaning: {
+        index: 0,
+        definition: "a type of reptile that has four legs and a long tail",
+        examples: [
+          "And lizards hid lots of baby lizards under the rocks in the desert.",
+          "All the wiring was exposed and frayed, and small lizards ran across the ceiling.",
+          "The severed heads of gulls, rabbits, crows, mice, owls, moles and small lizards looked down on me.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hang out",
+      pronunciation: "/hæŋ aʊt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hang out _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to spend a lot of time in a particular place or with particular people",
+        examples: [
+          "I don’t really know who she hangs out with.",
+          "Where do the youngsters hang out?",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "hang out",
+      pronunciation: "/hæŋ aʊt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "hang out _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "hang something ↔ out, to hang clothes outside in order to dry them",
+        examples: [
+          "My job was to hang out the washing.",
+          "Hang the wet things out to dry.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "bracket",
+      pronunciation: "/ˈbrækɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "bracket _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "(also round bracket) [usually plural] British English, one of a pair of signs ( ) put around words to show extra information SYN parenthesis American English",
+        examples: [
+          "Last year’s sales figures are given in brackets.",
+          "Supplements in brackets apply to July and August departures.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "bracket",
+      pronunciation: "/ˈbrækɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "bracket _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "→ income/tax/age etc bracket, a particular income, tax etc range",
+        examples: [
+          "the highest tax bracket",
+          "families in lower income brackets",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "bracket",
+      pronunciation: "/ˈbrækɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "bracket _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "a piece of metal, wood, or plastic, often in the shape of the letter L, fixed to a wall to support something such as a shelf",
+        examples: [
+          "A little ink bottle and two pens were fastened to its floor by gold brackets.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "whatsoever",
+      pronunciation: "/ˌwɒtsəʊˈevə $ ˌwɑːtsoʊˈevər, ˌwʌt-/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adverb",
+      additionalInfo: "",
+      translation: "",
+      title: "whatsoever _ adverb",
+      meaning: {
+        index: 0,
+        definition: "used to emphasize a negative statement SYN whatever",
+        examples: ["He’s had no luck whatsoever."],
+      },
+      images: [],
+    },
+    {
+      word: "bookcase",
+      pronunciation: "/ˈbʊk-keɪs/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "bookcase _ noun",
+      meaning: {
+        index: 0,
+        definition: "a piece of furniture with shelves to hold books",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "catch on",
+      pronunciation: "/kætʃ ɒn $ kætʃ ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "catch on _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition: "to become popular or fashionable",
+        examples: [
+          "The idea never really caught on.",
+          "The trend caught on quickly and soon everyone was wearing them.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "catch on",
+      pronunciation: "/kætʃ ɒn $ kætʃ ɑːn/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "catch on _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "to begin to understand or realize something",
+        examples: [
+          "It took me a while to catch on to what she was saying.",
+          "I didn't catch on until he explained it to me.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "if there is a mess somewhere or a place is a mess, things there are dirty or not neatly arranged",
+        examples: [
+          "Sorry – the place is a bit of a mess.",
+          "When I got home, the house was a complete mess.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "a situation in which there are a lot of problems and difficulties, especially as a result of mistakes or carelessness",
+        examples: [
+          "The welfare system in this country is a mess.",
+          "Her life’s such a mess.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition: "→ make a mess of (doing) something, to do something badly",
+        examples: [
+          "I feel I’ve made a real mess of my marriage.",
+          "Many people make a mess of handling money.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "→ be a mess, informal, if someone is a mess, they look dirty and untidy, or are in a bad emotional state",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ noun _ 5",
       meaning: {
         index: 5,
         definition:
-          "→ on the table, an offer, idea etc that is on the table has been officially suggested and someone is considering it",
-        examples: ["The offer on the table is a 10% wage increase."],
+          "→ a mess of something, American English, informal, a lot of something",
+        examples: ["a mess of fresh fish"],
       },
+      images: [],
     },
     {
-      word: "table",
-      pronunciation: "/ˈteɪbəl/",
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition: "to make something look untidy or dirty",
+        examples: ["He scratched his head and messed his hair even more."],
+      },
+      images: [],
+    },
+    {
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "British English, if an animal or person messes something, they use the wrong place as a toilet",
+        examples: ["He was so drunk that he messed the bed."],
+      },
+      images: [],
+    },
+    {
+      word: "mess",
+      pronunciation: "/mes/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "→ no messing, spoken, informal, used to say that something was done very easily",
+        examples: ["Williams won very comfortably, no messing."],
+      },
+      images: [],
+    },
+    {
+      word: "mess around with somebody/something",
+      pronunciation: "/ˈmes əˌraʊnd wɪð ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess around with somebody/something _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to have a sexual relationship with someone that you should not have a sexual relationship with",
+        examples: ["She’d been messing around with another man."],
+      },
+      images: [],
+    },
+    {
+      word: "mess around with somebody/something",
+      pronunciation: "/ˈmes əˌraʊnd wɪð ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess around with somebody/something _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "to spend time playing with something, repairing it etc",
+        examples: ["Dave likes messing around with old cars."],
+      },
+      images: [],
+    },
+    {
+      word: "mess around with somebody/something",
+      pronunciation: "/ˈmes əˌraʊnd wɪð ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess around with somebody/something _ phrasal verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to use something and make annoying changes to it",
+        examples: ["Who’s been messing around with my camera?"],
+      },
+      images: [],
+    },
+    {
+      word: "mess up",
+      pronunciation: "/mes ʌp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess up _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to spoil or ruin something, especially something important or something that has been carefully planned",
+        examples: [
+          "It took me ages to get this right – I don’t want some idiot to mess it up.",
+          "She felt she’d messed up her whole life.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "mess up",
+      pronunciation: "/mes ʌp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess up _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "mess something ↔ up, to make something dirty or untidy",
+        examples: ["Who messed up the kitchen?"],
+      },
+      images: [],
+    },
+    {
+      word: "mess up",
+      pronunciation: "/mes ʌp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess up _ phrasal verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to make a mistake and do something badly",
+        examples: [
+          "I think I messed up on the last question.",
+          "It doesn’t matter if you mess it up, you can always try again.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "mess up",
+      pronunciation: "/mes ʌp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      additionalInfo: "",
+      translation: "",
+      title: "mess up _ phrasal verb _ 4",
+      meaning: {
+        index: 4,
+        definition: "to make someone have emotional or mental problems",
+        examples: ["I messed up my kids."],
+      },
+      images: [],
+    },
+    {
+      word: "mess with somebody/something",
+      pronunciation: "/mes wɪð ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "informal",
+      additionalInfo: "",
+      translation: "",
+      title: "mess with somebody/something _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to get involved with someone or something that may cause problems or be dangerous",
+        examples: ["Don’t mess with drugs."],
+      },
+      images: [],
+    },
+    {
+      word: "mess with somebody/something",
+      pronunciation: "/mes wɪð ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "informal",
+      additionalInfo: "",
+      translation: "",
+      title: "mess with somebody/something _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "to deceive someone or cause trouble for them",
+        examples: ["You mess with me, and I’ll rip your head off."],
+      },
+      images: [],
+    },
+    {
+      word: "mess with somebody/something",
+      pronunciation: "/mes wɪð ˈsʌmbədi ˈsʌmθɪŋ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "informal",
+      additionalInfo: "",
+      translation: "",
+      title: "mess with somebody/something _ phrasal verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "to try changing something, especially in a way that damages or spoils it",
+        examples: ["I wouldn't mess with that if I were you."],
+      },
+      images: [],
+    },
+    {
+      word: "whipped cream",
+      pronunciation: "/wɪpt kriːm/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "whipped cream _ noun",
+      meaning: {
+        index: 0,
+        definition: "cream that has been beaten until it is thick",
+        examples: [""],
+      },
+      images: [],
+    },
+    {
+      word: "whip",
+      pronunciation: "/wɪp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "whip _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition: "to hit someone or something with a whip",
+        examples: ["He whipped the horse into a canter."],
+      },
+      images: [],
+    },
+    {
+      word: "whip",
+      pronunciation: "/wɪp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "whip _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to move quickly and violently, or to make something do this",
+        examples: [
+          "The wind whipped her hair into her eyes.",
+          "whip across/around/past etc",
+          "Rain whipped across the window pane.",
+          "whip something about/around",
+          "The branches were being whipped about in the storm.",
+          "whip round/around",
+          "He whipped round to face them.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "whip",
+      pronunciation: "/wɪp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "whip _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to move or remove something with a quick sudden movement",
+        examples: [
+          "whip something off/out/back etc",
+          "Annie whipped off her apron and put it into the drawer.",
+          "He whipped back the sheets.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "whip",
+      pronunciation: "/wɪp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "whip _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "to mix cream or the clear part of an egg very hard until it becomes stiff",
+        examples: ["Whip the cream until thick."],
+      },
+      images: [],
+    },
+    {
+      word: "horny",
+      pronunciation: "/ˈhɔːni $ ˈhɔːrni/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      additionalInfo: "",
+      translation: "",
+      title: "horny _ adjective",
+      meaning: {
+        index: 0,
+        definition: "informal sexually excited",
+        examples: ["feeling horny"],
+      },
+      images: [],
+    },
+    {
+      word: "revelation",
+      pronunciation: "/ˌrevəˈleɪʃən/",
       frequency: {
         written: "",
         spoken: "",
@@ -4340,38 +4015,521 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "table_noun_2",
+      title: "revelation _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "a surprising fact about someone or something that was previously secret and is now made known",
+        examples: [
+          "He resigned after revelations about his affair.",
+          "startling revelations about his background",
+          "revelations that two senior officers had lied in court",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "revelation",
+      pronunciation: "/ˌrevəˈleɪʃən/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "revelation _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "the act of suddenly making known a surprising fact that had previously been secret",
+        examples: ["the revelation of previously unknown facts"],
+      },
+      images: [],
+    },
+    {
+      word: "revelation",
+      pronunciation: "/ˌrevəˈleɪʃən/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "revelation _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition: "something that is surprisingly good, enjoyable, or useful",
+        examples: ["Alice Walker’s novel was a real revelation to me."],
+      },
+      images: [],
+    },
+    {
+      word: "revelation",
+      pronunciation: "/ˌrevəˈleɪʃən/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "revelation _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "an event, experience etc that is considered to be a message from God",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "be more of something than something",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "",
+      additionalInfo: "",
+      translation: "",
+      title: "be more of something than something",
+      meaning: {
+        index: 0,
+        definition: "to be one thing rather than another",
+        examples: ["It was more of a holiday than a training exercise."],
+      },
+      images: [],
+    },
+    {
+      word: "spit",
+      pronunciation: "/spɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "spit _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to force a small amount of saliva (=the liquid in your mouth) out of your mouth",
+        examples: [
+          "Nick rolled down his window and spat",
+          "spit at/on/into",
+          "A group of fans spat on the players as they left the field.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "spit",
+      pronunciation: "/spɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "spit _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "to force something out of your mouth",
+        examples: [
+          "Billy stood up slowly, rubbed his jaw, and spat blood.",
+          "Diana tasted her martini and quickly spat it out.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "spit",
+      pronunciation: "/spɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "spit _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "→ be spitting, British English, to be raining very lightly SYN drizzle",
+        examples: ["You don’t need an umbrella – it’s only spitting."],
+      },
+      images: [],
+    },
+    {
+      word: "spit",
+      pronunciation: "/spɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "spit _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition: "to say something quickly in a very angry way",
+        examples: ["'Shut up!', spat Maria furiously."],
+      },
+      images: [],
+    },
+    {
+      word: "spit",
+      pronunciation: "/spɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "spit _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "→ spit it out,spoken used to ask someone to tell you something that they seem too frightened or embarrassed to say",
+        examples: ["Come on, Jean. Spit it out!"],
+      },
+      images: [],
+    },
+    {
+      word: "spit",
+      pronunciation: "/spɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "spit _ verb _ 6",
       meaning: {
         index: 6,
         definition:
-          "→ turn the tables (on somebody), to change a situation completely, so that someone loses an advantage and you gain one",
-        examples: [
-          "The tables were turned in the second half, when Leeds United scored from the penalty spot.",
-        ],
+          "to send out small bits of something, for example fire or hot oil, into the air",
+        examples: ["A log fire was crackling and spitting in the hearth."],
       },
+      images: [],
     },
     {
-      word: "table",
-      pronunciation: "/ˈteɪbəl/",
+      word: "spit",
+      pronunciation: "/spɪt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "table_noun_3",
+      title: "spit _ verb _ 7",
+      meaning: {
+        index: 7,
+        definition: "if a cat spits, it makes short angry sounds",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "smash",
+      pronunciation: "/smæʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "smash _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to break into pieces violently or noisily, or to make something do this by dropping, throwing, or hitting it",
+        examples: [
+          "Vandals had smashed all the windows.",
+          "Firemen had to smash the lock to get in.",
+          "Several cups fell to the floor and smashed to pieces.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "smash",
+      pronunciation: "/smæʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "smash _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          " to hit an object or surface violently, or to make something do this",
+        examples: [
+          "A stolen car smashed into the bus.",
+          "He smashed his fist down on the table.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "smash",
+      pronunciation: "/smæʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "smash _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "to do something much faster, better etc than anyone has done before",
+        examples: ["The film smashed all box office records."],
+      },
+      images: [],
+    },
+    {
+      word: "smash",
+      pronunciation: "/smæʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "smash _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "to destroy something such as a political system or criminal organization",
+        examples: ["Police say they have smashed a major crime ring."],
+      },
+      images: [],
+    },
+    {
+      word: "smash",
+      pronunciation: "/smæʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "smash _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "to hit a high ball with a strong downward action, in tennis or similar games",
+        examples: [""],
+      },
+      images: [],
+    },
+    {
+      word: "get together",
+      pronunciation: "/ɡet təˈɡeðər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "get together _ phrasal verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "if people get together, they meet in order to spend time with each other",
+        examples: ["We must get together for a drink."],
+      },
+      images: [],
+    },
+    {
+      word: "get together",
+      pronunciation: "/ɡet təˈɡeðər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "get together _ phrasal verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "if two people get together, they start a romantic or sexual relationship",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "get together",
+      pronunciation: "/ɡet təˈɡeðər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "get together _ phrasal verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "get something ↔ together to collect things together",
+        examples: ["I need to get some paperwork together for the meeting."],
+      },
+      images: [],
+    },
+    {
+      word: "get together",
+      pronunciation: "/ɡet təˈɡeðər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "get together _ phrasal verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "get somebody ↔ together to bring people together to make a group",
+        examples: [
+          "He got together a group of local businessmen to discuss the problem.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "get together",
+      pronunciation: "/ɡet təˈɡeðər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "get together _ phrasal verb _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "get something ↔ together to succeed in getting enough money to do or buy something",
+        examples: ["We’re trying to get together enough money to buy a flat."],
+      },
+      images: [],
+    },
+    {
+      word: "get together",
+      pronunciation: "/ɡet təˈɡeðər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "get together _ phrasal verb _ 6",
+      meaning: {
+        index: 6,
+        definition:
+          "get something together, informal, to change your life so that it is organized and you are in control of it",
+        examples: [
+          "He’s just trying to get his life together at the moment.",
+          "get yourself together",
+          "I’m staying with my parents for a while, until I’ve got myself together a bit.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "get together",
+      pronunciation: "/ɡet təˈɡeðər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "phrasal verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "get together _ phrasal verb _ 7",
       meaning: {
         index: 7,
         definition:
-          "→ under the table, informal, money that is paid under the table is paid secretly and illegally",
-        examples: ["Payments were made under the table to local officials."],
+          "get it together spoken to be organized and successful in your life, job etc",
+        examples: [
+          "The government can’t seem to get it together on the environment.",
+        ],
       },
+      images: [],
     },
     {
-      word: "table",
-      pronunciation: "/ˈteɪbəl/",
+      word: "be on a roll",
+      pronunciation: "/bi ɒn ə rəʊl/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "idiom",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "be on a roll _ idiom",
+      meaning: {
+        index: 0,
+        definition:
+          "to be having a lot of success with what you are trying to do",
+        examples: [
+          "Midvale High was on a roll, having won their last six basketball games.",
+          "The Toronto-born architect is on a roll.",
+          "Small business is on a roll.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "abuse",
+      pronunciation: "/əˈbjuːs/",
       frequency: {
         written: "",
         spoken: "",
@@ -4380,20 +4538,591 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "table_noun_4",
+      title: "abuse _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition: "cruel or violent treatment of someone",
+        examples: [
+          "several cases of child abuse",
+          "physical/sexual/racial abuse",
+          "Many children suffer racial abuse at school.",
+          "An independent committee will look into alleged human rights abuses.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "abuse",
+      pronunciation: "/əˈbjuːs/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "abuse _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "the use of something in a way that it should not be used SYN misuse",
+        examples: [
+          "abuse of",
+          "government officials’ abuse of power",
+          "A self-monitoring tax system is clearly open to abuse (=able to be used wrongly).",
+          "alcohol/drug abuse (=the practice of drinking too much or taking illegal drugs)",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "abuse",
+      pronunciation: "/əˈbjuːs/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "abuse _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "rude or offensive things that someone says when they are angry",
+        examples: [
+          "vandalism and verbal abuse directed at old people",
+          "a torrent/stream of abuse (=a series of rude or angry words)",
+          "shout/hurl/scream abuse at somebody",
+          "The other driver started hurling abuse at me.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "abuse",
+      pronunciation: "/əˈbjuːz/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "abuse _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to treat someone in a cruel and violent way, often sexually",
+        examples: [
+          "sexually/physically abused",
+          "She was sexually abused as a child.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "abuse",
+      pronunciation: "/əˈbjuːz/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "abuse _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to deliberately use something for the wrong purpose or for your own advantage",
+        examples: [
+          "Williams abused his position as mayor to give jobs to his friends.",
+          "Morris abused the trust the firm had shown in him.",
+          "people who abuse the system",
+          "abuse alcohol/drugs",
+          "The proportion of drinkers who abuse alcohol is actually quite small.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "abuse",
+      pronunciation: "/əˈbjuːz/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "abuse _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to say rude or offensive things to someone SYN insult",
+        examples: [
+          "Many soldiers in Belfast are verbally abused.",
+          "He came to the help of another driver who was being racially abused by three white passengers.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "abuse",
+      pronunciation: "/əˈbjuːz/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "abuse _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition: "to treat something so badly that you start to destroy it",
+        examples: ["James abused his body for years with heroin and cocaine."],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "an arrangement with a shop, bank etc that allows you to buy something and pay for it later",
+        examples: [
+          "Most new cars are bought on credit.",
+          "The store agreed to let him have credit.",
+          "What’s the credit limit on your Visa card?",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "approval or praise that you give to someone for something they have done",
+        examples: [
+          "Credit for this win goes to everybody in the team.",
+          "They never give Gene any credit for all the extra work he does.",
+          "She deserves credit for trying her best.",
+          "To Jamie’s credit, he remained calm.",
+          "Credit must go to Fiona for making sure everything ran smoothly.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "→ be a credit to somebody/something,(also do somebody/something credit) to behave so well or be so successful that your family, team etc are proud of you",
+        examples: [
+          "She’s a credit to her profession.",
+          "Your children really do you credit.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "→ have something to your credit,to have achieved something",
+        examples: ["She already has two successful novels to her credit."],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "→ in credit,if you are in credit, there is money in your bank account",
+        examples: [" There are no bank charges if you stay in credit."],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 6",
+      meaning: {
+        index: 6,
+        definition:
+          "→ the credits,[plural] a list of all the people involved in making a film or television programme, which is shown at the beginning or end of it",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 7",
+      meaning: {
+        index: 7,
+        definition:
+          "→ on the credit side,used to talk about the good things about someone or something",
+        examples: [
+          "On the credit side, the book is extremely well researched.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 8",
       meaning: {
         index: 8,
         definition:
-          "→ times table, a list that young children learn, in which all the numbers between 1 and 12 are multiplied by each other SYN multiplication table",
+          "→ (give) credit where credit is due,used to say that someone deserves to be praised for the good things they have done",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 9",
+      meaning: {
+        index: 9,
+        definition:
+          "a successfully completed part of a course at a university or college",
+        examples: ["I don’t have enough credits to graduate."],
+      },
+      images: [],
+    },
+    {
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 10",
+      meaning: {
+        index: 10,
+        definition:
+          "an amount of money that is put into someone’s bank account or added to another amount OPP debit",
         examples: [
-          "three/four etc times table",
-          "He’s 12 years old and still doesn’t know his three times table.",
+          "The company promised to provide credits to customers who had been charged too much.",
         ],
       },
+      images: [],
     },
     {
-      word: "tan",
-      pronunciation: "/tæn/",
+      word: "credit",
+      pronunciation: "/ˈkredɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "noun",
+      additionalInfo: "",
+      translation: "",
+      title: "credit _ noun _ 11",
+      meaning: {
+        index: 11,
+        definition: "the belief that something is true or correct",
+        examples: ["The witness’s story gained credit with the jury."],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to break with a sudden sharp noise, or to make something do this",
+        examples: [
+          "A twig snapped under my feet.",
+          "The teacher snapped the chalk in two and gave me a piece.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to move into a particular position suddenly, making a short sharp noise, or to make something move like this",
+        examples: [
+          "The pieces just snap together like this.",
+          "She snapped her briefcase shut.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition: "to say something quickly in an angry way",
+        examples: [
+          "‘What do you want?’ Mike snapped.",
+          "He snapped at Walter for no reason.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "to suddenly stop being able to control your anger, anxiety, or other feelings in a difficult situation",
+        examples: [
+          "The stress began to get to her, and one morning she just snapped.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition: "if an animal such as a dog snaps, it tries to bite you",
+        examples: ["The dog started snapping at my heels."],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 6",
+      meaning: {
+        index: 6,
+        definition: "(informal) to take a photograph",
+        examples: [
+          "Dave snapped a picture of me and Sonia.",
+          "Mel snapped a picture with his pocket camera.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 7",
+      meaning: {
+        index: 7,
+        definition:
+          "→ snap your fingers,to make a short sharp noise by moving one of your fingers quickly against your thumb, for example in order to get someone’s attention or to mark the beat of music",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 8",
+      meaning: {
+        index: 8,
+        definition:
+          "→ snap to it, spoken, used to tell someone to hurry and do something immediately",
+        examples: ["Come on, snap to it – get that room cleaned up!"],
+      },
+      images: [],
+    },
+    {
+      word: "snap",
+      pronunciation: "/snæp/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      register: "",
+      partOfSpeech: "verb",
+      additionalInfo: "",
+      translation: "",
+      title: "snap _ verb _ 9",
+      meaning: {
+        index: 9,
+        definition:
+          " American English, to end a series of events – used especially in newspapers",
+        examples: [
+          "The Rockets snapped a seven-game losing streak by beating Portland.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "turtle",
+      pronunciation: "/ˈtɜːtl $ ˈtɜːrtl/",
       frequency: {
         written: "",
         spoken: "",
@@ -4402,17 +5131,18 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "tan_noun_1",
+      title: "turtle _ noun _ 1",
       meaning: {
         index: 1,
         definition:
-          "[noun] the attractive brown colour that someone with pale skin gets after they have been in the sun SYN suntan",
-        examples: ["I wish I could get a tan like that."],
+          "a reptile that lives mainly in water and has a soft body covered by a hard shell",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "tan",
-      pronunciation: "/tæn/",
+      word: "turtle",
+      pronunciation: "/ˈtɜːtl $ ˈtɜːrtl/",
       frequency: {
         written: "",
         spoken: "",
@@ -4421,54 +5151,18 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "tan_noun_2",
-      meaning: {
-        index: 2,
-        definition: "a light yellowish-brown colour",
-        examples: [],
-      },
-    },
-    {
-      word: "tan",
-      pronunciation: "/tæn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "tan_verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "if you tan, or if the sun tans you, your skin becomes darker because you spend time in the sun",
-        examples: ["She has a pale skin which doesn't tan easily."],
-      },
-    },
-    {
-      word: "tan",
-      pronunciation: "/tæn/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "tan_verb_2",
+      title: "turtle _ noun _ 2",
       meaning: {
         index: 2,
         definition:
-          "to make animal skin into leather by treating it with tannin (=a kind of acid)",
+          "any reptile that has a hard shell covering its body, for example a tortoise",
         examples: [],
       },
+      images: [],
     },
     {
-      word: "tan",
-      pronunciation: "/tæn/",
+      word: "sophisticated",
+      pronunciation: "/səˈfɪstɪkeɪtɪd/",
       frequency: {
         written: "",
         spoken: "",
@@ -4477,16 +5171,21 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "tan_adjective_1",
+      title: "sophisticated _ adjective _ 1",
       meaning: {
         index: 1,
-        definition: "having a light yellowish-brown colour",
-        examples: ["tan shoes"],
+        definition:
+          "having a lot of experience of life, and good judgment about socially important things such as art, fashion etc",
+        examples: [
+          "a sophisticated, witty American",
+          "Clarissa’s hair was swept up into a sophisticated style.",
+        ],
       },
+      images: [],
     },
     {
-      word: "tan",
-      pronunciation: "/tæn/",
+      word: "sophisticated",
+      pronunciation: "/səˈfɪstɪkeɪtɪd/",
       frequency: {
         written: "",
         spoken: "",
@@ -4495,165 +5194,41 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "tan_adjective_2",
+      title: "sophisticated _ adjective _ 2",
       meaning: {
         index: 2,
         definition:
-          "American English, having darker skin after spending time in the sun SYN tanned",
-        examples: ["She arrived home tan and rested."],
-      },
-    },
-    {
-      word: "stick",
-      pronunciation: "/stɪk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stick_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "a long thin piece of wood from a tree, which is no longer attached to the tree",
-        examples: ["They collected sticks to start the fire."],
-      },
-    },
-    {
-      word: "stick",
-      pronunciation: "/stɪk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stick_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "a long thin piece of wood, plastic etc that you use for a particular purpose",
+          "a sophisticated machine, system, method etc is very well designed and very advanced, and often works in a complicated way",
         examples: [
-          "a pair of drum sticks",
-          "a measuring stick",
-          "Aunt Lou walks with a stick (=uses a stick to help her walk).",
+          "sophisticated software",
+          "a highly sophisticated weapons system",
         ],
       },
+      images: [],
     },
     {
-      word: "stick",
-      pronunciation: "/stɪk/",
+      word: "sophisticated",
+      pronunciation: "/səˈfɪstɪkeɪtɪd/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "adjective",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "stick_noun_3",
-      meaning: {
-        index: 3,
-        definition: "a long thin or round piece of something",
-        examples: [
-          "carrot sticks with dip",
-          "a glue stick",
-          "a stick of chewing gum",
-        ],
-      },
-    },
-    {
-      word: "stick",
-      pronunciation: "/stɪk/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "stick_noun_4",
-      meaning: {
-        index: 4,
-        definition:
-          "a long, specially shaped piece of wood, plastic etc that you use in some sports to hit a ball",
-        examples: ["a hockey stick"],
-      },
-    },
-    {
-      word: "border",
-      pronunciation: "/ˈbɔːdə $ ˈbɔːrdər/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "border_noun_1",
-      meaning: {
-        index: 1,
-        definition:
-          "the official line that separates two countries, states, or areas, or the area close to this line",
-        examples: [
-          "To cross the border, you will need a valid passport.",
-          "the border between the US and Mexico",
-          "regular patrols along the border with France",
-          "a market town on the border of England and Wales",
-          "He helped them to get across the border.",
-          "south/north etc of the border",
-          "The coach took us south of the border to Tijuana.",
-        ],
-      },
-    },
-    {
-      word: "border",
-      pronunciation: "/ˈbɔːdə $ ˈbɔːrdər/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "border_noun_2",
-      meaning: {
-        index: 2,
-        definition:
-          "a band along or around the edge of something such as a picture or piece of material",
-        examples: ["writing paper with a black border"],
-      },
-    },
-    {
-      word: "border",
-      pronunciation: "/ˈbɔːdə $ ˈbɔːrdər/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "border_noun_3",
+      title: "sophisticated _ adjective _ 3",
       meaning: {
         index: 3,
         definition:
-          "an area of soil where you plant flowers or bushes, along the edge of an area of grass",
-        examples: ["a flower and shrub border"],
+          "having a lot of knowledge and experience of difficult or complicated subjects and therefore able to understand them well",
+        examples: ["British voters have become much more sophisticated."],
       },
+      images: [],
     },
     {
-      word: "border",
-      pronunciation: "/ˈbɔːdə $ ˈbɔːrdər/",
+      word: "beacon",
+      pronunciation: "/ˈbiːkən/",
       frequency: {
         written: "",
         spoken: "",
@@ -4662,58 +5237,97 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "border_noun_4",
-      meaning: {
-        index: 4,
-        definition:
-          "something that separates one situation, state etc from another",
-        examples: [
-          "new scientific discoveries that are stretching the borders of knowledge",
-        ],
-      },
-    },
-    {
-      word: "border",
-      pronunciation: "/ˈbɔːdə $ ˈbɔːrdər/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "border_verb_1",
+      title: "beacon _ noun _ 1",
       meaning: {
         index: 1,
         definition:
-          "if one country, state, or area borders another, it is next to it and shares a border with it",
-        examples: [
-          "countries that border the Mediterranean",
-          "The area borders on the Yorkshire Dales.",
-        ],
+          "a light that is put somewhere to warn or guide people, ships, vehicles, or aircraft",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "border",
-      pronunciation: "/ˈbɔːdə $ ˈbɔːrdər/",
+      word: "beacon",
+      pronunciation: "/ˈbiːkən/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "verb",
+      partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "border_verb_2",
+      title: "beacon _ noun _ 2",
       meaning: {
         index: 2,
-        definition: "to form a border along the edge of something",
-        examples: ["to form a border along the edge of something"],
+        definition:
+          "a radio or radar signal used by aircraft or boats to help them find their position and direction",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "border on something",
+      word: "beacon",
+      pronunciation: "/ˈbiːkən/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "beacon _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "especially literary, a person, idea etc that guides or encourages you",
+        examples: [
+          "The education program offers a beacon of hope to these children.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "beacon",
+      pronunciation: "/ˈbiːkən/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "beacon _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition: "a fire on top of a hill used in the past as a signal",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "upbeat",
+      pronunciation: "/ˈʌpbiːt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "upbeat _ adjective",
+      meaning: {
+        index: 0,
+        definition: "positive and making you feel that good things will happen",
+        examples: ["an upbeat message"],
+      },
+      images: [],
+    },
+    {
+      word: "live off somebody/something",
       pronunciation: "",
       frequency: {
         written: "",
@@ -4723,37 +5337,42 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "border on something_phrasal verb",
+      title: "live off somebody/something _ phrasal verb",
       meaning: {
         index: 0,
-        definition: "to be very close to being something extreme",
-        examples: ["His confidence bordered on arrogance."],
-      },
-    },
-    {
-      word: "wind up",
-      pronunciation: "/ˈwaɪnd ʌp/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "wind up_phrasal verb_1",
-      meaning: {
-        index: 1,
-        definition: "to bring an activity, meeting etc to an end",
+        definition:
+          "to get your income or food from a supply of money or from another person",
         examples: [
-          "OK, just to wind up, could I summarize what we’ve decided?",
-          "It’s time to wind things up – I have a plane to catch.",
+          "Mom used to live off the interest from her savings.",
+          "Dad lost his job and we had to live off welfare.",
+          "Most people in the countryside live off the land (=live by growing or finding their own food).",
         ],
       },
+      images: [],
     },
     {
-      word: "wind up",
-      pronunciation: "/ˈwaɪnd ʌp/",
+      word: "give me/it a break!",
+      pronunciation: "",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "idiom",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "give me/it a break! _ idiom",
+      meaning: {
+        index: 0,
+        definition:
+          "spoken, used when you want someone to stop doing or saying something that is annoying you",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "end up",
+      pronunciation: "",
       frequency: {
         written: "",
         spoken: "",
@@ -4762,94 +5381,207 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "wind up_phrasal verb_2",
+      title: "end up _ phrasal verb",
+      meaning: {
+        index: 0,
+        definition:
+          "to be in a particular situation, state, or place after a series of events, especially when you did not plan it",
+        examples: [
+          "He came round for a coffee and we ended up having a meal together.",
+          "I wondered where the pictures would end up after the auction.",
+          "end up doing something",
+          "Most slimmers end up putting weight back on.",
+          "Anyone who swims in the river could end up with a nasty stomach upset.",
+          "He could end up as president.",
+          "I don’t want to end up like my parents.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "albino",
+      pronunciation: "/ælˈbiːnəʊ $ ælˈbaɪnoʊ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "albino _ noun",
+      meaning: {
+        index: 0,
+        definition:
+          "a person or animal with a genetic condition that makes their skin and hair very white and their eyes pink",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "windshield",
+      pronunciation: "/ˈwɪndʃiːld/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "windshield _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "American English, (a windscreen, British English) the large window at the front of a car, bus etc",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "windshield",
+      pronunciation: "/ˈwɪndʃiːld/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "windshield _ noun _ 2",
       meaning: {
         index: 2,
-        definition: "to close down a company or organization",
-        examples: ["Our operations in Jamaica are being wound up."],
+        definition:
+          "a piece of glass or clear plastic fixed at the front of a motorcycle that protects the rider from wind",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "wind up",
-      pronunciation: "/ˈwaɪnd ʌp/",
+      word: "port",
+      pronunciation: "/pɔːt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "wind up_phrasal verb_3",
+      title: "port _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition: "a place where ships can be loaded and unloaded",
+        examples: [
+          "We’ll have two days ashore while the ship is in port.",
+          "The ferry was about to leave port.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "port",
+      pronunciation: "/pɔːt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "port _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "a town or city with a harbour or dock where ships can be loaded or unloaded",
+        examples: ["Britain’s largest port"],
+      },
+      images: [],
+    },
+    {
+      word: "port",
+      pronunciation: "/pɔːt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "port _ noun _ 3",
       meaning: {
         index: 3,
         definition:
-          "informal, to be in an unpleasant situation or place after a lot has happened SYN end up",
-        examples: [
-          "You know you’re going to wind up in court over this.",
-          "I wound up wishing I’d never come.",
-        ],
+          "a part of a computer where you can connect another piece of equipment, such as a printer",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "wind up",
-      pronunciation: "/ˈwaɪnd ʌp/",
+      word: "port",
+      pronunciation: "/pɔːt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "wind up_phrasal verb_4",
+      title: "port _ noun _ 4",
       meaning: {
         index: 4,
         definition:
-          "wind somebody ↔ up, British English, to deliberately say or do something that will annoy or worry someone, as a joke",
-        examples: ["They’re only winding you up."],
+          "strong sweet Portuguese wine that is usually drunk after a meal",
+        examples: ["a glass of port"],
       },
+      images: [],
     },
     {
-      word: "wind up",
-      pronunciation: "/ˈwaɪnd ʌp/",
+      word: "port",
+      pronunciation: "/pɔːt/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "wind up_phrasal verb_5",
+      title: "port _ noun _ 5",
       meaning: {
         index: 5,
         definition:
-          "to turn part of a machine around several times, in order to make it move or start working",
-        examples: [],
+          "the left side of a ship or aircraft when you are looking towards the front OPP starboard",
+        examples: ["The plane tilted to port."],
       },
+      images: [],
     },
     {
-      word: "wind up",
-      pronunciation: "/ˈwaɪnd ʌp/",
+      word: "aromatherapy",
+      pronunciation: "/əˌrəʊməˈθerəpi $ əˌroʊ-/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "noun",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "wind up_phrasal verb_6",
+      title: "aromatherapy _ noun",
       meaning: {
-        index: 6,
+        index: 0,
         definition:
-          "wind something ↔ up, British English,to make something, especially a car window, move up by turning a handle or pressing a button",
-        examples: ["Could you wind the window up, please?"],
+          "a treatment that uses massage with pleasant smelling natural oils to reduce pain and make you feel well",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "get/have your (own) way",
+      word: "something sucks",
       pronunciation: "",
       frequency: {
         written: "",
@@ -4859,58 +5591,18 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "get/have your (own) way",
+      title: "something sucks",
       meaning: {
         index: 0,
         definition:
-          "to do what you want to, even though someone else wants something different",
-        examples: ["Don’t let the children always get their own way."],
+          "spoken, not polite, used when you dislike something very much or think something is very bad",
+        examples: ["If you ask me, the whole thing sucks."],
       },
+      images: [],
     },
     {
-      word: "nausea",
-      pronunciation: "/ˈnɔːziə, -siə $ ˈnɒːziə, -ʃə/",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "noun",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "nausea_noun",
-      meaning: {
-        index: 0,
-        definition:
-          "the feeling that you have when you think you are going to vomit (=bring food up from your stomach through your mouth) SYN sickness",
-        examples: ["A feeling of nausea suddenly came over me."],
-      },
-    },
-    {
-      word: "be about to do something",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "be about to do something",
-      meaning: {
-        index: 0,
-        definition:
-          "if someone is about to do something, or if something is about to happen, they will do it or it will happen very soon",
-        examples: [
-          "We were just about to leave when Jerry arrived.",
-          "Work was about to start on a new factory building.",
-        ],
-      },
-    },
-    {
-      word: "tilt",
-      pronunciation: "/tɪlt/",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
@@ -4919,20 +5611,22 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "tilt_verb_1",
+      title: "crash _ verb _ 1",
       meaning: {
         index: 1,
         definition:
-          "to move a part of your body, especially your head or chin, upwards or to the side SYN tip",
+          "to have an accident in a car, plane etc by violently hitting something else",
         examples: [
-          "My mother tilted her head and smiled.",
-          "Ned’s mouth tilted upwards slightly at the corners.",
+          "The jet crashed after take-off.",
+          "The plane crashed into a mountain.",
+          "He was drunk when he crashed the car.",
         ],
       },
+      images: [],
     },
     {
-      word: "tilt",
-      pronunciation: "/tɪlt/",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
@@ -4941,20 +5635,23 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "tilt_verb_2",
+      title: "crash _ verb _ 2",
       meaning: {
         index: 2,
         definition:
-          "to move or make something move into a position where one side is higher than the other SYN tip",
+          "to hit something or someone extremely hard while moving, in a way that causes a lot of damage or makes a lot of noise",
         examples: [
-          "As it came in to land, the plane tilted sideways.",
-          "The man was tilting his chair back.",
+          "A brick crashed through the window.",
+          "We watched the waves crashing against the rocks.",
+          "The plates went crashing to the ground.",
+          "A large branch came crashing down.",
         ],
       },
+      images: [],
     },
     {
-      word: "tilt",
-      pronunciation: "/tɪlt/",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
@@ -4963,190 +5660,418 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "tilt_verb_3",
+      title: "crash _ verb _ 3",
       meaning: {
         index: 3,
-        definition:
-          "if an opinion or situation tilts, or if something tilts it, it changes so that people start to prefer one person, belief, or action to others",
-        examples: [
-          "Crisis situations tend to tilt the balance of power in favour of the president.",
-          "Government tax policy has tilted toward industrial development.",
-        ],
+        definition: " to make a sudden loud noise",
+        examples: ["Thunder crashed and boomed outside."],
       },
+      images: [],
     },
     {
-      word: "work out",
-      pronunciation: "",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "work out_phrasal verb_1",
-      meaning: {
-        index: 1,
-        definition:
-          "work something ↔ out , to think carefully about how you are going to do something and plan a good way of doing it",
-        examples: [
-          "UN negotiators have worked out a set of compromise proposals.",
-          "We need to work out how we’re going to get there.",
-          "I had it all worked out (=had made very careful plans).",
-        ],
-      },
-    },
-    {
-      word: "work out",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "work out_phrasal verb_2",
-      meaning: {
-        index: 2,
-        definition:
-          "work something ↔ out, to calculate an answer, amount, price etc",
-        examples: [
-          "See if you can work this bill out.",
-          "We’ll have to work out how much food we’ll need for the party.",
-        ],
-      },
-    },
-    {
-      word: "work out",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "work out_phrasal verb_3",
-      meaning: {
-        index: 3,
-        definition:
-          "work something ↔ out especially British English, to think about something and manage to understand it",
-        examples: [
-          "The plot is very complicated – it’ll take you a while to work it out.",
-          "I’m sure you can work it out for yourself.",
-        ],
-      },
-    },
-    {
-      word: "work out",
-      pronunciation: "",
-      frequency: {
-        written: "",
-        spoken: "",
-      },
-      partOfSpeech: "phrasal verb",
-      register: "",
-      additionalInfo: "",
-      translation: "",
-      title: "work out_phrasal verb_4",
+      title: "crash _ verb _ 4",
       meaning: {
         index: 4,
         definition:
-          "if a cost or amount works out at a particular figure, it is found to be that much when you calculate it",
-        examples: [
-          "work out at/to £10/$500 etc",
-          "The bill works out at £15 each.",
-          "work out expensive/cheap etc (=be expensive or cheap)",
-          "If we go by taxi, it’s going to work out very expensive.",
-        ],
+          "if a computer crashes, or if you crash the computer, it suddenly stops working",
+        examples: ["The system crashed and I lost three hours’ worth of work."],
       },
+      images: [],
     },
     {
-      word: "work out",
-      pronunciation: "",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "work out_phrasal verb_5",
+      title: "crash _ verb _ 5",
       meaning: {
         index: 5,
         definition:
-          "if a problem or complicated situation works out, it gradually gets better or gets solved",
-        examples: [
-          "Things will work out, you’ll see.",
-          "I hope it all works out for Gina and Andy.",
-          "I’m sure everything will work itself out.",
-        ],
+          "if a stock market or shares crash, they suddenly lose a lot of value",
+        examples: [],
       },
+      images: [],
     },
     {
-      word: "work out",
-      pronunciation: "",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "work out_phrasal verb_6",
+      title: "crash _ verb _ 6",
       meaning: {
         index: 6,
-        definition:
-          "if a situation works out in a particular way, it happens in that way SYN turn out",
-        examples: ["Financially, things have worked out well for us."],
+        definition: "British English, to lose very badly in a sports event",
+        examples: ["Liverpool crashed to their worst defeat of the season."],
       },
+      images: [],
     },
     {
-      word: "work out",
-      pronunciation: "",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "work out_phrasal verb_7",
+      title: "crash _ verb _ 7",
       meaning: {
         index: 7,
-        definition: "to make your body fit and strong by doing exercises",
-        examples: ["He works out with weights twice a week."],
+        definition:
+          "spoken, a) to stay at someone’s house for the night b) (also crash out) to go to bed, or go to sleep very quickly, because you are very tired; (informal) to go to a party that you have not been invited to",
+        examples: [
+          "Can I crash at your place on Saturday night?",
+          "I crashed out on the sofa this afternoon.",
+          "We crashed Joe’s party yesterday.",
+        ],
       },
+      images: [],
     },
     {
-      word: "work out",
-      pronunciation: "",
+      word: "crash",
+      pronunciation: "/kræʃ/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "phrasal verb",
+      partOfSpeech: "verb",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "work out_phrasal verb_8",
+      title: "crash _ verb _ 8",
       meaning: {
         index: 8,
         definition:
-          "I can’t work somebody out, British English, spoken, used to say that you cannot understand what someone is really like or why they behave in the way they do",
-        examples: ["I couldn’t work her out at all."],
+          " informal, to go to a party that you have not been invited to",
+        examples: ["We crashed Joe’s party yesterday."],
       },
+      images: [],
     },
     {
-      word: "hairline",
-      pronunciation: "/ˈheəlaɪn $ ˈher-/",
+      word: "split",
+      pronunciation: "/splɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "split _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "if a group of people splits, or if it is split, people in the group disagree strongly with each other and the group sometimes divides into separate smaller groups",
+        examples: [
+          "It was feared that the issue would split the church.",
+          "The party is split over the issue of immigration.",
+          "The government appears deeply split on this issue.",
+          "The Pan-Africanist Congress split from the ANC in 1959.",
+          "The war has split the nation in two.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "split",
+      pronunciation: "/splɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "split _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "(also split up) to divide or separate something into different parts or groups, or to be divided into different parts or groups",
+        examples: [
+          "Can you split into groups of three now?",
+          "The book is split into six sections.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "split",
+      pronunciation: "/splɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "split _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "if something splits, or if you split it, it tears or breaks along a straight line",
+        examples: [
+          "The branch split under their weight.",
+          "One of the boxes had split open.",
+          "The board had split in two.",
+          "Split the pineapple down the middle.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "split",
+      pronunciation: "/splɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "split _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "to divide something into separate parts and share it between two or more people",
+        examples: [
+          "Profits will be split between three major charities.",
+          "He agreed to sell the car and split the proceeds with his brother.",
+          "split something three/four etc ways (=share something between three, four etc people or groups)",
+          "The money will have to be split three ways.",
+          "We agreed to split the cost.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "split",
+      pronunciation: "/splɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "split _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "to make someone’s head or lip have a cut in it, as a result of a fall or hit",
+        examples: [
+          "She fell against a table and split her lip.",
+          "The force of the blow nearly split his head open.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "split",
+      pronunciation: "/splɪt/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "split _ verb _ 6",
+      meaning: {
+        index: 6,
+        definition:
+          "(also split up), informal, if people split, they end a marriage or relationship with each other",
+        examples: [
+          "He split from his wife last year.",
+          "The band split two years ago.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "major",
+      pronunciation: "/ˈmeɪdʒə $ -ər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "major _ adjective _ 1",
+      meaning: {
+        index: 1,
+        definition: "having very serious or worrying results OPP minor",
+        examples: [
+          "There is a major problem with parking in London.",
+          "The loss of their goalkeeper through injury was a major setback for the team.",
+          "He underwent major heart surgery recently.",
+          "It could have sparked a major confrontation.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "major",
+      pronunciation: "/ˈmeɪdʒə $ -ər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "major _ adjective _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "very large or important, when compared to other things or people of a similar kind OPP minor",
+        examples: [
+          "Britain played a major role in the negotiations.",
+          "There are two major political parties in the US.",
+          "The government’s major concern is with preventing road accidents.",
+          "Smoking is one of the major causes of cancer.",
+          "the major developments in computer technology",
+          "a major road",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "major",
+      pronunciation: "/ˈmeɪdʒə $ -ər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "major _ adjective _ 3",
+      meaning: {
+        index: 3,
+        definition: "(American English spoken) very important",
+        examples: ["This is major? You got me out of bed for this?"],
+      },
+      images: [],
+    },
+    {
+      word: "major",
+      pronunciation: "/ˈmeɪdʒə $ -ər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "major _ adjective _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "(music) a major key is based on a musical scale in which there are semitones between the third and fourth and the seventh and eighth notes → minor",
+        examples: ["a symphony in D major"],
+      },
+      images: [],
+    },
+    {
+      word: "crush",
+      pronunciation: "/krʌʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "crush _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition: "to press something so hard that it breaks or is damaged",
+        examples: [
+          "His leg was crushed in the accident.",
+          "Two people were crushed to death in the rush to escape.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "crush",
+      pronunciation: "/krʌʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "crush _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "to press something in order to break it into very small pieces or into a powder",
+        examples: ["Crush two cloves of garlic."],
+      },
+      images: [],
+    },
+    {
+      word: "crush",
+      pronunciation: "/krʌʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "crush _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "→ crush a rebellion/uprising/revolt etc, to use severe methods to stop people from fighting you or opposing you SYN put down",
+        examples: ["The revolution was crushed within days."],
+      },
+      images: [],
+    },
+    {
+      word: "crush",
+      pronunciation: "/krʌʃ/",
       frequency: {
         written: "",
         spoken: "",
@@ -5155,162 +6080,629 @@ function App() {
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "hairline_noun_1",
+      title: "crush _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "a crowd of people pressed so close together that it is difficult for them to move",
+        examples: ["There’s always such a crush on the train in the mornings."],
+      },
+      images: [],
+    },
+    {
+      word: "crush",
+      pronunciation: "/krʌʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "crush _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          " a strong feeling of romantic love for someone, especially one that a young person has for someone older who they do not know well",
+        examples: [
+          "She had a huge crush on her geography teacher.",
+          "It’s just a schoolgirl crush.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "crush",
+      pronunciation: "/krʌʃ/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "crush _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "American English, informal, someone who you have a feeling of romantic love for, but who you do not know well",
+        examples: ["a first date with your crush"],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "a) a number representing an amount, especially an official number b) a number from 0 to 9, written as a character rather than a word",
+        examples: [
+          "unemployment/sales/trade figures",
+          "Ohio’s unemployment figures for December",
+          "Government figures underestimate the problem.",
+          "the figure ‘2’",
+          "executives with salaries in six figures (=more than £99,999)",
+          "a four/five/six figure number (=a number in the thousands, ten thousands, hundred thousands etc)",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 2",
+      meaning: {
+        index: 2,
+        definition: "a particular amount of money",
+        examples: ["an estimated figure of $200 million"],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "a) someone who is important or famous in some way b) someone with a particular type of appearance or character, especially when they are far away or difficult to see",
+        examples: [
+          "Several leading figures resigned from the party.",
+          "the outstanding political figure of his time",
+          "a tall figure in a hat",
+          "Through the window I could see the commanding figure of Mrs Bradshaw.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 4",
+      meaning: {
+        index: 4,
+        definition: "the shape of a woman’s body",
+        examples: [
+          "She has a good figure.",
+          "keep/lose your figure (=stay thin or become fat)",
+          "Most women have to watch their figure (=be careful not to get fat).",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "→ father/mother/authority figure, someone who is considered to be like a father etc, or to represent authority, because of their character or behaviour",
+        examples: ["an estimated figure of $200 million"],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 6",
+      meaning: {
+        index: 6,
+        definition:
+          "→ figures, [plural], British English the activity of adding, multiplying etc numbers SYN arithmetic",
+        examples: [
+          "a natural ability with figures",
+          "have a head for figures (=be good at arithmetic)",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 7",
+      meaning: {
+        index: 7,
+        definition: "a geometric shape",
+        examples: ["A hexagon is a six-sided figure."],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 8",
+      meaning: {
+        index: 8,
+        definition: "a person in a painting or a model of a person",
+        examples: ["the figure in the background"],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ noun _ 9",
+      meaning: {
+        index: 9,
+        definition:
+          "(written abbreviation fig.) a numbered drawing or a diagram in a book",
+        examples: [],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to be an important part of a process, event, or situation, or to be included in something",
+        examples: [
+          "figure in/among",
+          "Social issues figured prominently in the talks.",
+          "My wishes didn’t figure among his considerations.",
+          "Reform now figures high on the agenda.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition:
+          "informal, to form a particular opinion after thinking about a situation",
+        examples: [
+          "From the way he behaved, I figured that he was drunk.",
+          "It was worth the trouble, I figured.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "→ that figures/(it) figures, spoken, especially American English, a) used to say that something that happens is expected or typical, especially something bad b) used to say that something is reasonable or makes sense",
+        examples: [
+          "‘It rained the whole weekend.’ ‘Oh, that figures.’",
+          "It figures that she’d be mad at you, after what you did.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition:
+          "→ go figure, American English, spoken, said to show that you think something is strange or difficult to explain",
+        examples: ["He didn’t even leave a message.’ ‘Go figure.’"],
+      },
+      images: [],
+    },
+    {
+      word: "figure",
+      pronunciation: "/ˈfɪɡər/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "figure _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition: "American English, to calculate an amount SYN work out",
+        examples: ["I’m just figuring my expenses."],
+      },
+      images: [],
+    },
+    {
+      word: "geek",
+      pronunciation: "/ɡiːk/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "noun",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "geek _ noun",
       meaning: {
         index: 0,
         definition:
-          "the line around your head, especially at the front, where your hair starts growing",
-        examples: [
-          "He had put on weight, and his hairline was beginning to recede.",
-        ],
+          "someone who is not popular because they wear unfashionable clothes, do not know how to behave in social situations, or do strange things SYN nerd",
+        examples: ["a computer geek"],
       },
+      images: [],
     },
     {
-      word: "hairline",
-      pronunciation: "/ˈheəlaɪn $ ˈher-/",
+      word: "vulnerable",
+      pronunciation: "/ˈvʌlnərəbəl/",
       frequency: {
         written: "",
         spoken: "",
       },
-      partOfSpeech: "noun",
+      partOfSpeech: "adjective",
       register: "",
       additionalInfo: "",
       translation: "",
-      title: "hairline_noun_2",
+      title: "vulnerable _ adjective _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "someone who is vulnerable can be easily harmed or hurt OPP invulnerable",
+        examples: [
+          "He took advantage of me when I was at my most vulnerable.",
+          "We work mainly with the elderly and other vulnerable groups.",
+          "Children are most vulnerable to abuse within their own home.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "vulnerable",
+      pronunciation: "/ˈvʌlnərəbəl/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "adjective",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "vulnerable _ adjective _ 2",
       meaning: {
         index: 2,
-        definition: "→ a hairline crack/fracture, a very thin crack ",
-        examples: ["a hairline fracture in a bone"],
+        definition:
+          "a place, thing, or idea that is vulnerable is easy to attack or criticize OPP invulnerable",
+        examples: [
+          "Their theories were badly thought out and very vulnerable to ridicule.",
+          "The fort was vulnerable to attack from the north.",
+        ],
       },
+      images: [],
+    },
+    {
+      word: "ask",
+      pronunciation: "/ɑːsk $ æsk/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "ask _ verb _ 1",
+      meaning: {
+        index: 1,
+        definition:
+          "to speak or write to someone in order to get an answer, information, or a solution",
+        examples: [
+          "‘What’s your name?’ she asked.",
+          "Don’t ask him – he won’t know.",
+          "That kid’s always asking awkward questions.",
+          "I asked him where he lived.",
+          "We’ll have to ask someone the way to the station.",
+          "Go and ask Tom whether he’s coming tonight.",
+          "Visitors usually ask about the history of the castle.",
+          "ask around (=ask in a lot of places or ask a lot of people)",
+          "I’ll ask around, see if I can find you a place to stay.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "ask",
+      pronunciation: "/ɑːsk $ æsk/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "ask _ verb _ 2",
+      meaning: {
+        index: 2,
+        definition: "to make a request for help, advice, information etc",
+        examples: [
+          "Don’t be afraid to ask for help.",
+          "You can call this number to ask for assistance.",
+          "If you are in any doubt, ask for advice.",
+          "I wrote asking for information about the course.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "ask",
+      pronunciation: "/ɑːsk $ æsk/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "ask _ verb _ 3",
+      meaning: {
+        index: 3,
+        definition:
+          "to want a particular amount of money for something you are selling",
+        examples: [
+          "How much is he asking?",
+          "He’s asking £2,000 for his car.",
+          "They’re asking a fortune for that house.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "ask",
+      pronunciation: "/ɑːsk $ æsk/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "ask _ verb _ 4",
+      meaning: {
+        index: 4,
+        definition: "to invite someone to your home, to go out with you etc",
+        examples: [
+          "Let’s ask them to have dinner with us some time.",
+          "ask somebody out (=ask someone, especially someone of the opposite sex, to go to a film, a restaurant etc with you)",
+          "Jerry’s too scared to ask her out.",
+          "ask somebody in (=invite someone into your house, office etc)",
+          "Don’t leave them standing on the doorstep – ask them in!",
+          "ask somebody over/round (=invite someone to come to your home)",
+          "We must ask our new neighbours over for a drink.",
+        ],
+      },
+      images: [],
+    },
+    {
+      word: "ask",
+      pronunciation: "/ɑːsk $ æsk/",
+      frequency: {
+        written: "",
+        spoken: "",
+      },
+      partOfSpeech: "verb",
+      register: "",
+      additionalInfo: "",
+      translation: "",
+      title: "ask _ verb _ 5",
+      meaning: {
+        index: 5,
+        definition:
+          "if you ask something of someone, you want them to do it for you",
+        examples: [
+          "It would be better if he cooperated, but perhaps I’m asking too much.",
+          "You have no right to ask anything of me.",
+          "Expecting the children to do an hour’s homework after school is asking a lot of them.",
+        ],
+      },
+      images: [],
     },
   ];
-
-  ///////////////
-  //CHECK IF THERE IS AN ITEM WITHOUT THE MEANING PROP
-  // data.forEach((item) => {
-  //   if (!item?.meanings) console.log("nooooooooooooo", item);
-  // });
-  /////////////
-  //// ADDING TRANSLATION PROP
-  // let newData = data.map((item) => ({ ...item, translation: "" }));
-  /////////////
-  // ADDING FREQUENCY PROP VALUE AS AN OBJECT
-  // let newData = data.map((item) => ({
-  //   ...item,
-  //   frequency: { written: "", spoken: "" },
-  // }));
-  /////////////////
-  // SEPARATING EACH MEANING
-  // let newData = [];
-  // data.forEach((item) => {
-  //   const { meanings, ...restOfItem } = item;
-  //   if (item.meanings.length === 1) {
-  //     newData.push({
-  //       ...restOfItem,
-  //       title: item.partOfSpeech
-  //         ? `${item.word}_${item.partOfSpeech}`
-  //         : `${item.word}`,
-  //       meaning: item.meanings,
-  //     });
-  //   } else {
-  //     // let x = {...restOfItem};
-  //     // console.log("rest", restOfItem);
-  //     const newitems = item.meanings.forEach((meaning, index) => {
-  //       newData.push({
-  //         ...restOfItem,
-  //         title: item.partOfSpeech
-  //           ? `${item.word}_${item.partOfSpeech}_${index + 1}`
-  //           : `${item.word}_${index + 1}`,
-  //         meaning: meaning,
-  //       });
-  //     });
-  //   }
-  // });
-  ////////////////
-  // console.log("53", data[52]);
-  // let dataCopy = [...data];
-  // dataCopy.forEach((item, index) => {
-  //   if (item.meanings.length === 1) {
-  //     data[index].meanings[0].index = 0;
-  //     // console.log("no meanings", index);
-  //   }
-  // });
-  // console.log("new dataaaaaaaa", newData);
-  /////////
-
-  // const newData = data.map((item) => {
-  //   if (!Array.isArray(item.meaning)) return item;
-  //   else {
-  //     return { ...item, meaning: item.meaning[0] };
-  //   }
-  // });
-  // const newData = data.map((item) => {
-  //   return {
-  //     ...item,
-  //     title: item.title.replaceAll("_", " _ "),
-  //   };
-  // });
-  // console.log("new", newData);
-
-  // const json = JSON.stringify(newData);
-  // console.log("json", json);
-  //////////
-
+  const words1 = data.map((item) => item.word);
+  const words = [...new Set(words1)];
+  console.log("this is words", words);
+  //////////////
+  const x = "hi this is \n a good";
   ////////////
   return (
-    <NewCourse />
+    // <div className="xxx">{x}</div>
+    // <Courses />
+    // <NewCourse />
     // <WordCreation />
     // <Carousel slides={slides} />
     // <WordReview />
     // <WordsPart />
     // <WordAutoCompleteSearch />
-    // <CourseView />
-    // <Router>
-    //   <NavBar
-    //     logInstatus={!!token}
-    //     logOutStatusHandler={logOutStatusHandler}
-    //     userId={userId}
-    //   />
-    //   <Switch>
-    //     <Route path="/" exact>
-    //       <MainPage />
-    //     </Route>
-    //     <Route path="/users" exact>
-    //       <Users />
-    //     </Route>
-    //     <Route path="/login" exact>
-    //       <LoginForm logInStatusHandler={logInStatusHandler} />
-    //     </Route>
-    //     <Route path="/registration" exact>
-    //       <RegistrationForm logInStatusHandler={logInStatusHandler} />
-    //     </Route>
-    //     <Route path="/tour" exact>
-    //       <Tour />
-    //     </Route>
-    //     <Route path="/courses/all" exact>
-    //       <CourseList />
-    //     </Route>
-    //     <Route path="/courses/user/:userId" exact>
-    //       <UserCourses />
-    //     </Route>
-    //     <Route path="/courses/new" exact>
-    //       <NewCourse />
-    //     </Route>
-    //     <Route path="/courses/:courseId" exact>
-    //       <UpdateCourse userId={userId} />
-    //     </Route>
-    //     <Route path="/course/friends" exact>
-    //       <CourseView />
-    //     </Route>
-    //     <Route path="/audios/new" exact>
-    //       <AudioStoring />
-    //     </Route>{" "}
-    //     <Route path="/images/new" exact>
-    //       <ImageStoring />
-    //     </Route>
-    //     <Redirect to="/" />
-    //   </Switch>
-    // </Router>
+    // <SectionView />
+
+    <Router>
+      <NavBar
+        logInstatus={!!token}
+        logOutStatusHandler={logOutStatusHandler}
+        userId={userId}
+      />
+      <Switch>
+        <Route path="/" exact>
+          <MainPage />
+        </Route>
+        <Route path="/users" exact>
+          <Users />
+        </Route>
+        <Route path="/login" exact>
+          <LoginForm logInStatusHandler={logInStatusHandler} />
+        </Route>
+        <Route path="/registration" exact>
+          <RegistrationForm logInStatusHandler={logInStatusHandler} />
+        </Route>
+        <Route path="/tour" exact>
+          <Tour />
+        </Route>
+        <Route path="/courses/all" exact>
+          <Courses />
+        </Route>
+        <Route path="/courses/view/:courseId" exact>
+          <CourseView />
+        </Route>
+        <Route path="/courses/user/:userId" exact>
+          <UserCourses />
+        </Route>
+        <Route path="/courses/new" exact>
+          <NewCourse />
+        </Route>
+        <Route path="/courses/:courseId" exact>
+          <UpdateCourse userId={userId} />
+        </Route>
+        <Route path="/course/friends" exact>
+          <SectionView />
+        </Route>
+        <Route path="/sections/view/:courseId/:sectionNumber" exact>
+          <SectionView />
+        </Route>
+        <Route path="/audios/new" exact>
+          <AudioStoring />
+        </Route>{" "}
+        <Route path="/images/new" exact>
+          <ImageStoring />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    </Router>
   );
 }
 export default App;

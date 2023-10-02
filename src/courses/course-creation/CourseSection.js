@@ -12,14 +12,18 @@ function CourseSection({
   databaseWords,
   sectionData,
   setSectionData,
+  /////////
+  subtitleFile,
+  setSubtitleFile,
+  subtitleSrc,
+  setSubtitleSrc,
 }) {
-  const [uploadedSubtitleSrc, setUploadedSubtitleSrc] = useState();
   const [subtitleWords, setSubtitleWords] = useState([]);
   const [cues, setCues] = useState([]);
 
   React.useEffect(() => {
     (function () {
-      if (uploadedSubtitleSrc) {
+      if (subtitleSrc) {
         const video = document.getElementById("vp-video");
         const track = document.getElementById("vp-track");
         const wordFilter = [
@@ -76,14 +80,16 @@ function CourseSection({
         });
       }
     })();
-  }, [uploadedSubtitleSrc]);
+  }, [subtitleSrc]);
 
   return (
     <React.Fragment>
       <div className="container-fluid">
         <SubtitleUploadPart
           className=" w-50 mx-auto"
-          setUploadedSubtitleSrc={setUploadedSubtitleSrc}
+          subtitleFile={subtitleFile}
+          setSubtitleSrc={setSubtitleSrc}
+          setSubtitleFile={setSubtitleFile}
           courseName={courseName}
           courseSection={courseSection}
           ////////////////
@@ -104,13 +110,13 @@ function CourseSection({
         />
         <video id="vp-video" controls preload="metadata" className="d-none">
           {/* <source src={videosource} /> */}
-          {uploadedSubtitleSrc ? (
+          {subtitleSrc ? (
             <track
               label="English"
               kind="subtitles"
               srcLang="en"
               // src="media/friends.s01e01_720p_bluray_x264-sujaidr.vtt"
-              src={uploadedSubtitleSrc}
+              src={subtitleSrc}
               default
               id="vp-track"
             />

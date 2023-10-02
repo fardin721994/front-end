@@ -2,15 +2,24 @@ import React, { useState, useRef } from "react";
 import "./VideoPlayer.css";
 import Carousel from "react-bootstrap/Carousel";
 import Hls from "hls.js";
+import { fabClasses } from "@mui/material";
 
-const VideoPlayer = ({ data, videoSrc, subtitle }) => {
+const VideoPlayer = ({ data, videoSrc, subtitleURL }) => {
+  console.log("mmmmmmmmowwwwwwwwwww", data);
   ////////////////////////////////////////////////////////////////////////
   // STATES:
   const [rows, setRows] = useState([]);
   const [imageSrc, setImageSrc] = useState("");
   const [showModal, setShowModal] = useState("false");
-  const [playingPronunciation, setPlayingPronunciation] = useState(false);
-  const [pronunciationSrc, setPronunciationSrc] = useState("");
+  // const [pronunciationSrc, setpronunciationSrc] = useState(false);
+  const [pronunciationSrc, setPronunciationSrc] = useState(null);
+  ///////////////////////
+  const [currentDataSet, setCurrentDataSet] = useState(data);
+  const [currentDataIndex, setCurrentDataIndex] = useState(0);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentExampleIndex, setCurrentExampleIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   ///////////////////////////////////////////////////////////////////////
   // REFERENCES:
   const videoContainerRef = useRef();
@@ -25,7 +34,70 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
   const volumeRef = useRef();
   const progressRef = useRef();
   const fullscreenRef = useRef();
+  ///////////////////
+  let activeWordsBackwardArrow = true;
+  if (currentWordIndex === 0) activeWordsBackwardArrow = false;
+  ////
+  let activeWordsForwardArrow = true;
+  if (
+    currentWordIndex ===
+    currentDataSet[currentDataIndex]?.databaseWord.length - 1
+  )
+    activeWordsForwardArrow = false;
+  ////
+  let activeExamplesBackwardArrow = true;
+  if (currentExampleIndex === 0) activeExamplesBackwardArrow = false;
+  ////
+  let activeExamplesForwardArrow = true;
+  if (
+    currentExampleIndex ===
+    currentDataSet[currentDataIndex]?.databaseWord[currentWordIndex]?.meaning
+      .examples.length -
+      1
+  )
+    activeExamplesForwardArrow = false;
+  ////
+  let activeImagesBackwardArrow = true;
+  if (currentImageIndex === 0) activeImagesBackwardArrow = false;
+  ////
+  let activeImagesForwardArrow = true;
+  if (
+    currentImageIndex ===
+    currentDataSet[currentDataIndex]?.databaseWord[currentWordIndex]?.images
+      .length -
+      1
+  )
+    activeImagesForwardArrow = false;
+  ////////////////
+  let showImagesPart = false;
+  if (
+    showModal === "true" &&
+    currentDataSet[currentDataIndex]?.databaseWord[currentWordIndex]?.images
+      .length > 0
+  ) {
+    showImagesPart = true;
+  }
+  ///////////////////
+  let showExamplesPart = false;
+  if (
+    showModal === "true" &&
+    currentDataSet[currentDataIndex]?.databaseWord[currentWordIndex]?.meaning
+      .examples.length > 0
+  ) {
+    showExamplesPart = true;
+  }
   ////////////////////////////////////////////////////
+  const wordClickHandler = (imgSrc, INDEX) => {
+    videoRef.current.pause();
+    setShowModal("true");
+    // setImageSrc(imgSrc);
+    ////////////
+    setCurrentDataIndex(INDEX);
+  };
+
+  //////////////////////////////////////////
+
+  //////////////
   // FULL SCREEN
   // Check if the browser supports the Fullscreen API
   const fullScreenEnabled = !!(
@@ -177,14 +249,12 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
   /////////////////////////////////////////////////////
   /////////////////////////////////////////////////////
 
-  const wordClickHandler = (event) => {
-    videoRef.current.pause();
-    setShowModal("true");
-  };
-
-  const closeModalHandler = () => {
+  const handleCloseModal = () => {
     videoRef.current.play();
     setShowModal("false");
+    setCurrentWordIndex(0);
+    setCurrentExampleIndex(0);
+    setCurrentImageIndex(0);
   };
 
   const cueLogger = () => {
@@ -199,10 +269,32 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
       // Obtain handles to main elements
       const video = videoRef.current;
       const track = trackRef.current;
-
+      let counter = 1;
+      const colorNumGenerator = () => {
+        counter++;
+        return (counter % 7) + 1;
+      };
       track.addEventListener("cuechange", (event) => {
-        // console.log(event);
+        // console.log("data", data);
         if (event.target.track?.activeCues[0]?.text) {
+          //////////////
+          const currentCueId = event.target.track?.activeCues[0]?.id;
+          const currentWords = data.filter(
+            (item) => item.subtitleWord[0].cueId === currentCueId
+          );
+          // I WANT TO AVOID SETTING AN EMPTY ARRAY AS "currentDataSet" , BECAUSE IN THAT CASE THERE WOULD BE NO WORDS TO DESTRUCTURE AND WE GET ERRORS:
+          if (currentWords.length > 0) setCurrentDataSet(currentWords);
+          const currentSubtitlePhrasedWords = currentWords.filter(
+            (item) => item.subtitleWord.length > 1
+          );
+          const currentSubtitlePhrasedWordsAndColors =
+            currentSubtitlePhrasedWords.map((word) => ({
+              word: word,
+              colorNumber: colorNumGenerator(),
+            }));
+
+          // console.log("current words", currentWords);
+          /////////////
           let text = event.target.track?.activeCues[0]?.text;
           // Text with /n seperated from the words
           text = text.replaceAll(".", " .").replaceAll("?", " ?");
@@ -211,25 +303,58 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
           words = words.map((line) => line.map((word) => word.trim()));
           // Now let's remove the possible whitespace from both ends of a word:
           // Output example :  [["How", "are","you?"],["I'm", "fine.","Thank", "you."]]
-          let counter = 0;
-          const colors = ["text-primary", "text-success", "text-danger"];
+          // const colors = ["text-primary", "text-success", "text-danger"];
           const newRows = words.map((line) => (
             <div className="d-flex justify-content-center">
               {line.map((word) => {
-                if (data[`${word}`]) {
-                  counter++;
-                  setImageSrc(
-                    process.env.REACT_APP_BACKEND_URL +
-                      `/images/${data[`${word}`]}.png`
-                  );
-                  setPronunciationSrc(
-                    process.env.REACT_APP_BACKEND_URL +
-                      `/audios/${data[`${word}`]}_Am.mp3`
-                  );
+                const dataItem = currentWords.find((item) =>
+                  item.subtitleWord.find(
+                    (subtitleItem) => subtitleItem.title === word
+                  )
+                );
+                let INDEX;
+                if (dataItem) {
+                  INDEX = currentWords.indexOf(dataItem);
+                }
+
+                if (dataItem && dataItem.subtitleWord.length > 1) {
+                  const phrasedSubWordAndColor =
+                    currentSubtitlePhrasedWordsAndColors.find(
+                      (item) => item.word === dataItem
+                    );
+                  const colorNum = phrasedSubWordAndColor.colorNumber;
                   return (
                     <button
-                      className={`subRow mx-2 ${colors[counter - 1]}`}
-                      onClick={wordClickHandler}
+                      className={`subRow mx-2 color${colorNum}`}
+                      onClick={() =>
+                        wordClickHandler(
+                          process.env.REACT_APP_BACKEND_URL +
+                            `/images/${data[`${word}`]}.png`,
+                          INDEX
+                        )
+                      }
+                      // data-bs-toggle="modal"
+                      // data-bs-target="#exampleModal"
+                    >
+                      {word}
+                    </button>
+                  );
+                }
+                if (dataItem && dataItem.subtitleWord.length === 1) {
+                  // setPronunciationSrc(
+                  //   process.env.REACT_APP_BACKEND_URL +
+                  //     `/audios/${data[`${word}`]}_Am.mp3`
+                  // );
+                  return (
+                    <button
+                      className={`subRow mx-2 color${colorNumGenerator()}`}
+                      onClick={() =>
+                        wordClickHandler(
+                          process.env.REACT_APP_BACKEND_URL +
+                            `/images/${data[`${word}`]}.png`,
+                          INDEX
+                        )
+                      }
                       // data-bs-toggle="modal"
                       // data-bs-target="#exampleModal"
                     >
@@ -268,27 +393,54 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
     })();
   }, []);
   ////////////// HLS.js player
-  React.useEffect(() => {
-    (function () {
-      const videoElement = videoRef.current;
+  // React.useEffect(() => {
+  //   (function () {
+  //     const videoElement = videoRef.current;
 
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(
-          process.env.REACT_APP_BACKEND_URL +
-            // `/courses-data/friends/section1/playlist/output_playlist.m3u8`
-            `/playlist/output_playlist.m3u8`
-        );
-        hls.attachMedia(videoElement);
-      } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
-        videoElement.src =
-          process.env.REACT_APP_BACKEND_URL +
-          // `/courses-data/friends/section1/playlist/output_playlist.m3u8`;
-          `/playlist/output_playlist.m3u8`;
-      }
-    })();
-  }, []);
+  //     if (Hls.isSupported()) {
+  //       const hls = new Hls();
+  //       hls.loadSource(
+  //         process.env.REACT_APP_BACKEND_URL +
+  //           // `/courses-data/friends/section1/playlist/output_playlist.m3u8`
+  //           `/playlist/output_playlist.m3u8`
+  //       );
+  //       hls.attachMedia(videoElement);
+  //     } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
+  //       videoElement.src =
+  //         process.env.REACT_APP_BACKEND_URL +
+  //         // `/courses-data/friends/section1/playlist/output_playlist.m3u8`;
+  //         `/playlist/output_playlist.m3u8`;
+  //     }
+  //   })();
+  // }, []);
+
+  ////////////////////////
+  //DESTRUCTURING THE CURRENT WORD DATA
+  // console.log(
+  //   "data to destructure",
+  //   currentDataSet[currentDataIndex]?.databaseWord[currentWordIndex]
+  // );
+  const {
+    word,
+    pronunciation,
+    frequency,
+    partOfSpeech,
+    register,
+    additionalInfo,
+    translation,
+    meaning,
+    images,
+  } = currentDataSet[currentDataIndex].databaseWord[currentWordIndex];
   /////////////////////
+
+  const playPronunciation = (accent) => {
+    const audioName = `${word}_${accent}.mp3`;
+    setPronunciationSrc(
+      process.env.REACT_APP_BACKEND_URL + `/static-files/audios/${audioName}`
+    );
+  };
+
+  ///////////////
   return (
     <figure
       id="vp-videoContainer"
@@ -309,14 +461,21 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
           onTimeUpdate={handleProgressUpdate}
           onLoadedMetadata={handleProgressMaxValue}
         >
-          {/* <source
-              src={process.env.REACT_APP_BACKEND_URL + `/video/friends/1`}
-            /> */}
+          <source src={videoSrc} />
+          {/* PLEASE PAY ATTENTION THAT FOR THE EXPRESS.JS TO SERVE STATIC FILES, THE VIDEO OR SUBTITLE SRC MUST BE SOME THING LIKE THE STRING BELOW:
+          <source src="http://localhost:5000/api/static-files/courses-data/A/section_1/A1.mp4" />
+
+          AS YOU SEE THE PART "/api" IS NEEDED AND THE "epress.static" METHOD SHOULD BE USED LIKE THIS:
+          app.use("/api/static-files", express.static("static-files"));
+         
+
+           */}
+
           <track
             label="English"
             kind="subtitles"
             srcLang="en"
-            src={subtitle}
+            src={subtitleURL}
             // src={process.env.REACT_APP_BACKEND_URL + "/playlist/friends1.vtt"}
             default
             id="vp-track"
@@ -387,65 +546,134 @@ const VideoPlayer = ({ data, videoSrc, subtitle }) => {
           </div>
         </div>
         {/* AUDIO PLAYER: This audio player is not sth we see in the UI (pay attention to the hidden attribute assigned to it), it just plays the pronunciation audio in the background when needed. */}
-        {playingPronunciation ? (
+        {pronunciationSrc ? (
           <audio
             src={pronunciationSrc}
             autoPlay
             hidden
-            // play={playingPronunciation}
-            onEnded={() => setPlayingPronunciation(false)}
+            // play={pronunciationSrc}
+            onEnded={() => setPronunciationSrc(null)}
           />
         ) : null}
 
         <div
-          className="vp-modal-background"
-          // onClick={closeModalHandler}
+          className="modal"
+          // onClick={handleCloseModal}
           data-showModal={showModal}
         >
-          <div className="vp-modal-content">
-            <div className="vp-modal-top-bar">
-              <div
-                className="bg-primary"
-                onClick={() => {
-                  // setPronunciationSrc(pronunciationSrc + "_Am.mp3")
-                  setPlayingPronunciation(true);
-                }}
-              >
-                <span className="vp-modal-top-bar-icon vp-AmP"></span>{" "}
-                <span>Am</span>
-              </div>
-              <div
-                className="bg-warning "
-                onClick={() => {
-                  // setPronunciationSrc(pronunciationSrc + "_Am.mp3")
-                  setPlayingPronunciation(true);
-                }}
-              >
-                <span className="vp-modal-top-bar-icon vp-BrP"></span>{" "}
-                <span>Br</span>
-              </div>
+          <div className="main-data">
+            <div className="main-nav">
+              <div>
+                <button
+                  className="back"
+                  onClick={() => {
+                    setCurrentWordIndex(currentWordIndex - 1);
+                  }}
+                  disabled={!activeWordsBackwardArrow}
+                  title="Back to previous highlighted word"
+                ></button>
 
-              <div className="bg-danger " onClick={closeModalHandler}>
-                <span className="vp-modal-top-bar-icon vp-modal-close "></span>
-                <span>Close</span>
+                <button
+                  className="forward"
+                  onClick={() => {
+                    setCurrentWordIndex(currentWordIndex + 1);
+                  }}
+                  disabled={!activeWordsForwardArrow}
+                  title="Forward to next highlighted word"
+                ></button>
+              </div>
+              <button
+                className="close"
+                onClick={handleCloseModal}
+                title="Close the modal"
+              ></button>
+            </div>
+            <div className="head">
+              <h5 className="word">{word}</h5>
+              <p>{pronunciation}</p>
+              <div className="pronunciation">
+                <button
+                  onClick={() => playPronunciation("Br")}
+                  className="Br"
+                  title="Play British pronunciation"
+                ></button>
+                <button
+                  onClick={() => playPronunciation("Am")}
+                  className="Am"
+                  title="Play American pronunciation"
+                ></button>
               </div>
             </div>
+            <div className="other-info">
+              {partOfSpeech ? (
+                <p className="part-of-speech">{partOfSpeech}</p>
+              ) : null}
+              {register ? <p className="register">{register}</p> : null}
+              {frequency.written ? <p>{frequency.written}</p> : null}
+              {additionalInfo ? (
+                <p className="additional-info">{additionalInfo}</p>
+              ) : null}
+            </div>
 
-            <Carousel>
-              <Carousel.Item interval={100000}>
+            <p className="definition">
+              <span>{meaning.index === 0 ? "" : meaning.index + 1 + ") "}</span>
+              {meaning.definition}
+            </p>
+            {showExamplesPart ? (
+              <div className="vp-examples">
+                <div className="examples-nav">
+                  <button
+                    className="previous"
+                    onClick={() =>
+                      setCurrentExampleIndex(currentExampleIndex - 1)
+                    }
+                    disabled={!activeExamplesBackwardArrow}
+                    title="Back to previous example"
+                  ></button>
+                  <h5> examples</h5>
+                  <button
+                    className="next"
+                    onClick={() =>
+                      setCurrentExampleIndex(currentExampleIndex + 1)
+                    }
+                    disabled={!activeExamplesForwardArrow}
+                    title="Back to previous example"
+                  ></button>
+                </div>
+
+                <p>{meaning.examples[currentExampleIndex]}</p>
+              </div>
+            ) : null}
+
+            {showImagesPart ? (
+              <div className="vp-images">
+                <div className="images-nav">
+                  <button
+                    className="previous"
+                    onClick={() => setCurrentImageIndex(currentImageIndex - 1)}
+                    disabled={!activeImagesBackwardArrow}
+                    title="Back to previous image"
+                  ></button>
+                  <h5> images</h5>
+                  <button
+                    className="next"
+                    onClick={() => setCurrentImageIndex(currentImageIndex + 1)}
+                    disabled={!activeImagesForwardArrow}
+                    title="Forward to next image"
+                  ></button>
+                </div>
                 <img
-                  id="vp-image"
-                  className="image"
-                  src={imageSrc}
-                  ref={imageRef}
+                  src={
+                    process.env.REACT_APP_BACKEND_URL +
+                    `/static-files/images/${word}_${images[currentImageIndex]}.jpg`
+                  }
+                  // src={
+                  //   process.env.REACT_APP_BACKEND_URL +
+                  //   `/static-files/images/hump_1.jpg`
+                  // }
                 />
-
-                <Carousel.Caption>
-                  <h5 className="text-primary">ترجمه فارسی</h5>
-                  <p> خود توضیح انگلیسی رو بخون </p>
-                </Carousel.Caption>
-              </Carousel.Item>
-            </Carousel>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
